@@ -14,12 +14,12 @@ numero_id = 0
 #calcular da contação
 def calc_contacao():
     valornf=frm_principal.edt_valor_merc.text()
-    fpeso=frm_principal.edt_fpeso.text()
-    pedagio=frm_principal.edt_pedag.text()
-    ad=frm_principal.edt_ad.text()
-    gris=frm_principal.edt_gris.text()
-    taxa=frm_principal.edt_taxas.text()
-    icms=frm_principal.edt_icms.text()
+    #fpeso=frm_principal.edt_fpeso.text()
+    #pedagio=frm_principal.edt_pedag.text()
+    #ad=frm_principal.edt_ad.text()
+    #gris=frm_principal.edt_gris.text()
+    #taxa=frm_principal.edt_taxas.text()
+    #icms=frm_principal.edt_icms.text()
     fcif=frm_principal.edt_frete_cif.text()
     ffob=frm_principal.edt_frete_fob.text()
     flit=frm_principal.edt_frete_litoral.text()
@@ -44,6 +44,10 @@ def calc_contacao():
         #valor taxa 
         valortaxa = float(valorped) + 32.45
         frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
+        #valor do ICMS
+        icmsres = (float(valornf)/0.88)-float(valornf)
+        frm_principal.edt_icms.setText(str('%.2f'%icmsres))
+    
     
 
     
@@ -97,7 +101,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal= uic.loadUi('frm_principal.ui')
     # botões da tela principal
-    frm_principal.btn_tarifa.clicked.connect()#chama_tarifas_minimas#)
+    #frm_principal.btn_tarifa.clicked.connect()#chama_tarifas_minimas#)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
