@@ -47,8 +47,16 @@ def calc_contacao():
         #valor do ICMS
         icmsres = (float(valornf)/0.88)-float(valornf)
         frm_principal.edt_icms.setText(str('%.2f'%icmsres))
-    
-    
+    #valor frete cif
+    valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
+    print(type(valorcif))
+    frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
+    #valor frete fob
+    valorfob = float(valorcif) / 0.88
+    frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
+    #valor frete litoral
+    valorlitoral = float(valorfob) / 0.69
+    frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
 
     
 def calc_trarifa20():
