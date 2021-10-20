@@ -62,7 +62,7 @@ def salva_tarifaM():
 
 def chama_tarifa():
     frm_tarifa.show()
-def chama_tarifas_minimas():
+"""def chama_tarifas_minimas():
     global numero_id
 
     cursor = banco.cursor()
@@ -90,14 +90,14 @@ def chama_tarifas_minimas():
         frm_tarifa_edit.edt_ffinal_50.setText(str(tarifas_minimas[0][4]))  
         frm_tarifa_edit.edt_ad_50.setText(str(tarifas_minimas[0][5]))  
         frm_tarifa_edit.edt_ftotal_50.setText(str(tarifas_minimas[0][6]))
-        frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
+        frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))"""
     
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal= uic.loadUi('frm_principal.ui')
     # botões da tela principal
-    frm_principal.btn_tarifa.clicked.connect(chama_tarifas_minimas)
+    frm_principal.btn_tarifa.clicked.connect()#chama_tarifas_minimas#)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
