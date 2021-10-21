@@ -1,5 +1,7 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
+import pandas as pd
+
 
 valornf = 100
 numero_id = 0

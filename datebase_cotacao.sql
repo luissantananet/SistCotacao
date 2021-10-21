@@ -52,3 +52,9 @@ create table cubagem(
     m3 decimal(6,3),
     primary key(id)
 );
+CREATE Table cidades(
+    id int not null AUTO_INCREMENT,
+    cidade VARCHAR(100) NOT NULL,
+    uf VARCHAR(100) not null,
+    PRIMARY KEY(id)
+);
