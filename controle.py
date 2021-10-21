@@ -4,12 +4,12 @@ import mysql.connector
 valornf = 100
 numero_id = 0
 
-"""banco = mysql.connector.connect(
+banco = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="cofggcvf",
     database="cotacao"
-)"""
+)
 
 #calcular da contação
 def calc_contacao():
@@ -74,7 +74,7 @@ def salva_tarifaM():
 
 def chama_tarifa():
     frm_tarifa.show()
-"""def chama_tarifas_minimas():
+def chama_tarifas_minimas():
     global numero_id
 
     cursor = banco.cursor()
@@ -102,20 +102,20 @@ def chama_tarifa():
         frm_tarifa_edit.edt_ffinal_50.setText(str(tarifas_minimas[0][4]))  
         frm_tarifa_edit.edt_ad_50.setText(str(tarifas_minimas[0][5]))  
         frm_tarifa_edit.edt_ftotal_50.setText(str(tarifas_minimas[0][6]))
-        frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))"""
+        frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
     
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal= uic.loadUi('frm_principal.ui')
     # botões da tela principal
-    #frm_principal.btn_tarifa.clicked.connect()#chama_tarifas_minimas#)
+    frm_principal.btn_tarifa.clicked.connect(chama_tarifas_minimas)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
     frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui')
 
-    """cursor = banco.cursor()
+    cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifa") # WHERE id="+str(1)
     tarifas = cursor.fetchall()
     valor_id = tarifas[0][0]
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     frm_principal.edt_icms.setText(str(tarifas[0][6]))
     frm_principal.edt_frete_cif.setText(str(tarifas[0][7]))
     frm_principal.edt_frete_fob.setText(str(tarifas[0][8]))
-    frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))"""
+    frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))
 
     frm_principal.show()
     app.exec()
