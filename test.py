@@ -4,5 +4,6 @@ import pandas as pd
 
 
 x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
-
-print(x)
+y =x
+print(type(x))
+print(type(y))
