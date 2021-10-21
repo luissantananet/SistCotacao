@@ -45,10 +45,10 @@ create table cotacao(
 );
 create table cubagem(
 	id int not null auto_increment,
-    dim1 decimal,
-    dim2 decimal,
-    dim3 decimal,
+    dim1 decimal(5,2),
+    dim2 decimal(5,2),
+    dim3 decimal(5,2),
     volume int,
-    m3 decimal,
+    m3 decimal(6,3),
     primary key(id)
 );
