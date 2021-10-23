@@ -3,7 +3,8 @@ import mysql.connector
 import pandas as pd
 
 
-x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
+x = pd.read_excel("cidades.xls")
 y =x
+print(x)
 print(type(x))
 print(type(y))
