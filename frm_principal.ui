@@ -539,7 +539,7 @@
       <rect>
        <x>190</x>
        <y>80</y>
-       <width>41</width>
+       <width>51</width>
        <height>22</height>
       </rect>
      </property>
@@ -664,12 +664,12 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox__estado_dest">
+    <widget class="QComboBox" name="comboBox_estado_dest">
      <property name="geometry">
       <rect>
        <x>190</x>
        <y>80</y>
-       <width>41</width>
+       <width>51</width>
        <height>22</height>
       </rect>
      </property>
@@ -1013,7 +1013,7 @@
      <x>0</x>
      <y>0</y>
      <width>615</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -1026,7 +1026,7 @@
   <tabstop>edt_cnpj_dest</tabstop>
   <tabstop>edt_nome_dest</tabstop>
   <tabstop>comboBox_cidade_dest</tabstop>
-  <tabstop>comboBox__estado_dest</tabstop>
+  <tabstop>comboBox_estado_dest</tabstop>
   <tabstop>rbtn_cif</tabstop>
   <tabstop>rbtn_fob</tabstop>
   <tabstop>edt_valor_merc</tabstop>

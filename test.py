@@ -10,8 +10,9 @@ x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
 
 
 list=[[0,0]]
-for i in range(0,len(x):
+for i in range(len(x)):
     for j in range(len(x)):
-        lista[x][y] = ({x['Município']},{x['UF']})
-print(lista(x,y))  
+        lista = (f"{i}{j}{x['Município']},{x['UF']}")
+
+    print(lista)
 print(len(x))
