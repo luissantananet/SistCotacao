@@ -11,20 +11,23 @@ import pandas as pd
 
 
 x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
-print(x.col_values('Município'))
-"""cidades = []
+
+cidades = []
 uf = []
 
 for i in range(0,len(x)):
-    for j in range(0,len(x)):
-        cidades = input.append(i,x['Município'])
-        uf = input.append(j,x['UF'])
+    
+    cidades = x['cidade']
+    uf = x['UF']
+        
 
 print('-='*30)
-
 print(cidades)
 print('-='*30)
-print(uf)"""
+print(uf)
+print('-='*30)
+
+
 
 """for i in range(len(x)):
     for j in range(len(x)):
