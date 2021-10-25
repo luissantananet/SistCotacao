@@ -127,7 +127,8 @@ if __name__ == "__main__":
     valor_id = tarifas[0][0]
     
     #print(valor_id)
-    
+    """
+    # Aqui vai para tela de editar cotação#
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifa WHERE id="+str(1)) # WHERE id="+str(1)
     tarifas = cursor.fetchall()
@@ -139,7 +140,7 @@ if __name__ == "__main__":
     frm_principal.edt_icms.setText(str(tarifas[0][6]))
     frm_principal.edt_frete_cif.setText(str(tarifas[0][7]))
     frm_principal.edt_frete_fob.setText(str(tarifas[0][8]))
-    frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))
+    frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))"""
 
     frm_principal.show()
     app.exec()
