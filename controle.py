@@ -13,6 +13,10 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
+
+def criate_cidades():
+    x = pd.read_excel("cidades.xls")
+    pass
 #calcular da contação
 def calc_contacao():
     valornf=frm_principal.edt_valor_merc.text()
