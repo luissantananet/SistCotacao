@@ -3,13 +3,6 @@ import mysql.connector
 import pandas as pd
 
 
-<<<<<<< Updated upstream
-x = pd.read_excel("cidades.xls")
-y =x
-print(x)
-print(type(x))
-print(type(y))
-=======
 x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
 
 #print(x['Município'][3],['UF'][3])
@@ -17,9 +10,8 @@ x = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
 
 
 list=[[0,0]]
-for i in range(len(x)):
+for i in range(0,len(x):
     for j in range(len(x)):
-        lista = (f"{i}{j}{x['Município']},{x['UF']}")
-print(lista)  
+        lista[x][y] = ({x['Município']},{x['UF']})
+print(lista(x,y))  
 print(len(x))
->>>>>>> Stashed changes

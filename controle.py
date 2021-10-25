@@ -1,7 +1,7 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
 import pandas as pd
-
+cidades = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
 
 valornf = 100
 numero_id = 0
@@ -13,10 +13,6 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
-
-def criate_cidades():
-    x = pd.read_excel("cidades.xls")
-    pass
 #calcular da contação
 def calc_contacao():
     valornf=frm_principal.edt_valor_merc.text()
@@ -117,6 +113,10 @@ if __name__ == "__main__":
     # botões da tela principal
     frm_principal.btn_tarifa.clicked.connect(chama_tarifas_minimas)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
+    frm_principal.comboBox_cidade_emit.addItems(cidades[0][0])
+    frm_principal.comboBox_estado_emit.addItems(cidades[0][1])
+    frm_principal.comboBox_cidade_dest.addItems(cidades[0][1])
+    frm_principal.comboBox__estado_dest.addItems(cidades[0][0])
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
     frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui')
