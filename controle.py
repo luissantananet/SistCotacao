@@ -3,9 +3,9 @@ import mysql.connector
 import pandas as pd
 cidades = pd.read_excel(r"C:\Users\usuario\Documents\GitHub\SistCotacao\cidades.xls")
 
-valornf = 100
+"""valornf = 100"""
 numero_id = 0
-
+# Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -13,15 +13,9 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
-#calcular da contação
+# Calcular da contação
 def calc_contacao():
     valornf=frm_principal.edt_valor_merc.text()
-    #fpeso=frm_principal.edt_fpeso.text()
-    #pedagio=frm_principal.edt_pedag.text()
-    #ad=frm_principal.edt_ad.text()
-    #gris=frm_principal.edt_gris.text()
-    #taxa=frm_principal.edt_taxas.text()
-    #icms=frm_principal.edt_icms.text()
     fcif=frm_principal.edt_frete_cif.text()
     ffob=frm_principal.edt_frete_fob.text()
     flit=frm_principal.edt_frete_litoral.text()
@@ -29,39 +23,38 @@ def calc_contacao():
     peso=frm_principal.edt_peso.text()
 
     if peso != " ":
-        #peso=frm_principal.edt_peso.text()
+        # Peso=frm_principal.edt_peso.text()
         fpesores = float(peso) * 0.52
         frm_principal.edt_fpeso.setText(str('%.2f'%fpesores))
     
     if valornf != " ":
-        #valor GRIS
+        # Valor GRIS
         valorgris = float(valornf) * 0.0015 #/0.88+1.92
         frm_principal.edt_gris.setText(str('%.2f'%valorgris)) 
-        #valor Ad_Valoren
+        # Valor Ad_Valoren
         vaload = float(valornf) * 0.004
         frm_principal.edt_ad.setText(str('%.2f'%vaload))
-        #valor pedagio
+        # Valor pedagio
         valorped = float(peso)/100 * 1.92
         frm_principal.edt_pedag.setText(str('%.2f'%valorped))
-        #valor taxa 
+        # Valor taxa 
         valortaxa = float(valorped) + 32.45
         frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
-        #valor do ICMS
+        # Valor do ICMS
         icmsres = (float(valornf)/0.88)-float(valornf)
         frm_principal.edt_icms.setText(str('%.2f'%icmsres))
-    #valor frete cif
+    # Valor frete cif
     valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
     print(type(valorcif))
     frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
-    #valor frete fob
+    # Valor frete fob
     valorfob = float(valorcif) / 0.88
     frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
-    #valor frete litoral
+    # Valor frete litoral
     valorlitoral = float(valorfob) / 0.69
     frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
-
-    
-def calc_trarifa20():
+# Carlular tarifas padrôes #no futuro
+def calc_tarifa20():
     base=frm_tarifa.edt_base_20.text()
     gris20=frm_tarifa.edt_gris_20.text()
     fretefinal=frm_tarifa.edt_ffinal_20.text()
@@ -70,12 +63,13 @@ def calc_trarifa20():
     fretelitoral=frm_tarifa.edt_litoral_20.text()
     
     #calcular frente
-
+# Carlular tarifas padrôes #no futuro
 def salva_tarifaM():
     pass
-
+# Chama tela de tarifas padôes #no futuro
 def chama_tarifa():
     frm_tarifa.show()
+# Calcular tarifas e frente #no futuro
 def chama_tarifas_minimas():
     global numero_id
 
@@ -105,7 +99,9 @@ def chama_tarifas_minimas():
         frm_tarifa_edit.edt_ad_50.setText(str(tarifas_minimas[0][5]))  
         frm_tarifa_edit.edt_ftotal_50.setText(str(tarifas_minimas[0][6]))
         frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
-    
+
+def salva_cotacao():
+    pass
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -119,23 +115,22 @@ if __name__ == "__main__":
     frm_principal.comboBox_estado_dest.addItems(cidades['UF'])
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
-    frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui')
-   
-    #print(valor_id)
-    """
-    # Aqui vai para tela de editar cotação#
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM tarifa WHERE id="+str(1)) # WHERE id="+str(1)
-    tarifas = cursor.fetchall()
-    frm_principal.edt_fpeso.setText(str(tarifas[0][1]))
-    frm_principal.edt_pedag.setText(str(tarifas[0][2]))
-    frm_principal.edt_ad.setText(str(tarifas[0][3]))  
-    frm_principal.edt_gris.setText(str(tarifas[0][4]))  
-    frm_principal.edt_taxas.setText(str(tarifas[0][5]))  
-    frm_principal.edt_icms.setText(str(tarifas[0][6]))
-    frm_principal.edt_frete_cif.setText(str(tarifas[0][7]))
-    frm_principal.edt_frete_fob.setText(str(tarifas[0][8]))
-    frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))"""
+    frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui') 
 
     frm_principal.show()
     app.exec()
+
+
+"""# Aqui vai para tela de editar cotação#
+cursor = banco.cursor()
+cursor.execute("SELECT * FROM tarifa WHERE id="+str(1)) # WHERE id="+str(1)
+tarifas = cursor.fetchall()
+frm_principal.edt_fpeso.setText(str(tarifas[0][1]))
+frm_principal.edt_pedag.setText(str(tarifas[0][2]))
+frm_principal.edt_ad.setText(str(tarifas[0][3]))  
+frm_principal.edt_gris.setText(str(tarifas[0][4]))  
+frm_principal.edt_taxas.setText(str(tarifas[0][5]))  
+frm_principal.edt_icms.setText(str(tarifas[0][6]))
+frm_principal.edt_frete_cif.setText(str(tarifas[0][7]))
+frm_principal.edt_frete_fob.setText(str(tarifas[0][8]))
+frm_principal.edt_frete_litoral.setText(str(tarifas[0][9]))"""
