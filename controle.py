@@ -99,7 +99,7 @@ def chama_tarifas_minimas():
         frm_tarifa_edit.edt_ad_50.setText(str(tarifas_minimas[0][5]))  
         frm_tarifa_edit.edt_ftotal_50.setText(str(tarifas_minimas[0][6]))
         frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
-
+# Salva registro de cotação
 def salva_cotacao():
     pass
 
