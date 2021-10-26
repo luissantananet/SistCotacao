@@ -120,12 +120,7 @@ if __name__ == "__main__":
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
     frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui')
-
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM tarifa") # WHERE id="+str(1)
-    tarifas = cursor.fetchall()
-    valor_id = tarifas[0][0]
-    
+   
     #print(valor_id)
     """
     # Aqui vai para tela de editar cotação#
