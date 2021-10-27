@@ -101,7 +101,21 @@ def chama_tarifas_minimas():
         frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
 # Salva registro de cotação
 def salva_cotacao():
-    pass
+    valornf=frm_principal.edt_valor_merc.text()
+    fpeso=frm_principal.edt_fpeso.text()
+    pedagio=frm_principal.edt_pedag.text()
+    ad=frm_principal.edt_ad.text()
+    gris=frm_principal.edt_gris.text()
+    taxa=frm_principal.edt_taxas.text()
+    icms=frm_principal.edt_icms.text()
+    fcif=frm_principal.edt_frete_cif.text()
+    ffob=frm_principal.edt_frete_fob.text()
+    flit=frm_principal.edt_frete_litoral.text()
+    comb_cid_emit = frm_principal.comboBox_cidade_emit.text()
+    comb_uf_emit = frm_principal.comboBox_estado_emit.text()
+    comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
+    comb_uf_dest = frm_principal.comboBox_estado_dest.text()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
