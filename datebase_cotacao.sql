@@ -28,8 +28,10 @@ create table tarifas_minimas(
 
 create table cotacao(
 	id int not null auto_increment,
-    origem varchar(100),
-    destino varchar(100),
+    emit_cnpj varchar(14),
+    emit_nome varchar(100),
+    dest_cnpj varchar(14),
+    dest_nome  varchar(100),
     cidade_origem varchar(100),
     estado_origem varchar(100),
     cidade_destino varchar(100),

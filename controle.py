@@ -53,6 +53,31 @@ def calc_contacao():
     # Valor frete litoral
     valorlitoral = float(valorfob) / 0.69
     frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
+# Salva registro de cotação
+def salva_cotacao():
+    emit_cnpj = frm_principal.edt_cnpj_emit.text()
+    emit_nome = frm_principal.edt_nome_emit.text()
+    dest_cnpj = frm_principal.edt_cnpj_dest.text()
+    dest_nome = frm_principal.edt_nome_dest.text()
+    valornf=frm_principal.edt_valor_merc.text()
+    fpeso=frm_principal.edt_fpeso.text()
+    pedagio=frm_principal.edt_pedag.text()
+    ad=frm_principal.edt_ad.text()
+    gris=frm_principal.edt_gris.text()
+    taxa=frm_principal.edt_taxas.text()
+    icms=frm_principal.edt_icms.text()
+    fcif=frm_principal.edt_frete_cif.text()
+    ffob=frm_principal.edt_frete_fob.text()
+    flit=frm_principal.edt_frete_litoral.text()
+    comb_cid_emit = frm_principal.comboBox_cidade_emit.text()
+    comb_uf_emit = frm_principal.comboBox_estado_emit.text()
+    comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
+    comb_uf_dest = frm_principal.comboBox_estado_dest.text()
+    cursor = banco.cursor()
+    comando_SQL = "INSERT INTO cidades (emit_cnpj,emit_nome,dest_cnpj,dest_nome,cidade_origem,estado_origem,cidade_destino,estado_destino,tipo,valor_merc,peso,volume,tipo_merc,peso_cubo_total,m3_total) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    dados = (str(emit_cnpj), str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest), str(),str(valornf),str(fpeso),str(),str(),str(),str())
+    cursor.execute(comando_SQL,dados)
+    cursor.close()
 # Carlular tarifas padrôes #no futuro
 def calc_tarifa20():
     base=frm_tarifa.edt_base_20.text()
@@ -61,6 +86,7 @@ def calc_tarifa20():
     ad=frm_tarifa.edt_ad_20.text()
     fretetotal=frm_tarifa.edt_ftotal_20.text()
     fretelitoral=frm_tarifa.edt_litoral_20.text()
+    
     
     #calcular frente
 # Carlular tarifas padrôes #no futuro
@@ -99,23 +125,6 @@ def chama_tarifas_minimas():
         frm_tarifa_edit.edt_ad_50.setText(str(tarifas_minimas[0][5]))  
         frm_tarifa_edit.edt_ftotal_50.setText(str(tarifas_minimas[0][6]))
         frm_tarifa_edit.edt_litoral_50.setText(str(tarifas_minimas[0][7]))
-# Salva registro de cotação
-def salva_cotacao():
-    valornf=frm_principal.edt_valor_merc.text()
-    fpeso=frm_principal.edt_fpeso.text()
-    pedagio=frm_principal.edt_pedag.text()
-    ad=frm_principal.edt_ad.text()
-    gris=frm_principal.edt_gris.text()
-    taxa=frm_principal.edt_taxas.text()
-    icms=frm_principal.edt_icms.text()
-    fcif=frm_principal.edt_frete_cif.text()
-    ffob=frm_principal.edt_frete_fob.text()
-    flit=frm_principal.edt_frete_litoral.text()
-    comb_cid_emit = frm_principal.comboBox_cidade_emit.text()
-    comb_uf_emit = frm_principal.comboBox_estado_emit.text()
-    comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
-    comb_uf_dest = frm_principal.comboBox_estado_dest.text()
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
