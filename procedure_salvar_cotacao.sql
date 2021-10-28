@@ -1,14 +1,11 @@
 DELIMITER //
-# salvar dados na tabelas cotacao / cidades / tarifa / cubagem 
-create procedure salvar_cotacao(cidades VARCHAR(100),  ufs VARCHAR(100),
+# salvar dados na tabelas cotacao / tarifa / cubagem 
+create procedure salvar_cotacao(
 	frete_pesos decimal(7,2), pedagios decimal(7,2),ad_valorens decimal(7,2),griss decimal(7,2),taxas decimal(7,2),icmss decimal(7,2),f_cifs decimal(7,2),f_fobs decimal(7,2),flitorals decimal(7,2),
     dim1s decimal(5,2),dim2s decimal(5,2),dim3s decimal(5,2),volumes int,m3s decimal(6,3),
     emit_cnpjs varchar(14),emit_nomes varchar(100),dest_cnpjs varchar(14),dest_nomes varchar(100),cidade_origems varchar(100),estado_origems varchar(100),cidade_destinos varchar(100),estado_destinos varchar(100),tipos varchar(3),valor_mercs decimal(10,2),pesos decimal(10,3),volumess int,tipo_mercs varchar(100),peso_cubo_totals decimal(10,3),m3_totals decimal(10,3))
 begin
 	start transaction;
-		insert into cidade(cidade, uf) 
-        values (cidades,ufs);
-        SELECT LAST_INSERT_ID() INTO @id;
         insert into tarifa(frete_peso,pedagio,ad_valoren,gris,taxa,icms,f_cif,f_fob,flitoral) 
         values(frete_pesos,pedagios,ad_valorens,griss,taxas,icmss,f_cifs,f_fobs,flitorals);
         SELECT LAST_INSERT_ID() INTO @id;
