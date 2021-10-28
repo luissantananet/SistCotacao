@@ -78,6 +78,11 @@ def salva_cotacao():
     comb_uf_emit = frm_principal.comboBox_estado_emit.text()
     comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
     comb_uf_dest = frm_principal.comboBox_estado_dest.text()
+    dim1 = frm_principal.edt_dim1.text()
+    dim2 = frm_principal.edt_dim2.text()
+    dim3 = frm_principal.edt_dim3.text()
+    vol = frm_principal.edt_vol.text()
+    resultado_m3 = frm_principal.edt_resultado_m3.text()
     cif_fob = ""
     if frm_principal.rbtn_cif.isChecked():
         cif_fob = "Cif"
@@ -86,7 +91,7 @@ def salva_cotacao():
     cursor = banco.cursor()
     comando_SQL = "CALL salvar_cotacao(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     dados = (str(fpeso),str(pedagio),str(ad),str(gris),str(taxa),str(icms),str(fcif),str(ffob),str(flit),
-        str(),str(),str(),str(),str(),
+        str(dim1),str(dim2),str(dim3),str(vol),str(resultado_m3),
         str(emit_cnpj),str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest),str(cif_fob),str(valornf),str(edt_peso),str(quant),str(tipo_merc),str(edit_peso_cubo),str(edt_total_m3))
     cursor.execute(comando_SQL,dados)
     cursor.close()
