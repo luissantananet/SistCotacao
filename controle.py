@@ -86,8 +86,8 @@ def salva_cotacao():
     cursor = banco.cursor()
     comando_SQL = "CALL salvar_cotacao(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     dados = (str(fpeso),str(pedagio),str(ad),str(gris),str(taxa),str(icms),str(fcif),str(ffob),str(flit),
-    str(),str(),str(),str(),str(),
-    str(emit_cnpj),str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest),str(cif_fob),str(valornf),str(edt_peso),str(quant),str(tipo_merc),str(edit_peso_cubo),str(edt_total_m3))
+        str(),str(),str(),str(),str(),
+        str(emit_cnpj),str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest),str(cif_fob),str(valornf),str(edt_peso),str(quant),str(tipo_merc),str(edit_peso_cubo),str(edt_total_m3))
     cursor.execute(comando_SQL,dados)
     cursor.close()
 # Carlular tarifas padrôes #no futuro
