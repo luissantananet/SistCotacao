@@ -73,9 +73,14 @@ def salva_cotacao():
     comb_uf_emit = frm_principal.comboBox_estado_emit.text()
     comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
     comb_uf_dest = frm_principal.comboBox_estado_dest.text()
+    cif_fob = ""
+    if frm_principal.rbtn_cif.isChecked():
+        cif_fob = "Cif"
+    elif frm_principal.rbtn_fob.isChecked():
+        cif_fob = "Fob"
     cursor = banco.cursor()
     comando_SQL = "INSERT INTO cidades (emit_cnpj,emit_nome,dest_cnpj,dest_nome,cidade_origem,estado_origem,cidade_destino,estado_destino,tipo,valor_merc,peso,volume,tipo_merc,peso_cubo_total,m3_total) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    dados = (str(emit_cnpj), str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest), str(),str(valornf),str(fpeso),str(),str(),str(),str())
+    dados = (str(emit_cnpj), str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest), str(cif_fob),str(valornf),str(fpeso),str(),str(),str(),str())
     cursor.execute(comando_SQL,dados)
     cursor.close()
 # Carlular tarifas padrôes #no futuro
