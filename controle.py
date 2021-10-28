@@ -59,6 +59,7 @@ def salva_cotacao():
     emit_nome = frm_principal.edt_nome_emit.text()
     dest_cnpj = frm_principal.edt_cnpj_dest.text()
     dest_nome = frm_principal.edt_nome_dest.text()
+    edt_peso = frm_principal.edt_peso.text
     tipo_merc = frm_principal.edit_tipo_merc.text()
     edit_peso_cubo = frm_principal.edit_peso_cubo.text()
     quant = frm_principal.edt_volume.text()
@@ -84,7 +85,9 @@ def salva_cotacao():
         cif_fob = "Fob"
     cursor = banco.cursor()
     comando_SQL = "INSERT INTO cidades (emit_cnpj,emit_nome,dest_cnpj,dest_nome,cidade_origem,estado_origem,cidade_destino,estado_destino,tipo,valor_merc,peso,volume,tipo_merc,peso_cubo_total,m3_total) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    dados = (str(emit_cnpj),str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest),str(cif_fob),str(valornf),str(fpeso),str(quant),str(tipo_merc),str(edit_peso_cubo),str(edt_total_m3))
+    dados = (str(emit_cnpj),str(emit_nome),str(dest_cnpj),str(dest_nome),str(comb_cid_emit),str(comb_uf_emit),str(comb_cid_dest),str(comb_uf_dest),str(cif_fob),str(valornf),str(edt_peso),str(quant),str(tipo_merc),str(edit_peso_cubo),str(edt_total_m3))
+    comando_SQL2 = "INSERT INTO tarifa (frete_peso,pedagio,ad_valoren,gris,taxa,icms,f_cif,f_fob,flitoral) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    dados2 = (str(fpeso),str(pedagio),str(ad),str(gris),str(taxa),str(icms),str(fcif),str(ffob),str(flit))
     cursor.execute(comando_SQL,dados)
     cursor.close()
 # Carlular tarifas padrôes #no futuro
