@@ -45,7 +45,6 @@ def calc_contacao():
         frm_principal.edt_icms.setText(str('%.2f'%icmsres))
     # Valor frete cif
     valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
-    print(type(valorcif))
     frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
     # Valor frete fob
     valorfob = float(valorcif) / 0.88
@@ -74,15 +73,15 @@ def salva_cotacao():
     fcif=frm_principal.edt_frete_cif.text()
     ffob=frm_principal.edt_frete_fob.text()
     flit=frm_principal.edt_frete_litoral.text()
-    comb_cid_emit = frm_principal.comboBox_cidade_emit.text()
-    comb_uf_emit = frm_principal.comboBox_estado_emit.text()
-    comb_cid_dest = frm_principal.comboBox_cidade_dest.text()
-    comb_uf_dest = frm_principal.comboBox_estado_dest.text()
+    comb_cid_emit = frm_principal.edt_cidade_emit.text()
+    comb_uf_emit = frm_principal.edt_estado_emit.text()
+    comb_cid_dest = frm_principal.edt_cidade_dest.text()
+    comb_uf_dest = frm_principal.edt_estado_dest.text()
     dim1 = frm_principal.edt_dim1.text()
     dim2 = frm_principal.edt_dim2.text()
     dim3 = frm_principal.edt_dim3.text()
-    vol = frm_principal.edt_vol.text()
-    resultado_m3 = frm_principal.edt_resultado_m3.text()
+    vol = frm_principal.edit_vol.text()
+    resultado_m3 = frm_principal.edit_resultado_m3.text()
     cif_fob = ""
     if frm_principal.rbtn_cif.isChecked():
         cif_fob = "Cif"
@@ -149,6 +148,7 @@ if __name__ == "__main__":
     # botões da tela principal
     frm_principal.btn_tarifa.clicked.connect(chama_tarifas_minimas)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
+    frm_principal.btn_salvar.clicked.connect(salva_cotacao)
     """frm_principal.comboBox_cidade_emit.addItems(cidades['Município'])
     frm_principal.comboBox_estado_emit.addItems(cidades['UF'])
     frm_principal.comboBox_cidade_dest.addItems(cidades['Município'])

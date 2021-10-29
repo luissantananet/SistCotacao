@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>530</y>
+      <y>552</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -467,17 +467,20 @@
       <rect>
        <x>30</x>
        <y>30</y>
-       <width>161</width>
+       <width>111</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_nome_emit">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>150</x>
        <y>30</y>
-       <width>261</width>
+       <width>301</width>
        <height>20</height>
       </rect>
      </property>
@@ -498,7 +501,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>150</x>
        <y>17</y>
        <width>47</width>
        <height>13</height>
@@ -534,23 +537,7 @@
       <string>Estado:</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_estado_emit">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>80</y>
-       <width>51</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_cidade_emit">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
+    <widget class="QLineEdit" name="edt_cidade_emit">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -559,8 +546,18 @@
        <height>22</height>
       </rect>
      </property>
-     <property name="editable">
-      <bool>true</bool>
+    </widget>
+    <widget class="QLineEdit" name="edt_estado_emit">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>80</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>
@@ -581,17 +578,20 @@
       <rect>
        <x>30</x>
        <y>30</y>
-       <width>161</width>
+       <width>111</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_nome_dest">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>150</x>
        <y>30</y>
-       <width>261</width>
+       <width>301</width>
        <height>20</height>
       </rect>
      </property>
@@ -612,7 +612,7 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>150</x>
        <y>17</y>
        <width>47</width>
        <height>13</height>
@@ -648,42 +648,13 @@
       <string>Estado:</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_cidade_dest">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>80</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_estado_dest">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>80</y>
-       <width>51</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-    </widget>
    </widget>
    <widget class="QRadioButton" name="rbtn_fob">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>129</x>
       <y>260</y>
-      <width>51</width>
+      <width>71</width>
       <height>17</height>
      </rect>
     </property>
@@ -749,7 +720,7 @@
      <rect>
       <x>70</x>
       <y>260</y>
-      <width>51</width>
+      <width>71</width>
       <height>17</height>
      </rect>
     </property>
@@ -768,7 +739,7 @@
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>505</y>
+      <y>528</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -1006,6 +977,42 @@
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="btn_salvar">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>504</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salvar</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edt_cidade_dest">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>210</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edt_estado_dest">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>210</y>
+      <width>31</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1021,40 +1028,42 @@
  <tabstops>
   <tabstop>edt_cnpj_emit</tabstop>
   <tabstop>edt_nome_emit</tabstop>
-  <tabstop>comboBox_cidade_emit</tabstop>
-  <tabstop>comboBox_estado_emit</tabstop>
+  <tabstop>edt_cidade_emit</tabstop>
+  <tabstop>edt_estado_emit</tabstop>
   <tabstop>edt_cnpj_dest</tabstop>
   <tabstop>edt_nome_dest</tabstop>
-  <tabstop>comboBox_cidade_dest</tabstop>
-  <tabstop>comboBox_estado_dest</tabstop>
+  <tabstop>edt_cidade_dest</tabstop>
+  <tabstop>edt_estado_dest</tabstop>
   <tabstop>rbtn_cif</tabstop>
   <tabstop>rbtn_fob</tabstop>
   <tabstop>edt_valor_merc</tabstop>
   <tabstop>edt_peso</tabstop>
   <tabstop>edt_volume</tabstop>
   <tabstop>edit_tipo_merc</tabstop>
+  <tabstop>edit_peso_cubo</tabstop>
   <tabstop>edt_dim1</tabstop>
   <tabstop>edt_dim2</tabstop>
   <tabstop>edt_dim3</tabstop>
   <tabstop>edit_vol</tabstop>
+  <tabstop>edit_resultado_m3</tabstop>
   <tabstop>btn_adicionar</tabstop>
-  <tabstop>tableView</tabstop>
-  <tabstop>edt_fpeso</tabstop>
-  <tabstop>edt_ad</tabstop>
-  <tabstop>edt_gris</tabstop>
-  <tabstop>edt_taxas</tabstop>
-  <tabstop>edt_icms</tabstop>
   <tabstop>btn_calcula</tabstop>
+  <tabstop>btn_salvar</tabstop>
   <tabstop>btn_localizar</tabstop>
   <tabstop>btn_limpa</tabstop>
-  <tabstop>TextEdit</tabstop>
-  <tabstop>edt_frete_cif</tabstop>
-  <tabstop>edt_frete_fob</tabstop>
-  <tabstop>edt_frete_litoral</tabstop>
   <tabstop>btn_tarifa</tabstop>
-  <tabstop>edit_peso_cubo</tabstop>
-  <tabstop>edit_resultado_m3</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>TextEdit</tabstop>
+  <tabstop>edt_frete_litoral</tabstop>
+  <tabstop>edt_frete_fob</tabstop>
+  <tabstop>edt_icms</tabstop>
+  <tabstop>edt_taxas</tabstop>
   <tabstop>edt_total_m3</tabstop>
+  <tabstop>edt_pedag</tabstop>
+  <tabstop>edt_ad</tabstop>
+  <tabstop>edt_frete_cif</tabstop>
+  <tabstop>edt_gris</tabstop>
+  <tabstop>edt_fpeso</tabstop>
  </tabstops>
  <resources/>
  <connections/>
