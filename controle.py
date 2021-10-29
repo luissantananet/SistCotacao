@@ -149,10 +149,10 @@ if __name__ == "__main__":
     # botões da tela principal
     frm_principal.btn_tarifa.clicked.connect(chama_tarifas_minimas)
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
-    frm_principal.comboBox_cidade_emit.addItems(cidades['Município'])
+    """frm_principal.comboBox_cidade_emit.addItems(cidades['Município'])
     frm_principal.comboBox_estado_emit.addItems(cidades['UF'])
     frm_principal.comboBox_cidade_dest.addItems(cidades['Município'])
-    frm_principal.comboBox_estado_dest.addItems(cidades['UF'])
+    frm_principal.comboBox_estado_dest.addItems(cidades['UF'])"""
     # botões da tela tarifa
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
     frm_tarifa_edit = uic.loadUi('frm_tarifa_edit.ui') 
