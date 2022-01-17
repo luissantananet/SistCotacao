@@ -145,7 +145,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="gBox_tarifas">
     <property name="geometry">
      <rect>
       <x>500</x>
@@ -413,7 +413,7 @@
      <string>Calcular</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="gBox_cubagem">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -682,7 +682,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="gBox_taxasMininas">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1118,7 +1118,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_4">
+   <widget class="QGroupBox" name="gBox_tabelas">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -1365,7 +1365,7 @@
      <string>Destinatario</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="edt_rem_cnpj">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1378,7 +1378,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="edt_rem_desc">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -1388,7 +1388,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="edt_dest_cnpj">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1401,7 +1401,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="edt_dest_desc">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -1424,7 +1424,7 @@
      <string>Cidade</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="edt_dest_cid">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1450,7 +1450,7 @@
      <string>Cidade</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
+   <widget class="QLineEdit" name="edt_rem_cid">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1463,7 +1463,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_calcula_2">
+   <widget class="QPushButton" name="btn_rem_pesq">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1476,7 +1476,7 @@
      <string>Pesquisar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_calcula_3">
+   <widget class="QPushButton" name="btn_dest_pesq">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1496,7 +1496,7 @@
      <x>0</x>
      <y>0</y>
      <width>732</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
