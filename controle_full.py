@@ -1,8 +1,7 @@
-from pydoc import describe
-from PyQt5 import uic, QtWidgets
+from PyQt5 import uic, QtWidgets, QtGui
+from PyQt5.QtWidgets import QMessageBox
 import mysql.connector
-import pandas as pd
-
+import mysql.connector.errors
 from controle import chama_tarifa, salva_tarifaM
 
 # Conexão com o bando de dados MySQL
@@ -59,14 +58,28 @@ def add_m3():
 def pesquisa_cliente():
     pass
 def chama_tarifa():
-    valor_id = 0
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM tarifas")
+    tarifas = cursor.fetchall()
+    valor_id = len(tarifas)
     
     
     if valor_id != 0:
         cursor = banco.cursor()
-        cursor.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
+        cursor.execute("SELECT * FROM tarifas_minimas") 
         tarifas_minimas = cursor.fetchall()
-        valor_id = tarifas_minimas[0][0]
+        
+
+        cursor2 = banco.cursor()
+        cursor2.execute("SELECT * FROM tarifas") 
+        tarifas = cursor.fetchall()
+        
+        frm_tarifa.edt_fpeso.setText(str(tarifas[0][1]))
+        frm_tarifa.edt_ad.setText(str(tarifas[0][2]))
+        frm_tarifa.edt_gris.setText(str(tarifas[0][3]))
+        frm_tarifa.edt_taxa.setText(str(tarifas[0][4]))
+        frm_tarifa.edt_icms.setText(str(tarifas[0][5]))
+
         frm_tarifa.show()
     else:
         frm_tarifa.show()
@@ -130,22 +143,25 @@ def salva_taxa():
     fPeso = frm_tarifa.edt_fpeso.text()
     ad_v = frm_tarifa.edt_ad.text()
     gris = frm_tarifa.edt_gris.text()
-    taxa = frm_tarifa.edt_taxa.tetx()
+    taxa = frm_tarifa.edt_taxa.text()
     icms = frm_tarifa.edt_icms.text()
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas") # WHERE id="+str(1)
     tarifas = cursor2.fetchall()
-    valor_id2 = tarifas[0][0]
+    valor_id2 = len(tarifas)
     frm_tarifa.show()
-    if valor_id2[0][1] == "":
+    if valor_id2 == 0:
         cursor = banco.cursor()
         comando_sql=("INSERT INTO tarifas(frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s)")
         dados=(float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
         cursor.execute(comando_sql,dados)
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "Taxas cadastradas")
     else:
         cursor = banco.cursor()
         cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}',id='{}'".format(fPeso,ad_v,gris,taxa,icms,valor_id2))
-
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi('frm_principal_full.ui')
