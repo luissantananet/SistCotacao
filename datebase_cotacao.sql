@@ -14,15 +14,18 @@ create table tarifa(
     flitoral decimal(7,2),
     primary key(id)
 );
-create table tarifas_minimas(
+create table tarifas(
 	id int not null auto_increment,
     descricao varchar(50),
-    tarifa_base decimal,
-    gris decimal,
-    ffinal decimal,
-    ad_valoren decimal,
-    ftotal decimal,
-    flitoral decimal,
+    tarifa_base decimal(7,2),
+    tarifa_litoral decimal(7,2),
+	ad_Gris decimal(7,2),
+    pedagio decimal(7,2),
+    frete_peso decimal(7,2),
+    ad_valoren decimal(7,2),
+    gris decimal(7,2),
+    taxa decimal(7,2),
+    icms decimal(7,2),
     primary key(id)
 );
 

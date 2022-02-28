@@ -1,0 +1,166 @@
+from pydoc import describe
+from PyQt5 import uic, QtWidgets
+import mysql.connector
+import pandas as pd
+
+from controle import chama_tarifa, salva_tarifaM
+
+# Conexão com o bando de dados MySQL
+banco = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="cofggcvf",
+    database="cotacao"
+)
+def calc_contacao():
+    valornf=frm_principal.edt_valor_merc.text()
+    fcif=frm_principal.edt_frete_cif.text()
+    ffob=frm_principal.edt_frete_fob.text()
+    flit=frm_principal.edt_frete_litoral.text()
+    valor_nf=frm_principal.edt_valor_merc.text()
+    peso=frm_principal.edt_peso.text()
+
+    if peso != " ":
+        # Peso=frm_principal.edt_peso.text()
+        fpesores = float(peso) * 0.52
+        frm_principal.edt_fpeso.setText(str('%.2f'%fpesores))
+    
+    if valornf != " ":
+        # Valor GRIS
+        valorgris = float(valornf) * 0.0025 #/0.88+1.92
+        frm_principal.edt_gris.setText(str('%.2f'%valorgris)) 
+        # Valor Ad_Valoren
+        vaload = float(valornf) * 0.005
+        frm_principal.edt_ad.setText(str('%.2f'%vaload))
+        # Valor pedagio
+        valorped = float(peso)/100 * 3.04
+        frm_principal.edt_pedag.setText(str('%.2f'%valorped))
+        # Valor taxa 
+        valortaxa = float(valorped) + 36.68
+        frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
+        # Valor do ICMS
+        icmsres = (float(valornf)/0.88)-float(valornf)
+        frm_principal.edt_icms.setText(str('%.2f'%icmsres))
+    # Valor frete cif
+    valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
+    frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
+    # Valor frete fob
+    valorfob = float(valorcif) / 0.88
+    frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
+    # Valor frete litoral
+    valorlitoral = float(valorfob) / 0.69
+    frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
+def salva_cotacao():
+    pass
+def limpar_tela():
+    pass
+def add_m3():
+    pass
+def pesquisa_cliente():
+    pass
+def chama_tarifa():
+    valor_id = 0
+    
+    
+    if valor_id != 0:
+        cursor = banco.cursor()
+        cursor.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
+        tarifas_minimas = cursor.fetchall()
+        valor_id = tarifas_minimas[0][0]
+        frm_tarifa.show()
+    else:
+        frm_tarifa.show()
+
+def salva_tarifa():
+    desc20 = frm_tarifa.edt_base_20.text()
+    tBase20 = frm_tarifa.edt_base_20.text()
+    tLit20 = frm_tarifa.edt_base_lit_20.text()
+    ad_gris20 = frm_tarifa.edt_ad_gris_20.text()
+    ped20 = frm_tarifa.edt_pedagio_20.text()
+    
+    desc50 = frm_tarifa.edt_base_50.text()
+    tBase50 = frm_tarifa.edt_base_50.text()
+    tLit50 = frm_tarifa.edt_base_lit_50.text()
+    ad_gris50 = frm_tarifa.edt_ad_gris_50.text()
+    ped50 = frm_tarifa.edt_pedagio_50.text()
+    
+
+    desc100 = frm_tarifa.edt_base_100.text()
+    tBase100 = frm_tarifa.edt_base_100.text()
+    tLit100 = frm_tarifa.edt_base_lit_100.text()
+    ad_gris100 = frm_tarifa.edt_ad_gris_100.text()
+    ped100 = frm_tarifa.edt_pedagio_100.text()
+
+    desc150 = frm_tarifa.edt_base_150.text()
+    tBase150 = frm_tarifa.edt_base_150.text()
+    tLit150 = frm_tarifa.edt_base_lit_150.text()
+    ad_gris150 = frm_tarifa.edt_ad_gris_150.text()
+    ped150 = frm_tarifa.edt_pedagio_150.text()
+
+    desc200 = frm_tarifa.edt_base_200.text()
+    tBase200 = frm_tarifa.edt_base_200.text()
+    tLit200 = frm_tarifa.edt_base_lit_200.text()
+    ad_gris200 = frm_tarifa.edt_ad_gris_200.text()
+    ped200 = frm_tarifa.edt_pedagio_200.text()
+    
+    desc250 = frm_tarifa.edt_base_250.text()
+    tBase250 = frm_tarifa.edt_base_250.text()
+    tLit250 = frm_tarifa.edt_base_lit_250.text()
+    ad_gris250 = frm_tarifa.edt_ad_gris_250.text()
+    ped250 = frm_tarifa.edt_pedagio_250.text()
+    
+    desc300 = frm_tarifa.edt_base_300.text()
+    tBase300 = frm_tarifa.edt_base_300.text()
+    tLit300 = frm_tarifa.edt_base_lit_300.text()
+    ad_gris300 = frm_tarifa.edt_ad_gris_300.text()
+    ped300 = frm_tarifa.edt_pedagio_300.text()
+
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
+    tarifas_minimas = cursor.fetchall()
+    valor_id = tarifas_minimas[0][0]
+    frm_tarifa.show()
+
+    if desc20 != valor_id[0][1]:
+        cursor = banco.cursor()
+        comando_sql=("INSERT INTO tarifas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES(%s,%s,%s,%s,%s,%s,%s)")
+        dados=(float(desc20),float(tBase20),float(tLit20),float(ad_gris20),float(ped20))
+        cursor.execute(comando_sql,dados)
+def salva_taxa():
+    fPeso = frm_tarifa.edt_fpeso.text()
+    ad_v = frm_tarifa.edt_ad.text()
+    gris = frm_tarifa.edt_gris.text()
+    taxa = frm_tarifa.edt_taxa.tetx()
+    icms = frm_tarifa.edt_icms.text()
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas") # WHERE id="+str(1)
+    tarifas = cursor2.fetchall()
+    valor_id2 = tarifas[0][0]
+    frm_tarifa.show()
+    if valor_id2[0][1] == "":
+        cursor = banco.cursor()
+        comando_sql=("INSERT INTO tarifas(frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s)")
+        dados=(float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
+        cursor.execute(comando_sql,dados)
+    else:
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}',id='{}'".format(fPeso,ad_v,gris,taxa,icms,valor_id2))
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    frm_principal = uic.loadUi('frm_principal_full.ui')
+    frm_tarifa = uic.loadUi('frm_tarifa.ui')
+
+    #botões da tela principal
+    frm_principal.btn_calcula.clicked.connect(calc_contacao)
+    frm_principal.btn_salvar.clicked.connect(salva_cotacao)
+    frm_principal.btn_limpa.clicked.connect(limpar_tela)
+    frm_principal.btn_adicionar.clicked.connect(add_m3)
+    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_cliente)
+    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_cliente)
+    frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
+    #botões da tela tarifas
+    frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
+    frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
+    frm_principal.show()
+    app.exec()

@@ -425,7 +425,7 @@
     <property name="title">
      <string>Cubagem</string>
     </property>
-    <widget class="QLineEdit" name="edit_vol_2">
+    <widget class="QLineEdit" name="edit_vol">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -435,7 +435,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_total_m3_2">
+    <widget class="QLineEdit" name="edt_total_m3">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -483,7 +483,7 @@
       <string>M 3</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_adicionar_2">
+    <widget class="QPushButton" name="btn_adicionar">
      <property name="geometry">
       <rect>
        <x>360</x>
@@ -548,7 +548,7 @@
       <string>Dim 3</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_dim1_2">
+    <widget class="QLineEdit" name="edt_dim1">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -558,7 +558,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edit_resultado_m3_2">
+    <widget class="QLineEdit" name="edit_resultado_m3">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -581,7 +581,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_dim2_2">
+    <widget class="QLineEdit" name="edt_dim2">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -591,7 +591,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_dim3_2">
+    <widget class="QLineEdit" name="edt_dim3">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -694,7 +694,7 @@
     <property name="title">
      <string>Valores dos Fretes Mínimos</string>
     </property>
-    <widget class="QLineEdit" name="edt_ffinal_250">
+    <widget class="QLineEdit" name="edt_ad_gris_250">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -724,7 +724,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_200">
+    <widget class="QLineEdit" name="edt_base_lit_200">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -744,7 +744,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_150">
+    <widget class="QLineEdit" name="edt_ad_gris_150">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -754,7 +754,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_20">
+    <widget class="QLineEdit" name="edt_base_lit_20">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -784,7 +784,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_50">
+    <widget class="QLineEdit" name="edt_base_lit_50">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -814,7 +814,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_100">
+    <widget class="QLineEdit" name="edt_base_lit_100">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -834,7 +834,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_200">
+    <widget class="QLineEdit" name="edt_ad_gris_200">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -844,7 +844,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_50">
+    <widget class="QLineEdit" name="edt_ad_gris_50">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -854,7 +854,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_300">
+    <widget class="QLineEdit" name="edt_base_lit_300">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -894,7 +894,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_100">
+    <widget class="QLineEdit" name="edt_ad_gris_100">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -924,7 +924,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_20">
+    <widget class="QLineEdit" name="edt_ad_gris_20">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -934,7 +934,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_150">
+    <widget class="QLineEdit" name="edt_base_lit_150">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -944,7 +944,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ffinal_300">
+    <widget class="QLineEdit" name="edt_ad_gris_300">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -954,7 +954,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_gris_250">
+    <widget class="QLineEdit" name="edt_base_lit_250">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -990,19 +990,6 @@
     <widget class="QLabel" name="label_48">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>20</y>
-       <width>61</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string> GRIS</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_49">
-     <property name="geometry">
-      <rect>
        <x>260</x>
        <y>20</y>
        <width>61</width>
@@ -1010,7 +997,20 @@
       </rect>
      </property>
      <property name="text">
-      <string> Frete Final</string>
+      <string> AD-V/GRIS</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_49">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>20</y>
+       <width>64</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tarifa Litoral</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_50">
@@ -1023,7 +1023,7 @@
       </rect>
      </property>
      <property name="text">
-      <string> Ad-valoren</string>
+      <string>Pedagio</string>
      </property>
     </widget>
     <widget class="QLabel" name="desc_20">
@@ -1487,6 +1487,19 @@
     </property>
     <property name="text">
      <string>Pesquisar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_tarifa">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>10</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tarifas</string>
     </property>
    </widget>
   </widget>
