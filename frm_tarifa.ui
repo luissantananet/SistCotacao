@@ -527,7 +527,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_26">
+    <widget class="QLabel" name="desc_20">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -553,7 +553,7 @@
       <string> Tarifa Base</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_27">
+    <widget class="QLabel" name="desc_50">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -566,7 +566,7 @@
       <string>De 21 até 50Kg</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_28">
+    <widget class="QLabel" name="desc_100">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -579,7 +579,7 @@
       <string>De 51 até 100Kg</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_29">
+    <widget class="QLabel" name="desc_150">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -592,7 +592,7 @@
       <string>De 101 até 150Kg</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_30">
+    <widget class="QLabel" name="desc_200">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -605,7 +605,7 @@
       <string>De 151 até 200Kg</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_31">
+    <widget class="QLabel" name="desc_250">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -618,7 +618,7 @@
       <string>De 201 até 250Kg</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_32">
+    <widget class="QLabel" name="desc_300">
      <property name="geometry">
       <rect>
        <x>10</x>
