@@ -8,22 +8,10 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
-tabela = pd.read_excel('cidades.xls')
-#print(tabela)
+cursor2 = banco.cursor()
+cursor2.execute("SELECT * FROM tarifas") # WHERE id="+str(1)
+dados_lidos = cursor2.fetchall()
+#valor_id = dados_lidos[0][0]
 
 
-
-
-"""for i in range(0,5570):
-    cidades = (tabela['cidade']) #= input(str(tabela.cols['cidade']))
-    uf=(tabela['UF'])"""
-
-for i in range(0,5570):
-    cidades = (tabela['cidade']) #= input(str(tabela.cols['cidade']))
-    uf=(tabela['UF'])
-    cursor = banco.cursor()
-    comando_SQL = "INSERT INTO cidades (cidade, uf) VALUES (%s,%s)"
-    dados = (str(cidades), str(uf))
-    #tarifas = cursor.fetchall()
-    cursor.execute(comando_SQL,dados)
-    cursor.close()
+print(len(dados_lidos))

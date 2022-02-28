@@ -1,31 +1,22 @@
 create database cotacao;
 use cotacao;
 
-create table tarifa(
+create table tarifas(
 	id int not null auto_increment,
     frete_peso decimal(7,2),
-    pedagio decimal(7,2),
-    ad_valoren decimal(7,2),
-    gris decimal(7,2),
+    ad_valoren decimal(7,4),
+    gris decimal(7,4),
     taxa decimal(7,2),
     icms decimal(7,2),
-    f_cif decimal(7,2),
-    f_fob decimal(7,2),
-    flitoral decimal(7,2),
     primary key(id)
 );
-create table tarifas(
+create table tarifas_minimas(
 	id int not null auto_increment,
     descricao varchar(50),
     tarifa_base decimal(7,2),
     tarifa_litoral decimal(7,2),
-	ad_Gris decimal(7,2),
+	ad_Gris decimal(7,4),
     pedagio decimal(7,2),
-    frete_peso decimal(7,2),
-    ad_valoren decimal(7,2),
-    gris decimal(7,2),
-    taxa decimal(7,2),
-    icms decimal(7,2),
     primary key(id)
 );
 

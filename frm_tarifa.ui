@@ -56,7 +56,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_taxas">
+    <widget class="QLineEdit" name="edt_taxa">
      <property name="geometry">
       <rect>
        <x>220</x>
@@ -649,7 +649,7 @@
   <tabstop>edt_fpeso</tabstop>
   <tabstop>edt_ad</tabstop>
   <tabstop>edt_gris</tabstop>
-  <tabstop>edt_taxas</tabstop>
+  <tabstop>edt_taxa</tabstop>
   <tabstop>edt_icms</tabstop>
   <tabstop>btn_salvar_taxa</tabstop>
  </tabstops>
