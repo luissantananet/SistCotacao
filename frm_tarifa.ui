@@ -337,7 +337,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_bas_150">
+    <widget class="QLineEdit" name="edt_base_150">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -629,7 +629,7 @@
   <tabstop>edt_base_lit_100</tabstop>
   <tabstop>edt_ad_gris_100</tabstop>
   <tabstop>edt_pedagio_100</tabstop>
-  <tabstop>edt_bas_150</tabstop>
+  <tabstop>edt_base_150</tabstop>
   <tabstop>edt_base_lit_150</tabstop>
   <tabstop>edt_ad_gris_150</tabstop>
   <tabstop>edt_pedagio_150</tabstop>
