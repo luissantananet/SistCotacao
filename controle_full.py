@@ -2,7 +2,6 @@ from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox
 import mysql.connector
 import mysql.connector.errors
-from controle import chama_tarifa, salva_tarifaM
 
 # Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
@@ -58,36 +57,25 @@ def add_m3():
 def pesquisa_cliente():
     pass
 def chama_tarifa():
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM tarifas")
-    tarifas = cursor.fetchall()
-    taxa = len(tarifas)
-    cursor3 = banco.cursor()
-    cursor3.execute("SELECT * FROM tarifas_minimas") 
-    tarifas_minimas = cursor3.fetchall()
-    tarifa_minima = len(tarifas_minimas)
-    
-    if taxa != 0:
-        if tarifa_minima != 0:
-            frm_tarifa.edt_base_20.setText(str(tarifas_minimas[0][1]))
-            frm_tarifa.edt_base_20.setText(str(tarifas_minimas[0][2]))
-            frm_tarifa.edt_base_lit_20.setText(str(tarifas_minimas[0][3]))
-            frm_tarifa.edt_ad_gris_20.setText(str(tarifas_minimas[0][4]))
-            frm_tarifa.edt_pedagio_20.setText(str(tarifas_minimas[0][5]))
+    cursor4 = banco.cursor()
+    cursor4.execute("SELECT * FROM tarifas_minimas") 
+    tabelas = cursor4.fetchall()
+    frm_tarifa.edt_base_20.setText(str(tabelas[0][2]))
+    frm_tarifa.edt_base_lit_20.setText(str(tabelas[0][3]))
+    frm_tarifa.edt_ad_gris_20.setText(str(tabelas[0][4]))
+    frm_tarifa.edt_pedagio_20.setText(str(tabelas[0][5]))
 
-        cursor2 = banco.cursor()
-        cursor2.execute("SELECT * FROM tarifas") 
-        tarifas = cursor.fetchall()
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas") 
+    taxas = cursor2.fetchall()
         
-        frm_tarifa.edt_fpeso.setText(str(tarifas[0][1]))
-        frm_tarifa.edt_ad.setText(str(tarifas[0][2]))
-        frm_tarifa.edt_gris.setText(str(tarifas[0][3]))
-        frm_tarifa.edt_taxa.setText(str(tarifas[0][4]))
-        frm_tarifa.edt_icms.setText(str(tarifas[0][5]))
+    frm_tarifa.edt_fpeso.setText(str(taxas[0][1]))
+    frm_tarifa.edt_ad.setText(str(taxas[0][2]))
+    frm_tarifa.edt_gris.setText(str(taxas[0][3]))
+    frm_tarifa.edt_taxa.setText(str(taxas[0][4]))
+    frm_tarifa.edt_icms.setText(str(taxas[0][5]))
 
-        frm_tarifa.show()
-    else:
-        frm_tarifa.show()
+    frm_tarifa.show()
 
 def salva_tarifa():
     desc20 = frm_tarifa.desc_20.text()
@@ -97,7 +85,7 @@ def salva_tarifa():
     ped20 = frm_tarifa.edt_pedagio_20.text()
     
     desc50 = frm_tarifa.desc_50.text()
-    tBase50 = frm_tarifa.base_50.text()
+    tBase50 = frm_tarifa.edt_base_50.text()
     tLit50 = frm_tarifa.edt_base_lit_50.text()
     ad_gris50 = frm_tarifa.edt_ad_gris_50.text()
     ped50 = frm_tarifa.edt_pedagio_50.text()
@@ -133,29 +121,29 @@ def salva_tarifa():
     ad_gris300 = frm_tarifa.edt_ad_gris_300.text()
     ped300 = frm_tarifa.edt_pedagio_300.text()
 
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM tarifas_minimas") 
-    tarifas_minimas = cursor.fetchall()
-    valor_id = len(tarifas_minimas)
-    frm_tarifa.show()
-    if valor_id == 0:
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
+    dados = cursor2.fetchall()
+    tabela = dados[0][1]
+    
+    if desc20 == tabela:
+        ids =  tabela = dados[0][0]
         cursor = banco.cursor()
-        comando_sql=("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES(%s,%s,%s,%s,%s,%s,%s)")
-        dados=(float(desc20),float(tBase20),float(tLit20),float(ad_gris20),float(ped20))
-        cursor.execute(comando_sql,dados)
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}',id='{}'".format(tBase20,tLit20,ad_gris20,ped20,ids))
         banco.commit()
-        if desc50 != valor_id:
-            pass
-        if desc100 != valor_id:
-            pass
-        if desc150 != valor_id:
-            pass
-        if desc200 != valor_id:
-            pass
-        if desc250 != valor_id:
-            pass
-        if desc300 != valor_id:
-            pass
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela cadastradas")
+    if desc50 == "De 21 até 50Kg":
+        pass
+    if desc100 != "De 51 até 100Kg":
+        pass
+    if desc150 != "De 101 até 150Kg":
+        pass
+    if desc200 != "De 151 até 200Kg":
+        pass
+    if desc250 != "De 201 até 250Kg":
+        pass
+    if desc300 != "De 251 até 300Kg":
+        pass
 
 def salva_taxa():
     fPeso = frm_tarifa.edt_fpeso.text()
