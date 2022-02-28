@@ -61,14 +61,19 @@ def chama_tarifa():
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifas")
     tarifas = cursor.fetchall()
-    valor_id = len(tarifas)
+    taxa = len(tarifas)
+    cursor3 = banco.cursor()
+    cursor3.execute("SELECT * FROM tarifas_minimas") 
+    tarifas_minimas = cursor3.fetchall()
+    tarifa_minima = len(tarifas_minimas)
     
-    
-    if valor_id != 0:
-        cursor = banco.cursor()
-        cursor.execute("SELECT * FROM tarifas_minimas") 
-        tarifas_minimas = cursor.fetchall()
-        
+    if taxa != 0:
+        if tarifa_minima != 0:
+            frm_tarifa.edt_base_20.setText(str(tarifas_minimas[0][1]))
+            frm_tarifa.edt_base_20.setText(str(tarifas_minimas[0][2]))
+            frm_tarifa.edt_base_lit_20.setText(str(tarifas_minimas[0][3]))
+            frm_tarifa.edt_ad_gris_20.setText(str(tarifas_minimas[0][4]))
+            frm_tarifa.edt_pedagio_20.setText(str(tarifas_minimas[0][5]))
 
         cursor2 = banco.cursor()
         cursor2.execute("SELECT * FROM tarifas") 
@@ -85,60 +90,73 @@ def chama_tarifa():
         frm_tarifa.show()
 
 def salva_tarifa():
-    desc20 = frm_tarifa.edt_base_20.text()
+    desc20 = frm_tarifa.desc_20.text()
     tBase20 = frm_tarifa.edt_base_20.text()
     tLit20 = frm_tarifa.edt_base_lit_20.text()
     ad_gris20 = frm_tarifa.edt_ad_gris_20.text()
     ped20 = frm_tarifa.edt_pedagio_20.text()
     
-    desc50 = frm_tarifa.edt_base_50.text()
-    tBase50 = frm_tarifa.edt_base_50.text()
+    desc50 = frm_tarifa.desc_50.text()
+    tBase50 = frm_tarifa.base_50.text()
     tLit50 = frm_tarifa.edt_base_lit_50.text()
     ad_gris50 = frm_tarifa.edt_ad_gris_50.text()
     ped50 = frm_tarifa.edt_pedagio_50.text()
     
 
-    desc100 = frm_tarifa.edt_base_100.text()
+    desc100 = frm_tarifa.desc_100.text()
     tBase100 = frm_tarifa.edt_base_100.text()
     tLit100 = frm_tarifa.edt_base_lit_100.text()
     ad_gris100 = frm_tarifa.edt_ad_gris_100.text()
     ped100 = frm_tarifa.edt_pedagio_100.text()
 
-    desc150 = frm_tarifa.edt_base_150.text()
+    desc150 = frm_tarifa.desc_150.text()
     tBase150 = frm_tarifa.edt_base_150.text()
     tLit150 = frm_tarifa.edt_base_lit_150.text()
     ad_gris150 = frm_tarifa.edt_ad_gris_150.text()
     ped150 = frm_tarifa.edt_pedagio_150.text()
 
-    desc200 = frm_tarifa.edt_base_200.text()
+    desc200 = frm_tarifa.desc_200.text()
     tBase200 = frm_tarifa.edt_base_200.text()
     tLit200 = frm_tarifa.edt_base_lit_200.text()
     ad_gris200 = frm_tarifa.edt_ad_gris_200.text()
     ped200 = frm_tarifa.edt_pedagio_200.text()
     
-    desc250 = frm_tarifa.edt_base_250.text()
+    desc250 = frm_tarifa.desc_250.text()
     tBase250 = frm_tarifa.edt_base_250.text()
     tLit250 = frm_tarifa.edt_base_lit_250.text()
     ad_gris250 = frm_tarifa.edt_ad_gris_250.text()
     ped250 = frm_tarifa.edt_pedagio_250.text()
     
-    desc300 = frm_tarifa.edt_base_300.text()
+    desc300 = frm_tarifa.desc_300.text()
     tBase300 = frm_tarifa.edt_base_300.text()
     tLit300 = frm_tarifa.edt_base_lit_300.text()
     ad_gris300 = frm_tarifa.edt_ad_gris_300.text()
     ped300 = frm_tarifa.edt_pedagio_300.text()
 
     cursor = banco.cursor()
-    cursor.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
+    cursor.execute("SELECT * FROM tarifas_minimas") 
     tarifas_minimas = cursor.fetchall()
-    valor_id = tarifas_minimas[0][0]
+    valor_id = len(tarifas_minimas)
     frm_tarifa.show()
-
-    if desc20 != valor_id[0][1]:
+    if valor_id == 0:
         cursor = banco.cursor()
-        comando_sql=("INSERT INTO tarifas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES(%s,%s,%s,%s,%s,%s,%s)")
+        comando_sql=("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES(%s,%s,%s,%s,%s,%s,%s)")
         dados=(float(desc20),float(tBase20),float(tLit20),float(ad_gris20),float(ped20))
         cursor.execute(comando_sql,dados)
+        banco.commit()
+        if desc50 != valor_id:
+            pass
+        if desc100 != valor_id:
+            pass
+        if desc150 != valor_id:
+            pass
+        if desc200 != valor_id:
+            pass
+        if desc250 != valor_id:
+            pass
+        if desc300 != valor_id:
+            pass
+
 def salva_taxa():
     fPeso = frm_tarifa.edt_fpeso.text()
     ad_v = frm_tarifa.edt_ad.text()

@@ -8,10 +8,9 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
-cursor2 = banco.cursor()
-cursor2.execute("SELECT * FROM tarifas") # WHERE id="+str(1)
-dados_lidos = cursor2.fetchall()
-#valor_id = dados_lidos[0][0]
-
-
-print(len(dados_lidos))
+cursor = banco.cursor()
+cursor.execute("SELECT * FROM tarifas_minimas") 
+tarifas_minimas = cursor.fetchall()
+valor_id = len(tarifas_minimas) 
+#descs20 = tarifas_minimas[0][2]
+print(valor_id)
