@@ -54,3 +54,15 @@ CREATE Table cidades(
     uf VARCHAR(100) not null,
     PRIMARY KEY(id)
 );
+
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 01 até 20Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 21 até 50Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 51 até 100Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 101 até 150Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 151 até 200Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 201 até 250Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio) VALUES('De 251 até 300Kg',00.00,00.00,00.00,00.00);
+INSERT INTO tarifas(frete_peso,ad_valoren,gris,taxa,icms) VALUES(00.00,00.00,00.00,00.00,00.00);
+
+select * from tarifas_minimas;
+select * from tarifas;
