@@ -1117,7 +1117,7 @@
       <string>De 151 até 200Kg</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_50">
+    <widget class="QLineEdit" name="edt_pedlitoral_50">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1127,7 +1127,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_250">
+    <widget class="QLineEdit" name="edt_pedlitoral_250">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1150,7 +1150,7 @@
       <string>Ped.Litoral</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_300">
+    <widget class="QLineEdit" name="edt_pedlitoral_300">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1160,7 +1160,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_20">
+    <widget class="QLineEdit" name="edt_pedlitoral_20">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1170,7 +1170,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_200">
+    <widget class="QLineEdit" name="edt_pedlitoral_200">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1180,7 +1180,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_150">
+    <widget class="QLineEdit" name="edt_pedlitoral_150">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1190,7 +1190,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_pedLitoral_100">
+    <widget class="QLineEdit" name="edt_pedlitoral_100">
      <property name="geometry">
       <rect>
        <x>400</x>
