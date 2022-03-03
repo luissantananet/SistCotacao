@@ -12,9 +12,20 @@ banco = mysql.connector.connect(
 )
 global numero_id
 def calc_contacao():
+    # Taxas fixas
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM tarifas")
+    taxas = cursor.fetchall()
     cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM tarifas")
-    tarifas = cursor2.fetchall()
+    cursor2.execute("SELECT * FROM tarifas_minimas") 
+    tabelas = cursor2.fetchall()
+    taxa_fpeso = float(taxas[0][1])
+    taxa_ad = float(taxas[0][2])
+    taxa_gris = float(taxas[0][3])
+    taxa_taxas = float(taxas[0][4])
+    taxa_icms = float(taxas[0][5])
+    tabelas_flitoral = float(tabelas[0][3])
+    tabelas_ped = float(tabelas[0][5])
 
     valornf=frm_principal.edt_valor_merc.text()
     fcif=frm_principal.edt_frete_cif.text()
@@ -24,31 +35,29 @@ def calc_contacao():
     peso=frm_principal.edt_peso.text()
     if valornf != "" or peso != "":
         if peso != "":
-            # Peso=frm_principal.edt_peso.text()
-            fpesores = float(peso) * 0.52
+            fpesores = float(peso) * taxa_fpeso #0.52
             frm_principal.edt_fpeso.setText(str('%.2f'%fpesores))
         else:
             QMessageBox.about(frm_principal, "Aviso", "Insira o Peso!")
             frm_principal.show()
         if valornf != "":
             # Valor GRIS
-            valorgris = float(valornf) * 0.0025 #/0.88+1.92
-            frm_principal.edt_gris.setText(str('%.2f'%valorgris)) 
+            valorgris = float(valornf) * taxa_gris #0.0025 #/0.88+1.92
+            frm_principal.edt_gris.setText(str('%.4f'%valorgris)) 
             # Valor Ad_Valoren
-            vaload = float(valornf) * 0.005
-            frm_principal.edt_ad.setText(str('%.2f'%vaload))
+            vaload = float(valornf) * taxa_ad #0.005
+            frm_principal.edt_ad.setText(str('%.4f'%vaload))
             # Valor pedagio
             if peso != "":
-                valorped = float(peso)/100 * 3.04
-                frm_principal.edt_pedag.setText(str('%.2f'%valorped))
-            
+                valorped = tabelas_ped *float(peso) / 100 #3.04
+                frm_principal.edt_pedag.setText(str('%.3f'%valorped))
                 # Valor taxa 
-                valortaxa = float(valorped) + 36.68
+                valortaxa = float(valorped) + taxa_taxas #36.68
                 frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
                 # Valor frete cif
                 valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
                 frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
-                valorfob = float(valorcif) / 0.88
+                valorfob = float(valorcif) / taxa_icms #0.88
                 frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
                 # Valor frete litoral
                 valorlitoral = float(valorfob) / 0.69
@@ -56,7 +65,7 @@ def calc_contacao():
             else:
                 frm_principal.show
             # Valor do ICMS
-            icmsres = (float(valornf)/0.88)-float(valornf)
+            icmsres = (float(valornf)/taxa_icms)-float(valornf) #0.88
             frm_principal.edt_icms.setText(str('%.2f'%icmsres)) 
         else:
             QMessageBox.about(frm_principal, "Aviso", "Insira o Valor da Nota Fiscal!")

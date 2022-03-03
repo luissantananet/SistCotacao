@@ -18,12 +18,17 @@ desc = tarifas_minimas[2][1]
 #descs20 = tarifas_minimas[0][2]
 print(desc)"""
 cursor2 = banco.cursor()
-cursor2.execute("SELECT id FROM tarifas_minimas")
-dadosid = cursor2.fetchall()
+cursor2.execute("SELECT * FROM tarifas")
+taxas = cursor2.fetchall()
 
 cursor2 = banco.cursor()
 cursor2.execute("SELECT * FROM tarifas_minimas") 
-dados = cursor2.fetchall()
-numero_id = dadosid[2][0]
+tabelas = cursor2.fetchall()
 
-print(dados[2])
+dadoslidos=float(taxas[0][1])
+tabelas_ped = float(tabelas[0][5])
+print(tabelas[0][3])
+peso = 10
+
+teste = tabelas_ped *float(peso) / 100 
+print(teste)
