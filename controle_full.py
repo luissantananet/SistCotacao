@@ -10,44 +10,60 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
+global numero_id
 def calc_contacao():
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas")
+    tarifas = cursor2.fetchall()
+
     valornf=frm_principal.edt_valor_merc.text()
     fcif=frm_principal.edt_frete_cif.text()
     ffob=frm_principal.edt_frete_fob.text()
     flit=frm_principal.edt_frete_litoral.text()
     valor_nf=frm_principal.edt_valor_merc.text()
     peso=frm_principal.edt_peso.text()
-
-    if peso != " ":
-        # Peso=frm_principal.edt_peso.text()
-        fpesores = float(peso) * 0.52
-        frm_principal.edt_fpeso.setText(str('%.2f'%fpesores))
-    
-    if valornf != " ":
-        # Valor GRIS
-        valorgris = float(valornf) * 0.0025 #/0.88+1.92
-        frm_principal.edt_gris.setText(str('%.2f'%valorgris)) 
-        # Valor Ad_Valoren
-        vaload = float(valornf) * 0.005
-        frm_principal.edt_ad.setText(str('%.2f'%vaload))
-        # Valor pedagio
-        valorped = float(peso)/100 * 3.04
-        frm_principal.edt_pedag.setText(str('%.2f'%valorped))
-        # Valor taxa 
-        valortaxa = float(valorped) + 36.68
-        frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
-        # Valor do ICMS
-        icmsres = (float(valornf)/0.88)-float(valornf)
-        frm_principal.edt_icms.setText(str('%.2f'%icmsres))
-    # Valor frete cif
-    valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
-    frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
-    # Valor frete fob
-    valorfob = float(valorcif) / 0.88
-    frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
-    # Valor frete litoral
-    valorlitoral = float(valorfob) / 0.69
-    frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
+    if valornf != "" or peso != "":
+        if peso != "":
+            # Peso=frm_principal.edt_peso.text()
+            fpesores = float(peso) * 0.52
+            frm_principal.edt_fpeso.setText(str('%.2f'%fpesores))
+        else:
+            QMessageBox.about(frm_principal, "Aviso", "Insira o Peso!")
+            frm_principal.show()
+        if valornf != "":
+            # Valor GRIS
+            valorgris = float(valornf) * 0.0025 #/0.88+1.92
+            frm_principal.edt_gris.setText(str('%.2f'%valorgris)) 
+            # Valor Ad_Valoren
+            vaload = float(valornf) * 0.005
+            frm_principal.edt_ad.setText(str('%.2f'%vaload))
+            # Valor pedagio
+            if peso != "":
+                valorped = float(peso)/100 * 3.04
+                frm_principal.edt_pedag.setText(str('%.2f'%valorped))
+            
+                # Valor taxa 
+                valortaxa = float(valorped) + 36.68
+                frm_principal.edt_taxas.setText(str('%.2f'%valortaxa))
+                # Valor frete cif
+                valorcif = float(fpesores) + float(valorgris) + float(vaload) + float(valortaxa)
+                frm_principal.edt_frete_cif.setText(str('%.2f'%valorcif))
+                valorfob = float(valorcif) / 0.88
+                frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
+                # Valor frete litoral
+                valorlitoral = float(valorfob) / 0.69
+                frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
+            else:
+                frm_principal.show
+            # Valor do ICMS
+            icmsres = (float(valornf)/0.88)-float(valornf)
+            frm_principal.edt_icms.setText(str('%.2f'%icmsres)) 
+        else:
+            QMessageBox.about(frm_principal, "Aviso", "Insira o Valor da Nota Fiscal!")
+            frm_principal.show()
+    else:
+        QMessageBox.about(frm_principal, "Aviso", "Insira os valores!")
+        frm_principal.show()
 def salva_cotacao():
     pass
 def limpar_tela():
@@ -65,6 +81,38 @@ def chama_tarifa():
     frm_tarifa.edt_ad_gris_20.setText(str(tabelas[0][4]))
     frm_tarifa.edt_pedagio_20.setText(str(tabelas[0][5]))
 
+    frm_tarifa.edt_base_50.setText(str(tabelas[1][2]))
+    frm_tarifa.edt_base_lit_50.setText(str(tabelas[1][3]))
+    frm_tarifa.edt_ad_gris_50.setText(str(tabelas[1][4]))
+    frm_tarifa.edt_pedagio_50.setText(str(tabelas[1][5]))
+
+    frm_tarifa.edt_base_100.setText(str(tabelas[2][2]))
+    frm_tarifa.edt_base_lit_100.setText(str(tabelas[2][3]))
+    frm_tarifa.edt_ad_gris_100.setText(str(tabelas[2][4]))
+    frm_tarifa.edt_pedagio_100.setText(str(tabelas[2][5]))
+
+    frm_tarifa.edt_base_150.setText(str(tabelas[3][2]))
+    frm_tarifa.edt_base_lit_150.setText(str(tabelas[3][3]))
+    frm_tarifa.edt_ad_gris_150.setText(str(tabelas[3][4]))
+    frm_tarifa.edt_pedagio_150.setText(str(tabelas[3][5]))
+
+    frm_tarifa.edt_base_200.setText(str(tabelas[4][2]))
+    frm_tarifa.edt_base_lit_200.setText(str(tabelas[4][3]))
+    frm_tarifa.edt_ad_gris_200.setText(str(tabelas[4][4]))
+    frm_tarifa.edt_pedagio_200.setText(str(tabelas[4][5]))
+
+    frm_tarifa.edt_base_250.setText(str(tabelas[5][2]))
+    frm_tarifa.edt_base_lit_250.setText(str(tabelas[5][3]))
+    frm_tarifa.edt_ad_gris_250.setText(str(tabelas[5][4]))
+    frm_tarifa.edt_pedagio_250.setText(str(tabelas[5][5]))
+
+    frm_tarifa.edt_base_300.setText(str(tabelas[6][2]))
+    frm_tarifa.edt_base_lit_300.setText(str(tabelas[6][3]))
+    frm_tarifa.edt_ad_gris_300.setText(str(tabelas[6][4]))
+    frm_tarifa.edt_pedagio_300.setText(str(tabelas[6][5]))
+
+    
+
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas") 
     taxas = cursor2.fetchall()
@@ -78,6 +126,7 @@ def chama_tarifa():
     frm_tarifa.show()
 
 def salva_tarifa():
+    global numero_id
     desc20 = frm_tarifa.desc_20.text()
     tBase20 = frm_tarifa.edt_base_20.text()
     tLit20 = frm_tarifa.edt_base_lit_20.text()
@@ -121,29 +170,57 @@ def salva_tarifa():
     ad_gris300 = frm_tarifa.edt_ad_gris_300.text()
     ped300 = frm_tarifa.edt_pedagio_300.text()
 
-    cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM tarifas_minimas") # WHERE id="+str(1)
-    dados = cursor2.fetchall()
-    tabela = dados[0][1]
+    cursor = banco.cursor()
+    cursor.execute("SELECT id FROM tarifas_minimas")
+    dadosid = cursor.fetchall()
     
-    if desc20 == tabela:
-        ids =  tabela = dados[0][0]
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas_minimas") 
+    dados = cursor2.fetchall()
+   
+    
+    if desc20 == dados[0][1]:
+        numero_id = dadosid[0][0]
         cursor = banco.cursor()
-        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}',id='{}'".format(tBase20,tLit20,ad_gris20,ped20,ids))
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase20,tLit20,ad_gris20,ped20,numero_id))
         banco.commit()
-        QMessageBox.information(frm_tarifa, "Aviso", "tabela cadastradas")
-    if desc50 == "De 21 até 50Kg":
-        pass
-    if desc100 != "De 51 até 100Kg":
-        pass
-    if desc150 != "De 101 até 150Kg":
-        pass
-    if desc200 != "De 151 até 200Kg":
-        pass
-    if desc250 != "De 201 até 250Kg":
-        pass
-    if desc300 != "De 251 até 300Kg":
-        pass
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc50 == dados[1][1]:
+        numero_id = dadosid[1][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase50,tLit50,ad_gris50,ped50,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc100 == dados[2][1]:
+        numero_id = dadosid[2][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase100,tLit100,ad_gris100,ped100,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc150 == dados[3][1]:
+        numero_id = dadosid[3][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase20,tLit150,ad_gris150,ped150,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc200 == dados[4][1]:
+        numero_id = dadosid[4][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase200,tLit200,ad_gris200,ped200,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc250 == dados[5][1]:
+        numero_id = dadosid[5][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase250,tLit250,ad_gris250,ped250,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
+    if desc300 == dados[6][1]:
+        numero_id = dadosid[6][0]
+        cursor = banco.cursor()
+        cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}' WHERE id={}".format(tBase300,tLit300,ad_gris300,ped300,numero_id))
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
 
 def salva_taxa():
     fPeso = frm_tarifa.edt_fpeso.text()
@@ -152,7 +229,7 @@ def salva_taxa():
     taxa = frm_tarifa.edt_taxa.text()
     icms = frm_tarifa.edt_icms.text()
     cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM tarifas") # WHERE id="+str(1)
+    cursor2.execute("SELECT * FROM tarifas")
     tarifas = cursor2.fetchall()
     valor_id2 = len(tarifas)
     frm_tarifa.show()
@@ -165,13 +242,51 @@ def salva_taxa():
         QMessageBox.information(frm_tarifa, "Aviso", "Taxas cadastradas")
     else:
         cursor = banco.cursor()
-        cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}',id='{}'".format(fPeso,ad_v,gris,taxa,icms,valor_id2))
+        cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE id='{}'".format(fPeso,ad_v,gris,taxa,icms,valor_id2))
         banco.commit()
         QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi('frm_principal_full.ui')
     frm_tarifa = uic.loadUi('frm_tarifa.ui')
+
+    cursor4 = banco.cursor()
+    cursor4.execute("SELECT * FROM tarifas_minimas") 
+    tabelas = cursor4.fetchall()
+    frm_principal.edt_base_20.setText(str(tabelas[0][2]))
+    frm_principal.edt_base_lit_20.setText(str(tabelas[0][3]))
+    frm_principal.edt_ad_gris_20.setText(str(tabelas[0][4]))
+    frm_principal.edt_pedagio_20.setText(str(tabelas[0][5]))
+
+    frm_principal.edt_base_50.setText(str(tabelas[1][2]))
+    frm_principal.edt_base_lit_50.setText(str(tabelas[1][3]))
+    frm_principal.edt_ad_gris_50.setText(str(tabelas[1][4]))
+    frm_principal.edt_pedagio_50.setText(str(tabelas[1][5]))
+
+    frm_principal.edt_base_100.setText(str(tabelas[2][2]))
+    frm_principal.edt_base_lit_100.setText(str(tabelas[2][3]))
+    frm_principal.edt_ad_gris_100.setText(str(tabelas[2][4]))
+    frm_principal.edt_pedagio_100.setText(str(tabelas[2][5]))
+
+    frm_principal.edt_base_150.setText(str(tabelas[3][2]))
+    frm_principal.edt_base_lit_150.setText(str(tabelas[3][3]))
+    frm_principal.edt_ad_gris_150.setText(str(tabelas[3][4]))
+    frm_principal.edt_pedagio_150.setText(str(tabelas[3][5]))
+
+    frm_principal.edt_base_200.setText(str(tabelas[4][2]))
+    frm_principal.edt_base_lit_200.setText(str(tabelas[4][3]))
+    frm_principal.edt_ad_gris_200.setText(str(tabelas[4][4]))
+    frm_principal.edt_pedagio_200.setText(str(tabelas[4][5]))
+
+    frm_principal.edt_base_250.setText(str(tabelas[5][2]))
+    frm_principal.edt_base_lit_250.setText(str(tabelas[5][3]))
+    frm_principal.edt_ad_gris_250.setText(str(tabelas[5][4]))
+    frm_principal.edt_pedagio_250.setText(str(tabelas[5][5]))
+
+    frm_principal.edt_base_300.setText(str(tabelas[6][2]))
+    frm_principal.edt_base_lit_300.setText(str(tabelas[6][3]))
+    frm_principal.edt_ad_gris_300.setText(str(tabelas[6][4]))
+    frm_principal.edt_pedagio_300.setText(str(tabelas[6][5]))
 
     #botões da tela principal
     frm_principal.btn_calcula.clicked.connect(calc_contacao)

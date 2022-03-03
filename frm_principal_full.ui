@@ -714,7 +714,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_50">
+    <widget class="QLineEdit" name="edt_pedagio_50">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -734,7 +734,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_100">
+    <widget class="QLineEdit" name="edt_pedagio_100">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -804,7 +804,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_20">
+    <widget class="QLineEdit" name="edt_pedagio_20">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -824,7 +824,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_150">
+    <widget class="QLineEdit" name="edt_pedagio_150">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -864,7 +864,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_bas_150">
+    <widget class="QLineEdit" name="edt_base_150">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -874,7 +874,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_200">
+    <widget class="QLineEdit" name="edt_pedagio_200">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -904,7 +904,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_250">
+    <widget class="QLineEdit" name="edt_pedagio_250">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -914,7 +914,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edt_ad_300">
+    <widget class="QLineEdit" name="edt_pedagio_300">
      <property name="geometry">
       <rect>
        <x>330</x>
