@@ -842,39 +842,51 @@
  </widget>
  <tabstops>
   <tabstop>edt_base_20</tabstop>
-  <tabstop>edt_base_lit_20</tabstop>
-  <tabstop>edt_ad_gris_20</tabstop>
-  <tabstop>edt_pedagio_20</tabstop>
   <tabstop>edt_base_50</tabstop>
-  <tabstop>edt_base_lit_50</tabstop>
-  <tabstop>edt_ad_gris_50</tabstop>
-  <tabstop>edt_pedagio_50</tabstop>
   <tabstop>edt_base_100</tabstop>
-  <tabstop>edt_base_lit_100</tabstop>
-  <tabstop>edt_ad_gris_100</tabstop>
-  <tabstop>edt_pedagio_100</tabstop>
   <tabstop>edt_base_150</tabstop>
-  <tabstop>edt_base_lit_150</tabstop>
-  <tabstop>edt_ad_gris_150</tabstop>
-  <tabstop>edt_pedagio_150</tabstop>
   <tabstop>edt_base_200</tabstop>
-  <tabstop>edt_base_lit_200</tabstop>
-  <tabstop>edt_ad_gris_200</tabstop>
-  <tabstop>edt_pedagio_200</tabstop>
   <tabstop>edt_base_250</tabstop>
-  <tabstop>edt_base_lit_250</tabstop>
-  <tabstop>edt_ad_gris_250</tabstop>
-  <tabstop>edt_pedagio_250</tabstop>
   <tabstop>edt_base_300</tabstop>
+  <tabstop>edt_base_lit_20</tabstop>
+  <tabstop>edt_base_lit_50</tabstop>
+  <tabstop>edt_base_lit_100</tabstop>
+  <tabstop>edt_base_lit_150</tabstop>
+  <tabstop>edt_base_lit_200</tabstop>
+  <tabstop>edt_base_lit_250</tabstop>
   <tabstop>edt_base_lit_300</tabstop>
+  <tabstop>edt_ad_gris_20</tabstop>
+  <tabstop>edt_ad_gris_50</tabstop>
+  <tabstop>edt_ad_gris_100</tabstop>
+  <tabstop>edt_ad_gris_150</tabstop>
+  <tabstop>edt_ad_gris_200</tabstop>
+  <tabstop>edt_ad_gris_250</tabstop>
   <tabstop>edt_ad_gris_300</tabstop>
+  <tabstop>edt_pedagio_20</tabstop>
+  <tabstop>edt_pedagio_50</tabstop>
+  <tabstop>edt_pedagio_100</tabstop>
+  <tabstop>edt_pedagio_150</tabstop>
+  <tabstop>edt_pedagio_200</tabstop>
+  <tabstop>edt_pedagio_250</tabstop>
   <tabstop>edt_pedagio_300</tabstop>
+  <tabstop>edt_pedlitoral_20</tabstop>
+  <tabstop>edt_pedlitoral_50</tabstop>
+  <tabstop>edt_pedlitoral_100</tabstop>
+  <tabstop>edt_pedlitoral_150</tabstop>
+  <tabstop>edt_pedlitoral_200</tabstop>
+  <tabstop>edt_pedlitoral_250</tabstop>
+  <tabstop>edt_pedlitoral_300</tabstop>
   <tabstop>btn_salvar_tabela</tabstop>
   <tabstop>edt_fpeso</tabstop>
   <tabstop>edt_ad</tabstop>
   <tabstop>edt_gris</tabstop>
   <tabstop>edt_taxa</tabstop>
   <tabstop>edt_icms</tabstop>
+  <tabstop>edt_fpeso_lit</tabstop>
+  <tabstop>edt_ad_lit</tabstop>
+  <tabstop>edt_gris_lit</tabstop>
+  <tabstop>edt_taxa_lit</tabstop>
+  <tabstop>edt_icms_lit</tabstop>
   <tabstop>btn_salvar_taxa</tabstop>
  </tabstops>
  <resources/>
