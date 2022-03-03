@@ -3,6 +3,7 @@ use cotacao;
 
 create table tarifas(
 	id int not null auto_increment,
+    descricao varchar(50),
     frete_peso decimal(7,2),
     ad_valoren decimal(7,4),
     gris decimal(7,4),
