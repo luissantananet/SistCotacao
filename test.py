@@ -19,3 +19,4 @@ ids= tarifas
 print(total_id)
 print(type(total_id))
 print(ids)
+print(type(ids))
