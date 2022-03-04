@@ -1,3 +1,9 @@
 {
-    "workbench.experimental.layoutControl.enabled": true
+    "workbench.experimental.layoutControl.enabled": true,
+    "sync.autoDownload": true,
+    "sync.autoUpload": true,
+    "sync.forceDownload": true,
+    "sync.forceUpload": true,
+    "sync.gist": "luissantananet",
+    "sync.quietSync": true
 }
