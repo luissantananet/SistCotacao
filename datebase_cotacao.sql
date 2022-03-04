@@ -64,8 +64,8 @@ INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio
 INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 151 até 200Kg',00.00,00.00,00.00,00.00,00.00);
 INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 201 até 250Kg',00.00,00.00,00.00,00.00,00.00);
 INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 251 até 300Kg',00.00,00.00,00.00,00.00,00.00);
-INSERT INTO tarifas(frete_peso,ad_valoren,gris,taxa,icms) VALUES(00.00,00.00,00.00,00.00,00.00);
-INSERT INTO tarifas(frete_peso,ad_valoren,gris,taxa,icms) VALUES(00.00,00.00,00.00,00.00,00.00);
+INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES('TB',00.00,00.00,00.00,00.00,00.00);
+INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES('TBL',00.00,00.00,00.00,00.00,00.00);
 
 select * from tarifas_minimas;
 select * from tarifas;
