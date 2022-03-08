@@ -254,15 +254,14 @@ def salva_taxa():
     taxalit = frm_tarifa.edt_taxa_lit.text()
     icmslit = frm_tarifa.edt_icms_lit.text()
     cursor2 = banco.cursor()
-    cursor2.execute("SELECT id FROM tarifas")
+    cursor2.execute("SELECT * FROM tarifas")
     tarifas = cursor2.fetchall()
     valor_id2 = len(tarifas)
     ids= tarifas
-    frm_tarifa.show()
     idtb='TB'
     idtbl="TBL"
     if valor_id2 == 0:
-        if ids == [] or ids != idtb:
+        if ids != idtb:
             cursor = banco.cursor()
             comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
             dados=(str('TB'),float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
@@ -275,18 +274,19 @@ def salva_taxa():
             cursor.execute(comando_sql,dados)
             banco.commit()
         QMessageBox.information(frm_tarifa, "Aviso", "Taxas cadastradas")
+        frm_tarifa.show()
     elif valor_id2 != 0:
         if ids[0][1] == idtb:
             cursor = banco.cursor()
-            cursor.execute("UPDATE tarifas SET descricao='{}',frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE id={}".format(str('TB'),fPeso,ad_v,gris,taxa,icms,1))
+            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPeso,ad_v,gris,taxa,icms,str('TB')))
             banco.commit()
-        if desc == idtbl:
+        if ids[1][1] == idtbl:
             cursor = banco.cursor()
-            cursor.execute("UPDATE tarifas SET descricao='{}',frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE id={}".format(str('TBL'),fPesolit,ad_vlit,grislit,taxalit,icmslit,2))
+            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPesolit,ad_vlit,grislit,taxalit,icmslit,str('TBL')))
             banco.commit()
             QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
         else:
-            QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+            QMessageBox.about(frm_tarifa, "ERRO", "Erro na Atualização")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 if __name__ == "__main__":
