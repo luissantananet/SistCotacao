@@ -262,15 +262,15 @@ def salva_taxa():
     idtb='TB'
     idtbl="TBL"
     if valor_id2 == 0:
-        if ids != idtb:
+        if ids == [] or ids != idtb:
             cursor = banco.cursor()
-            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s)")
+            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
             dados=(str('TB'),float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
             cursor.execute(comando_sql,dados)
             banco.commit()
         if ids != idtbl:
             cursor = banco.cursor()
-            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s)")
+            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
             dados=(str('TBL'),float(fPesolit),float(ad_vlit),float(grislit),float(taxalit),float(icmslit))
             cursor.execute(comando_sql,dados)
             banco.commit()
@@ -285,6 +285,8 @@ def salva_taxa():
             cursor.execute("UPDATE tarifas SET descricao='{}',frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE id={}".format(str('TBL'),fPesolit,ad_vlit,grislit,taxalit,icmslit,2))
             banco.commit()
             QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
+        else:
+            QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 if __name__ == "__main__":

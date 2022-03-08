@@ -20,3 +20,9 @@ print(total_id)
 print(type(total_id))
 print(ids)
 print(type(ids))
+idtb='TB'
+idtbl="TBL"
+if ids == [] or ids != idtb:
+    print('teste ok')
+else:
+    print('teste error')
