@@ -12,26 +12,28 @@ banco = mysql.connector.connect(
 )
 global numero_id
 def calc_contacao():
-    # Taxas fixas
+    # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifas")
     taxas = cursor.fetchall()
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas_minimas") 
     tabelas = cursor2.fetchall()
+    # TAXAS BASE PADRÃO
     taxa_fpeso = float(taxas[0][2])
     taxa_ad = float(taxas[0][3])
     taxa_gris = float(taxas[0][4])
     taxa_taxas = float(taxas[0][5])
     taxa_icms = float(taxas[0][6])
-    tabelas_flitoral = float(tabelas[0][3])
+    # TAXAS LITORAL/SERRA
+    taxa_fpesol = float(taxas[1][2])
+    taxa_adl = float(taxas[1][3])
+    taxa_grisl = float(taxas[1][4])
+    taxa_taxasl = float(taxas[1][5])
+    taxa_icmsl = float(taxas[1][6])
     tabelas_ped = float(tabelas[0][5])
-
+    
     valornf=frm_principal.edt_valor_merc.text()
-    fcif=frm_principal.edt_frete_cif.text()
-    ffob=frm_principal.edt_frete_fob.text()
-    flit=frm_principal.edt_frete_litoral.text()
-    valor_nf=frm_principal.edt_valor_merc.text()
     peso=frm_principal.edt_peso.text()
     if valornf != "" or peso != "":
         if peso != "":
@@ -60,7 +62,11 @@ def calc_contacao():
                 valorfob = float(valorcif) / taxa_icms #0.88
                 frm_principal.edt_frete_fob.setText(str('%.2f'%valorfob))
                 # Valor frete litoral
-                valorlitoral = float(valorfob) / 0.69
+                fpresol = float(peso) * taxa_fpesol
+                valorgrisl = float(valornf) * taxa_grisl
+                valoadl = float(valornf) * taxa_adl
+                valortaxal = float(valorped) + taxa_taxasl
+                valorlitoral = float(fpresol) + float(valorgrisl) + float(valoadl) + float(valortaxal) + float(taxa_icmsl)
                 frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
             else:
                 frm_principal.show
