@@ -32,7 +32,8 @@ def calc_contacao():
     taxa_taxasl = float(taxas[1][5])
     taxa_icmsl = float(taxas[1][6])
     tabelas_ped = float(tabelas[0][5])
-    
+    # Tabelas
+
     valornf=frm_principal.edt_valor_merc.text()
     peso=frm_principal.edt_peso.text()
     if valornf != "" or peso != "":
@@ -51,7 +52,7 @@ def calc_contacao():
             frm_principal.edt_ad.setText(str('%.4f'%vaload))
             # Valor pedagio
             if peso != "":
-                valorped = tabelas_ped *float(peso) / 100 #3.04
+                valorped = float(tabelas_ped) *float(peso) / 100 #3.04
                 frm_principal.edt_pedag.setText(str('%.3f'%valorped))
                 # Valor taxa 
                 valortaxa = float(valorped) + taxa_taxas #36.68
@@ -68,6 +69,84 @@ def calc_contacao():
                 valortaxal = float(valorped) + taxa_taxasl
                 valorlitoral = float(fpresol) + float(valorgrisl) + float(valoadl) + float(valortaxal) + float(taxa_icmsl)
                 frm_principal.edt_frete_litoral.setText(str('%.2f'%valorlitoral))
+                # Calculo da tabelas
+                adg20 = float(tabelas[0][4])
+                fb20 = float(tabelas[0][2])
+                fbl20 = float(tabelas[0][3])
+                ad_g20 = float(valornf) + adg20
+                ped20 = float(tabelas[0][5])
+                pedl20 = float( tabelas[0][6])
+                ftotal_20 = fb20 + ped20 + ad_g20
+                ftotall_20 = float(fbl20 + pedl20 + ad_g20)
+                frm_principal.edt_ftotal_20.setText(str(ftotal_20))
+                frm_principal.edt_litoral_20.setText(str(ftotall_20))
+
+                adg50 = float(tabelas[1][4])
+                fb50 = float(tabelas[1][2])
+                fbl50 = float(tabelas[1][3])
+                ad_g50 = float(valornf) + adg50
+                ped50 = float(tabelas[1][5])
+                pedl50 = float( tabelas[1][6])
+                ftotal_50 = fb50 + ped50 + ad_g50
+                ftotall_50 = float(fbl50 + pedl50 + ad_g50)
+                frm_principal.edt_ftotal_50.setText(str(ftotal_50))
+                frm_principal.edt_litoral_50.setText(str(ftotall_50))
+
+                adg100 = float(tabelas[2][4])
+                fb100 = float(tabelas[2][2])
+                fbl100 = float(tabelas[2][3])
+                ad_g100 = float(valornf) + adg100
+                ped100 = float(tabelas[2][5])
+                pedl100 = float( tabelas[2][6])
+                ftotal_100 = fb100 + ped100 + ad_g100
+                ftotall_100 = float(fbl100 + pedl100 + ad_g100)
+                frm_principal.edt_ftotal_100.setText(str(ftotal_100))
+                frm_principal.edt_litoral_100.setText(str(ftotall_100))
+
+                adg150 = float(tabelas[3][4])
+                fb150 = float(tabelas[3][2])
+                fbl150 = float(tabelas[3][3])
+                ad_g150 = float(valornf) + adg150
+                ped150 = float(tabelas[3][5])
+                pedl150 = float( tabelas[3][6])
+                ftotal_150 = fb150 + ped150 + ad_g150
+                ftotall_150 = float(fbl150 + pedl150 + ad_g150)
+                frm_principal.edt_ftotal_150.setText(str(ftotal_150))
+                frm_principal.edt_litoral_150.setText(str(ftotall_150))
+
+                adg200 = float(tabelas[4][4])
+                fb200 = float(tabelas[4][2])
+                fbl200 = float(tabelas[4][3])
+                ad_g200 = float(valornf) + adg200
+                ped200 = float(tabelas[4][5])
+                pedl200 = float( tabelas[4][6])
+                ftotal_200 = fb200 + ped200 + ad_g200
+                ftotall_200 = float(fbl200 + pedl200 + ad_g200)
+                frm_principal.edt_ftotal_200.setText(str(ftotal_200))
+                frm_principal.edt_litoral_200.setText(str(ftotall_200))
+
+                adg250 = float(tabelas[5][4])
+                fb250 = float(tabelas[5][2])
+                fbl250 = float(tabelas[5][3])
+                ad_g250 = float(valornf) + adg250
+                ped250 = float(tabelas[5][5])
+                pedl250 = float( tabelas[5][6])
+                ftotal_250 = fb250 + ped250 + ad_g250
+                ftotall_250 = float(fbl250 + pedl250 + ad_g250)
+                frm_principal.edt_ftotal_250.setText(str(ftotal_250))
+                frm_principal.edt_litoral_250.setText(str(ftotall_250))
+
+                adg300 = float(tabelas[6][4])
+                fb300 = float(tabelas[6][2])
+                fbl300 = float(tabelas[6][3])
+                ad_g300 = float(valornf) + adg300
+                ped300 = float(tabelas[6][5])
+                pedl300 = float( tabelas[6][6])
+                ftotal_300 = fb300 + ped300 + ad_g300
+                ftotall_300 = float(fbl300 + pedl300 + ad_g300)
+                frm_principal.edt_ftotal_300.setText(str(ftotal_300))
+                frm_principal.edt_litoral_300.setText(str(ftotall_300))
+
             else:
                 frm_principal.show
             # Valor do ICMS
@@ -103,32 +182,32 @@ def chama_tarifa():
         frm_tarifa.edt_base_lit_20.setText(str(tabelas[0][3]))
         frm_tarifa.edt_ad_gris_20.setText(str(tabelas[0][4]))
         frm_tarifa.edt_pedagio_20.setText(str(tabelas[0][5]))
-        frm_tarifa.edt_pedlitoral_20.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_20.setText(str(tabelas[0][6]))
         frm_tarifa.edt_base_50.setText(str(tabelas[1][2]))
         frm_tarifa.edt_base_lit_50.setText(str(tabelas[1][3]))
         frm_tarifa.edt_ad_gris_50.setText(str(tabelas[1][4]))
         frm_tarifa.edt_pedagio_50.setText(str(tabelas[1][5]))
-        frm_tarifa.edt_pedlitoral_50.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_50.setText(str(tabelas[1][6]))
         frm_tarifa.edt_base_100.setText(str(tabelas[2][2]))
         frm_tarifa.edt_base_lit_100.setText(str(tabelas[2][3]))
         frm_tarifa.edt_ad_gris_100.setText(str(tabelas[2][4]))
         frm_tarifa.edt_pedagio_100.setText(str(tabelas[2][5]))
-        frm_tarifa.edt_pedlitoral_100.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_100.setText(str(tabelas[2][6]))
         frm_tarifa.edt_base_150.setText(str(tabelas[3][2]))
         frm_tarifa.edt_base_lit_150.setText(str(tabelas[3][3]))
         frm_tarifa.edt_ad_gris_150.setText(str(tabelas[3][4]))
         frm_tarifa.edt_pedagio_150.setText(str(tabelas[3][5]))
-        frm_tarifa.edt_pedlitoral_150.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_150.setText(str(tabelas[3][6]))
         frm_tarifa.edt_base_200.setText(str(tabelas[4][2]))
         frm_tarifa.edt_base_lit_200.setText(str(tabelas[4][3]))
         frm_tarifa.edt_ad_gris_200.setText(str(tabelas[4][4]))
         frm_tarifa.edt_pedagio_200.setText(str(tabelas[4][5]))
-        frm_tarifa.edt_pedlitoral_200.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_200.setText(str(tabelas[4][6]))
         frm_tarifa.edt_base_250.setText(str(tabelas[5][2]))
         frm_tarifa.edt_base_lit_250.setText(str(tabelas[5][3]))
         frm_tarifa.edt_ad_gris_250.setText(str(tabelas[5][4]))
         frm_tarifa.edt_pedagio_250.setText(str(tabelas[5][5]))
-        frm_tarifa.edt_pedlitoral_250.setText(str(tabelas[6][6]))
+        frm_tarifa.edt_pedlitoral_250.setText(str(tabelas[5][6]))
         frm_tarifa.edt_base_300.setText(str(tabelas[6][2]))
         frm_tarifa.edt_base_lit_300.setText(str(tabelas[6][3]))
         frm_tarifa.edt_ad_gris_300.setText(str(tabelas[6][4]))
@@ -307,37 +386,37 @@ if __name__ == "__main__":
     frm_principal.edt_base_lit_20.setText(str(tabelas[0][3]))
     frm_principal.edt_ad_gris_20.setText(str(tabelas[0][4]))
     frm_principal.edt_pedagio_20.setText(str(tabelas[0][5]))
-    frm_principal.edt_pedlitoral_20.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_20.setText(str(tabelas[0][6]))
 
     frm_principal.edt_base_50.setText(str(tabelas[1][2]))
     frm_principal.edt_base_lit_50.setText(str(tabelas[1][3]))
     frm_principal.edt_ad_gris_50.setText(str(tabelas[1][4]))
     frm_principal.edt_pedagio_50.setText(str(tabelas[1][5]))
-    frm_principal.edt_pedlitoral_50.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_50.setText(str(tabelas[1][6]))
 
     frm_principal.edt_base_100.setText(str(tabelas[2][2]))
     frm_principal.edt_base_lit_100.setText(str(tabelas[2][3]))
     frm_principal.edt_ad_gris_100.setText(str(tabelas[2][4]))
     frm_principal.edt_pedagio_100.setText(str(tabelas[2][5]))
-    frm_principal.edt_pedlitoral_100.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_100.setText(str(tabelas[2][6]))
 
     frm_principal.edt_base_150.setText(str(tabelas[3][2]))
     frm_principal.edt_base_lit_150.setText(str(tabelas[3][3]))
     frm_principal.edt_ad_gris_150.setText(str(tabelas[3][4]))
     frm_principal.edt_pedagio_150.setText(str(tabelas[3][5]))
-    frm_principal.edt_pedlitoral_150.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_150.setText(str(tabelas[3][6]))
 
     frm_principal.edt_base_200.setText(str(tabelas[4][2]))
     frm_principal.edt_base_lit_200.setText(str(tabelas[4][3]))
     frm_principal.edt_ad_gris_200.setText(str(tabelas[4][4]))
     frm_principal.edt_pedagio_200.setText(str(tabelas[4][5]))
-    frm_principal.edt_pedlitoral_200.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_200.setText(str(tabelas[4][6]))
 
     frm_principal.edt_base_250.setText(str(tabelas[5][2]))
     frm_principal.edt_base_lit_250.setText(str(tabelas[5][3]))
     frm_principal.edt_ad_gris_250.setText(str(tabelas[5][4]))
     frm_principal.edt_pedagio_250.setText(str(tabelas[5][5]))
-    frm_principal.edt_pedlitoral_250.setText(str(tabelas[6][6]))
+    frm_principal.edt_pedlitoral_250.setText(str(tabelas[5][6]))
 
     frm_principal.edt_base_300.setText(str(tabelas[6][2]))
     frm_principal.edt_base_lit_300.setText(str(tabelas[6][3]))
