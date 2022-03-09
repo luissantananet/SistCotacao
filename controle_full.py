@@ -297,8 +297,8 @@ def salva_taxa():
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    frm_principal = uic.loadUi('frm_principal_full.ui')
-    frm_tarifa = uic.loadUi('frm_tarifa.ui')
+    frm_principal = uic.loadUi(r'.\Forms\frm_principal_full.ui')
+    frm_tarifa = uic.loadUi(r'.\Forms\frm_tarifa.ui')
 
     cursor4 = banco.cursor()
     cursor4.execute("SELECT * FROM tarifas_minimas") 
