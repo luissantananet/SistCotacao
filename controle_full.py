@@ -73,80 +73,79 @@ def calc_contacao():
                 adg20 = float(tabelas[0][4])
                 fb20 = float(tabelas[0][2])
                 fbl20 = float(tabelas[0][3])
-                ad_g20 = float(valornf) + adg20
+                ad_g20 = float(valornf) * adg20
                 ped20 = float(tabelas[0][5])
                 pedl20 = float( tabelas[0][6])
                 ftotal_20 = fb20 + ped20 + ad_g20
                 ftotall_20 = float(fbl20 + pedl20 + ad_g20)
-                frm_principal.edt_ftotal_20.setText(str(ftotal_20))
-                frm_principal.edt_litoral_20.setText(str(ftotall_20))
+                frm_principal.edt_ftotal_20.setText(str('%.2f'%ftotal_20))
+                frm_principal.edt_litoral_20.setText(str('%.2f'%ftotall_20))
 
                 adg50 = float(tabelas[1][4])
                 fb50 = float(tabelas[1][2])
                 fbl50 = float(tabelas[1][3])
-                ad_g50 = float(valornf) + adg50
+                ad_g50 = float(valornf) * adg50
                 ped50 = float(tabelas[1][5])
                 pedl50 = float( tabelas[1][6])
                 ftotal_50 = fb50 + ped50 + ad_g50
                 ftotall_50 = float(fbl50 + pedl50 + ad_g50)
-                frm_principal.edt_ftotal_50.setText(str(ftotal_50))
-                frm_principal.edt_litoral_50.setText(str(ftotall_50))
+                frm_principal.edt_ftotal_50.setText(str('%.2f'%ftotal_50))
+                frm_principal.edt_litoral_50.setText(str('%.2f'%ftotall_50))
 
                 adg100 = float(tabelas[2][4])
                 fb100 = float(tabelas[2][2])
                 fbl100 = float(tabelas[2][3])
-                ad_g100 = float(valornf) + adg100
+                ad_g100 = float(valornf) * adg100
                 ped100 = float(tabelas[2][5])
                 pedl100 = float( tabelas[2][6])
                 ftotal_100 = fb100 + ped100 + ad_g100
-                ftotall_100 = float(fbl100 + pedl100 + ad_g100)
-                frm_principal.edt_ftotal_100.setText(str(ftotal_100))
-                frm_principal.edt_litoral_100.setText(str(ftotall_100))
+                ftotall_100 = fbl100 + pedl100 + ad_g100
+                frm_principal.edt_ftotal_100.setText(str('%.2f'%ftotal_100))
+                frm_principal.edt_litoral_100.setText(str('%.2f'%ftotall_100))
 
                 adg150 = float(tabelas[3][4])
                 fb150 = float(tabelas[3][2])
                 fbl150 = float(tabelas[3][3])
-                ad_g150 = float(valornf) + adg150
+                ad_g150 = float(valornf) * adg150
                 ped150 = float(tabelas[3][5])
                 pedl150 = float( tabelas[3][6])
                 ftotal_150 = fb150 + ped150 + ad_g150
                 ftotall_150 = float(fbl150 + pedl150 + ad_g150)
-                frm_principal.edt_ftotal_150.setText(str(ftotal_150))
-                frm_principal.edt_litoral_150.setText(str(ftotall_150))
+                frm_principal.edt_ftotal_150.setText(str('%.2f'%ftotal_150))
+                frm_principal.edt_litoral_150.setText(str('%.2f'%ftotall_150))
 
                 adg200 = float(tabelas[4][4])
                 fb200 = float(tabelas[4][2])
                 fbl200 = float(tabelas[4][3])
-                ad_g200 = float(valornf) + adg200
+                ad_g200 = float(valornf) * adg200
                 ped200 = float(tabelas[4][5])
                 pedl200 = float( tabelas[4][6])
                 ftotal_200 = fb200 + ped200 + ad_g200
                 ftotall_200 = float(fbl200 + pedl200 + ad_g200)
-                frm_principal.edt_ftotal_200.setText(str(ftotal_200))
-                frm_principal.edt_litoral_200.setText(str(ftotall_200))
+                frm_principal.edt_ftotal_200.setText(str('%.2f'%ftotal_200))
+                frm_principal.edt_litoral_200.setText(str('%.2f'%ftotall_200))
 
                 adg250 = float(tabelas[5][4])
                 fb250 = float(tabelas[5][2])
                 fbl250 = float(tabelas[5][3])
-                ad_g250 = float(valornf) + adg250
+                ad_g250 = float(valornf) * adg250
                 ped250 = float(tabelas[5][5])
                 pedl250 = float( tabelas[5][6])
                 ftotal_250 = fb250 + ped250 + ad_g250
                 ftotall_250 = float(fbl250 + pedl250 + ad_g250)
-                frm_principal.edt_ftotal_250.setText(str(ftotal_250))
-                frm_principal.edt_litoral_250.setText(str(ftotall_250))
+                frm_principal.edt_ftotal_250.setText(str('%.2f'%ftotal_250))
+                frm_principal.edt_litoral_250.setText(str('%.2f'%ftotall_250))
 
                 adg300 = float(tabelas[6][4])
                 fb300 = float(tabelas[6][2])
                 fbl300 = float(tabelas[6][3])
-                ad_g300 = float(valornf) + adg300
+                ad_g300 = float(valornf) * adg300
                 ped300 = float(tabelas[6][5])
                 pedl300 = float( tabelas[6][6])
                 ftotal_300 = fb300 + ped300 + ad_g300
                 ftotall_300 = float(fbl300 + pedl300 + ad_g300)
-                frm_principal.edt_ftotal_300.setText(str(ftotal_300))
-                frm_principal.edt_litoral_300.setText(str(ftotall_300))
-
+                frm_principal.edt_ftotal_300.setText(str('%.2f'%ftotal_300))
+                frm_principal.edt_litoral_300.setText(str('%.2f'%ftotall_300))
             else:
                 frm_principal.show
             # Valor do ICMS
@@ -285,7 +284,6 @@ def salva_tarifa():
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas_minimas") 
     dados = cursor2.fetchall()
-   
     
     if desc20 == dados[0][1]:
         numero_id = dadosid[0][0]
