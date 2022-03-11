@@ -10,7 +10,9 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
-global numero_id
+numero_id = 0
+resut_m3 = 0
+
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
@@ -162,7 +164,32 @@ def salva_cotacao():
 def limpar_tela():
     pass
 def add_m3():
-    pass
+    global resut_m3
+    dim1 = float(frm_principal.edt_dim1.text().replace(',','.'))
+    dim2 = float(frm_principal.edt_dim2.text().replace(',','.'))
+    dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
+    vol = int(frm_principal.edt_vol.text())
+    
+    resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000
+    resut_m3 = resultado
+    res = len(resut_m3)
+    print(resut_m3)
+   
+    while res < 2:
+        resultadototal =  resut_m3 + resultado
+    
+
+
+
+    
+    frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
+    frm_principal.edt_total_m3.setText(str('%.4f'%resultadototal).replace('.',','))
+    
+    
+    
+    """for i in range(0, len()):
+        for j in range(0, 5):
+           frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str([i][j])))"""
 def pesquisa_cliente():
     pass
 def chama_tarifa():

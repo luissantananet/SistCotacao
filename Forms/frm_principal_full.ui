@@ -425,7 +425,7 @@
     <property name="title">
      <string>Cubagem</string>
     </property>
-    <widget class="QLineEdit" name="edit_vol">
+    <widget class="QLineEdit" name="edt_vol">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -558,7 +558,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edit_resultado_m3">
+    <widget class="QLineEdit" name="edt_resultado_m3">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -571,7 +571,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QTableView" name="tableView_2">
+    <widget class="QTableView" name="tableView">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -1597,6 +1597,91 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>edt_valor_merc</tabstop>
+  <tabstop>edt_peso</tabstop>
+  <tabstop>edt_volume</tabstop>
+  <tabstop>edit_tipo_merc</tabstop>
+  <tabstop>edit_peso_cubo</tabstop>
+  <tabstop>edt_fpeso</tabstop>
+  <tabstop>edt_ad</tabstop>
+  <tabstop>edt_gris</tabstop>
+  <tabstop>edt_taxas</tabstop>
+  <tabstop>edt_icms</tabstop>
+  <tabstop>edt_frete_cif</tabstop>
+  <tabstop>edt_frete_fob</tabstop>
+  <tabstop>edt_frete_litoral</tabstop>
+  <tabstop>edt_pedag</tabstop>
+  <tabstop>btn_salvar</tabstop>
+  <tabstop>btn_limpa</tabstop>
+  <tabstop>btn_calcula</tabstop>
+  <tabstop>edt_total_m3</tabstop>
+  <tabstop>edt_dim1</tabstop>
+  <tabstop>edt_dim2</tabstop>
+  <tabstop>edt_dim3</tabstop>
+  <tabstop>edt_vol</tabstop>
+  <tabstop>btn_adicionar</tabstop>
+  <tabstop>edt_resultado_m3</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>edt_ad_gris_250</tabstop>
+  <tabstop>edt_base_100</tabstop>
+  <tabstop>edt_pedagio_50</tabstop>
+  <tabstop>edt_base_lit_200</tabstop>
+  <tabstop>edt_pedagio_100</tabstop>
+  <tabstop>edt_ad_gris_150</tabstop>
+  <tabstop>edt_base_lit_20</tabstop>
+  <tabstop>edt_base_250</tabstop>
+  <tabstop>edt_base_200</tabstop>
+  <tabstop>edt_base_lit_50</tabstop>
+  <tabstop>edt_base_20</tabstop>
+  <tabstop>edt_pedagio_20</tabstop>
+  <tabstop>edt_base_lit_100</tabstop>
+  <tabstop>edt_pedagio_150</tabstop>
+  <tabstop>edt_ad_gris_200</tabstop>
+  <tabstop>edt_ad_gris_50</tabstop>
+  <tabstop>edt_base_lit_300</tabstop>
+  <tabstop>edt_base_150</tabstop>
+  <tabstop>edt_pedagio_200</tabstop>
+  <tabstop>edt_base_50</tabstop>
+  <tabstop>edt_ad_gris_100</tabstop>
+  <tabstop>edt_pedagio_250</tabstop>
+  <tabstop>edt_pedagio_300</tabstop>
+  <tabstop>edt_ad_gris_20</tabstop>
+  <tabstop>edt_base_lit_150</tabstop>
+  <tabstop>edt_ad_gris_300</tabstop>
+  <tabstop>edt_base_lit_250</tabstop>
+  <tabstop>edt_base_300</tabstop>
+  <tabstop>edt_pedlitoral_50</tabstop>
+  <tabstop>edt_pedlitoral_250</tabstop>
+  <tabstop>edt_pedlitoral_300</tabstop>
+  <tabstop>edt_pedlitoral_20</tabstop>
+  <tabstop>edt_pedlitoral_200</tabstop>
+  <tabstop>edt_pedlitoral_150</tabstop>
+  <tabstop>edt_pedlitoral_100</tabstop>
+  <tabstop>edt_litoral_100</tabstop>
+  <tabstop>edt_litoral_200</tabstop>
+  <tabstop>edt_litoral_300</tabstop>
+  <tabstop>edt_ftotal_200</tabstop>
+  <tabstop>edt_litoral_250</tabstop>
+  <tabstop>edt_ftotal_300</tabstop>
+  <tabstop>edt_litoral_150</tabstop>
+  <tabstop>edt_litoral_50</tabstop>
+  <tabstop>edt_ftotal_20</tabstop>
+  <tabstop>edt_ftotal_100</tabstop>
+  <tabstop>edt_ftotal_150</tabstop>
+  <tabstop>edt_ftotal_250</tabstop>
+  <tabstop>edt_litoral_20</tabstop>
+  <tabstop>edt_ftotal_50</tabstop>
+  <tabstop>edt_rem_cnpj</tabstop>
+  <tabstop>edt_rem_desc</tabstop>
+  <tabstop>edt_dest_cnpj</tabstop>
+  <tabstop>edt_dest_desc</tabstop>
+  <tabstop>edt_dest_cid</tabstop>
+  <tabstop>edt_rem_cid</tabstop>
+  <tabstop>btn_rem_pesq</tabstop>
+  <tabstop>btn_dest_pesq</tabstop>
+  <tabstop>btn_tarifa</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
