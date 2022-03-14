@@ -1,5 +1,5 @@
 from PyQt5 import uic, QtWidgets, QtGui
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
 import mysql.connector.errors
 
@@ -11,7 +11,7 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 numero_id = 0
-resut_m3 = 0
+
 
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
@@ -163,33 +163,38 @@ def salva_cotacao():
     pass
 def limpar_tela():
     pass
+result_m3 = 0
 def add_m3():
-    global resut_m3
+    global result_m3
     dim1 = float(frm_principal.edt_dim1.text().replace(',','.'))
     dim2 = float(frm_principal.edt_dim2.text().replace(',','.'))
     dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
     vol = int(frm_principal.edt_vol.text())
     
-    resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000
-    resut_m3 = resultado
-    res = len(resut_m3)
-    print(resut_m3)
-   
-    while res < 2:
-        resultadototal =  resut_m3 + resultado
-    
-
-
-
+    resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000   
+    if result_m3 != resultado:
+        result_m3 = result_m3 + resultado
+        
     
     frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
-    frm_principal.edt_total_m3.setText(str('%.4f'%resultadototal).replace('.',','))
+    frm_principal.edt_total_m3.setText(str('%.4f'%result_m3).replace('.',','))
     
+
+    numcols = frm_principal.tableWidget.columnCount()
+    numrows = frm_principal.tableWidget.rowCount()
+    frm_principal.tableWidget.setRowCount(numrows)
+    frm_principal.tableWidget.setColumnCount(numcols)
+    frm_principal.tableWidget.setItem(numrows -1,0,QTableWidgetItem(str(dim1).replace('.',',')))
+    frm_principal.tableWidget.setItem(numrows -1,1,QTableWidgetItem(str(dim2).replace('.',',')))
+    frm_principal.tableWidget.setItem(numrows -1,2,QTableWidgetItem(str(dim3).replace('.',',')))
+    frm_principal.tableWidget.setItem(numrows -1,3,QTableWidgetItem(vol))
+    frm_principal.tableWidget.setItem(numrows -1,4,QTableWidgetItem(str('%.4f'%resultado).replace('.',',')))
     
+    frm_principal.edt_dim1.setText('')
+    frm_principal.edt_dim2.setText('')
+    frm_principal.edt_dim3.setText('')
+    frm_principal.edt_vol.setText('')
     
-    """for i in range(0, len()):
-        for j in range(0, 5):
-           frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str([i][j])))"""
 def pesquisa_cliente():
     pass
 def chama_tarifa():
