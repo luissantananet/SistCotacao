@@ -172,10 +172,7 @@ def add_m3():
     vol = int(frm_principal.edt_vol.text())
     
     resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000   
-    if result_m3 != resultado:
-        result_m3 = result_m3 + resultado
-        
-    
+    result_m3 = result_m3 + resultado
     frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
     frm_principal.edt_total_m3.setText(str('%.4f'%result_m3).replace('.',','))
     
@@ -184,12 +181,13 @@ def add_m3():
     numrows = frm_principal.tableWidget.rowCount()
     frm_principal.tableWidget.setRowCount(numrows)
     frm_principal.tableWidget.setColumnCount(numcols)
-    frm_principal.tableWidget.setItem(numrows -1,0,QTableWidgetItem(str(dim1).replace('.',',')))
+    frm_principal.tableWidget.setItem(numrows -1,0,QTableWidgetItem(str(dim1).replace(',','.')))
     frm_principal.tableWidget.setItem(numrows -1,1,QTableWidgetItem(str(dim2).replace('.',',')))
     frm_principal.tableWidget.setItem(numrows -1,2,QTableWidgetItem(str(dim3).replace('.',',')))
     frm_principal.tableWidget.setItem(numrows -1,3,QTableWidgetItem(vol))
     frm_principal.tableWidget.setItem(numrows -1,4,QTableWidgetItem(str('%.4f'%resultado).replace('.',',')))
     
+
     frm_principal.edt_dim1.setText('')
     frm_principal.edt_dim2.setText('')
     frm_principal.edt_dim3.setText('')
