@@ -175,18 +175,25 @@ def add_m3():
     result_m3 = result_m3 + resultado
     frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
     frm_principal.edt_total_m3.setText(str('%.4f'%result_m3).replace('.',','))
-    
 
-    numcols = frm_principal.tableWidget.columnCount()
-    numrows = frm_principal.tableWidget.rowCount()
-    frm_principal.tableWidget.setRowCount(numrows)
-    frm_principal.tableWidget.setColumnCount(numcols)
-    frm_principal.tableWidget.setItem(numrows -1,0,QTableWidgetItem(str(dim1).replace(',','.')))
-    frm_principal.tableWidget.setItem(numrows -1,1,QTableWidgetItem(str(dim2).replace('.',',')))
-    frm_principal.tableWidget.setItem(numrows -1,2,QTableWidgetItem(str(dim3).replace('.',',')))
-    frm_principal.tableWidget.setItem(numrows -1,3,QTableWidgetItem(vol))
-    frm_principal.tableWidget.setItem(numrows -1,4,QTableWidgetItem(str('%.4f'%resultado).replace('.',',')))
+    cursor = banco.cursor()
+    comando_sql=("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES(%s,%s,%s,%s,%s)")
+    dados=(float(dim1),float(dim2),float(dim3),int(vol),float(resultado))
+    cursor.execute(comando_sql,dados)
+    banco.commit()
     
+    cursor2 = banco.cursor()
+    comando_SQL = "SELECT dim1, dim2, dim3,volume,m3  FROM cubagem"
+    cursor2.execute(comando_SQL)
+    dados_lidos = cursor2.fetchall()
+
+    frm_principal.tableWidget.setRowCount(len(dados_lidos))
+    frm_principal.tableWidget.setColumnCount(5)
+
+    for i in range(0, len(dados_lidos)):
+        for j in range(0, 5):
+            frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados_lidos[i][j]))) 
+      
 
     frm_principal.edt_dim1.setText('')
     frm_principal.edt_dim2.setText('')
@@ -406,6 +413,10 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\Forms\frm_principal_full.ui')
     frm_tarifa = uic.loadUi(r'.\Forms\frm_tarifa.ui')
+    #limpar bd.cubagem
+    cursor = banco.cursor()
+    cursor.execute("TRUNCATE TABLE cubagem") 
+    tabelas = cursor.fetchall()
 
     cursor4 = banco.cursor()
     cursor4.execute("SELECT * FROM tarifas_minimas") 

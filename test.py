@@ -11,22 +11,26 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 
-dim1 = float(input('digite medida 1: '))
-dim2 = 0.23
-dim3 = 0.23
-vol = 3
+dim1 = 1.2
+dim2 = 3.5
+dim3 = 4.0
+vol = 1
+resultado = 50.50
 
-resultado = float(dim1 * dim2 * dim3 * vol* 0.3*1000)
+dados = {dim1, dim2 ,dim3,vol,resultado}
 
-len_result = 0
-restotal =0
+cursor2 = banco.cursor()
+comando_SQL = "SELECT * FROM cubagem"
+cursor2.execute(comando_SQL)
+dados_lidos = cursor2.fetchall()
+for i in range(0, len(dados)):
+    for j in range(0, 5):
+        cursor = banco.cursor()
+        #comando_sql=("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES('{}')".format( float(dados[i][j])))
+        #dado=(float(dados)
+        cursor.execute("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES('{}','{}','{}','{}','{}')".format(float(dados[i][j])))
+        banco.commit() 
 
-while len_result == 0:
-    len_result = len_result + 1
-    restotal = restotal+resultado 
-    dim1 = float(input('digite medida 1: '))
-
-#print(resultado)
-print(type(resultado))
-print(str('%.4f'%resultado).replace('.',','))
-print(str('%.4f'%restotal).replace('.',','))
+print(dados)
+print(type(dados))
+print(dados_lidos)
