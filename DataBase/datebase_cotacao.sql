@@ -46,7 +46,7 @@ create table cubagem(
     dim1 decimal(5,2),
     dim2 decimal(5,2),
     dim3 decimal(5,2),
-    volume int,
+    volume decimal,
     m3 decimal(6,3),
     primary key(id)
 );
