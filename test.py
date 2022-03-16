@@ -10,27 +10,10 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
-
-dim1 = 1.2
-dim2 = 3.5
-dim3 = 4.0
-vol = 1
-resultado = 50.50
-
-dados = {dim1, dim2 ,dim3,vol,resultado}
-
 cursor2 = banco.cursor()
-comando_SQL = "SELECT * FROM cubagem"
-cursor2.execute(comando_SQL)
+cursor2.execute("SELECT * FROM cubagem")
 dados_lidos = cursor2.fetchall()
-for i in range(0, len(dados)):
-    for j in range(0, 5):
-        cursor = banco.cursor()
-        #comando_sql=("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES('{}')".format( float(dados[i][j])))
-        #dado=(float(dados)
-        cursor.execute("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES('{}','{}','{}','{}','{}')".format(float(dados[i][j])))
-        banco.commit() 
+lista = dados_lidos[0][5]
+#valor_id = dados_lidos[0][0]
 
-print(dados)
-print(type(dados))
-print(dados_lidos)
+print(lista)

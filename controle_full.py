@@ -15,6 +15,7 @@ id_m3 = 0
 result_peso_m3 = 0
 
 def calc_contacao():
+    
     # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifas")
@@ -39,10 +40,19 @@ def calc_contacao():
 
     valornf=frm_principal.edt_valor_merc.text().replace(',','.')
     peso=frm_principal.edt_peso.text().replace(',','.')
+    peso_m3 = frm_principal.edit_peso_cubo.text().replace(',','.')
     if valornf != "" or peso != "":
         if peso != "":
-            fpesores = float(peso) * taxa_fpeso #0.52
-            frm_principal.edt_fpeso.setText(str('%.2f'%fpesores).replace('.',','))
+            if peso_m3 != '':
+                if float(peso) > float(peso_m3):
+                    fpesores = float(peso) * taxa_fpeso #0.52
+                    frm_principal.edt_fpeso.setText(str('%.2f'%fpesores).replace('.',','))
+                else:
+                    fpesores = float(peso_m3) * taxa_fpeso #0.52
+                    frm_principal.edt_fpeso.setText(str('%.2f'%fpesores).replace('.',','))
+            else:
+                fpesores = float(peso) * taxa_fpeso #0.52
+                frm_principal.edt_fpeso.setText(str('%.2f'%fpesores).replace('.',','))
         else:
             QMessageBox.about(frm_principal, "Aviso", "Insira o Peso!")
             frm_principal.show()
@@ -171,21 +181,34 @@ def excluir_m3():
     
     linha = frm_principal.tableWidget.currentRow()
     frm_principal.tableWidget.removeRow(linha)
-    # Exclui no bando de dado
+
     cursor = banco.cursor()
-    cursor.execute("SELECT id FROM cubagem")
+    cursor.execute("SELECT * FROM cubagem")
     dados_lidos = cursor.fetchall()
     valor_id = dados_lidos[linha][0]
+
+    # Subtrai o valor total
+    """cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM cubagem")
+    dados_lidos = cursor2.fetchall()"""
+    lista = dados_lidos[valor_id][5]
+    result_peso_m3 =float(totalpreso-lista)
+    result_m3 = float(result_peso_m3 - totalm3)
+    # Exclui no bando de dado
+    
     cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
     banco.commit()
-    # Subtrai o valor total
-    result_peso_m3 =float(totalpreso - linha)
-    result_m3 = float(result_peso_m3 - totalm3)
     # Mostra no tela    
     frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso_m3).replace('.',','))
     frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso_m3).replace('.',','))
     frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
-
+    cursor3 = banco.cursor()
+    cursor3.execute("SELECT id FROM cubagem")
+    dados_lido = cursor3.fetchall()
+    if dados_lido == []:
+        frm_principal.edt_totalPeso_m3.setText('')
+        frm_principal.edit_peso_cubo.setText('')
+        frm_principal.edt_total_m3.setText('')
 def add_m3():
     global id_m3
     global result_peso_m3
@@ -194,7 +217,7 @@ def add_m3():
     dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
     vol = int(frm_principal.edt_vol.text())
     
-    resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000   
+    resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000
     result_peso_m3 = result_peso_m3 + resultado
     result_m3 = result_peso_m3 / 300
     frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
@@ -225,6 +248,8 @@ def add_m3():
     frm_principal.edt_dim2.setText('')
     frm_principal.edt_dim3.setText('')
     frm_principal.edt_vol.setText('')
+    frm_principal.edt_resultado_m3.setText('')
+    
     
 def pesquisa_cliente():
     pass
