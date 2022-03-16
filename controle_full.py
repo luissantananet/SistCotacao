@@ -11,7 +11,8 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 numero_id = 0
-
+id_m3 = 0
+result_peso_m3 = 0
 
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
@@ -163,18 +164,43 @@ def salva_cotacao():
     pass
 def limpar_tela():
     pass
-result_m3 = 0
+
+def excluir_m3():
+    totalpreso = float(frm_principal.edt_totalPeso_m3.text().replace(',','.'))
+    totalm3 = float(frm_principal.edt_total_m3.text().replace(',','.'))
+    
+    linha = frm_principal.tableWidget.currentRow()
+    frm_principal.tableWidget.removeRow(linha)
+    # Exclui no bando de dado
+    cursor = banco.cursor()
+    cursor.execute("SELECT id FROM cubagem")
+    dados_lidos = cursor.fetchall()
+    valor_id = dados_lidos[linha][0]
+    cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
+    banco.commit()
+    # Subtrai o valor total
+    result_peso_m3 =float(totalpreso - linha)
+    result_m3 = float(result_peso_m3 - totalm3)
+    # Mostra no tela    
+    frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso_m3).replace('.',','))
+    frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso_m3).replace('.',','))
+    frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+
 def add_m3():
-    global result_m3
+    global id_m3
+    global result_peso_m3
     dim1 = float(frm_principal.edt_dim1.text().replace(',','.'))
     dim2 = float(frm_principal.edt_dim2.text().replace(',','.'))
     dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
     vol = int(frm_principal.edt_vol.text())
     
     resultado = dim1 * dim2 * dim3* vol * 0.3 * 1000   
-    result_m3 = result_m3 + resultado
+    result_peso_m3 = result_peso_m3 + resultado
+    result_m3 = result_peso_m3 / 300
     frm_principal.edt_resultado_m3.setText(str('%.4f'%resultado).replace('.',','))
-    frm_principal.edt_total_m3.setText(str('%.4f'%result_m3).replace('.',','))
+    frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso_m3).replace('.',','))
+    frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso_m3).replace('.',','))
+    frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
 
     cursor = banco.cursor()
     comando_sql=("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES(%s,%s,%s,%s,%s)")
@@ -470,6 +496,7 @@ if __name__ == "__main__":
     frm_principal.btn_rem_pesq.clicked.connect(pesquisa_cliente)
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_cliente)
     frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
+    frm_principal.btn_excluir.clicked.connect(excluir_m3)
     #botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
