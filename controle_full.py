@@ -15,7 +15,6 @@ id_m3 = 0
 result_peso_m3 = 0
 
 def calc_contacao():
-    
     # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifas")
@@ -37,7 +36,6 @@ def calc_contacao():
     taxa_icmsl = float(taxas[1][6])
     tabelas_ped = float(tabelas[0][5])
     # Tabelas
-
     valornf=frm_principal.edt_valor_merc.text().replace(',','.')
     peso=frm_principal.edt_peso.text().replace(',','.')
     peso_m3 = frm_principal.edit_peso_cubo.text().replace(',','.')
@@ -174,7 +172,6 @@ def salva_cotacao():
     pass
 def limpar_tela():
     pass
-
 def excluir_m3():
     totalpreso = float(frm_principal.edt_totalPeso_m3.text().replace(',','.'))
     totalm3 = float(frm_principal.edt_total_m3.text().replace(',','.'))
@@ -186,21 +183,21 @@ def excluir_m3():
     cursor.execute("SELECT * FROM cubagem")
     dados_lidos = cursor.fetchall()
     valor_id = dados_lidos[linha][0]
-
-    # Subtrai o valor total
-    """cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM cubagem")
-    dados_lidos = cursor2.fetchall()"""
-    lista = dados_lidos[valor_id][5]
-    result_peso_m3 =float(totalpreso-lista)
-    result_m3 = float(result_peso_m3 - totalm3)
-    # Exclui no bando de dado
-    
     cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
     banco.commit()
+    # Subtrai o valor total e Exclui no bando de dado
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM cubagem")
+    dados = cursor2.fetchall()
+    banco.commit()
+    totalm3lista = 0 
+    for dado in range(len(dados)):
+        lista = float(dados[dado][5])
+        totalm3lista = float(totalm3lista + lista)
+        result_m3 = totalm3lista / 300
     # Mostra no tela    
-    frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso_m3).replace('.',','))
-    frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso_m3).replace('.',','))
+    frm_principal.edt_totalPeso_m3.setText(str('%.2f'%totalm3lista).replace('.',','))
+    frm_principal.edit_peso_cubo.setText(str('%.2f'%totalm3lista).replace('.',','))
     frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
     cursor3 = banco.cursor()
     cursor3.execute("SELECT id FROM cubagem")
@@ -242,28 +239,25 @@ def add_m3():
     for i in range(0, len(dados_lidos)):
         for j in range(0, 5):
             frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados_lidos[i][j]))) 
-      
 
     frm_principal.edt_dim1.setText('')
     frm_principal.edt_dim2.setText('')
     frm_principal.edt_dim3.setText('')
     frm_principal.edt_vol.setText('')
-    frm_principal.edt_resultado_m3.setText('')
-    
-    
+    frm_principal.edt_resultado_m3.setText('')   
 def pesquisa_cliente():
     pass
 def chama_tarifa():
+    # Tabela "tarifas_minimas"
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM tarifas_minimas") 
     tabelas = cursor.fetchall()
     total_id = len(tabelas)
-
+    # Tabela "tarifas"
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas") 
     taxas = cursor2.fetchall()
     total_taxa = len(taxas)
-
     if total_id != 0:
         frm_tarifa.edt_base_20.setText(str(tabelas[0][2]).replace('.',','))
         frm_tarifa.edt_base_lit_20.setText(str(tabelas[0][3]).replace('.',','))
@@ -311,9 +305,7 @@ def chama_tarifa():
         frm_tarifa.edt_gris_lit.setText(str(taxas[1][4]).replace('.',','))
         frm_tarifa.edt_taxa_lit.setText(str(taxas[1][5]).replace('.',','))
         frm_tarifa.edt_icms_lit.setText(str(taxas[1][6]).replace('.',','))
-
     frm_tarifa.show()
-
 def salva_tarifa():
     global numero_id
     desc20 = frm_tarifa.desc_20.text().replace(',','.')
@@ -368,7 +360,6 @@ def salva_tarifa():
     cursor = banco.cursor()
     cursor.execute("SELECT id FROM tarifas_minimas")
     dadosid = cursor.fetchall()
-    
     cursor2 = banco.cursor()
     cursor2.execute("SELECT * FROM tarifas_minimas") 
     dados = cursor2.fetchall()
@@ -409,7 +400,6 @@ def salva_tarifa():
         cursor.execute("UPDATE tarifas_minimas SET tarifa_base='{}',tarifa_litoral='{}',ad_Gris='{}',pedagio='{}',pedlitoral='{}' WHERE id={}".format(tBase300,tLit300,ad_gris300,ped300,pedl300,numero_id))
         banco.commit()
     QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
-
 def salva_taxa():
     #taxas base
     desc = frm_tarifa.label_37.text()
@@ -468,7 +458,7 @@ if __name__ == "__main__":
     cursor = banco.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
     tabelas = cursor.fetchall()
-
+    # Mostrar dados da tabelas "tarifas_minimas"
     cursor4 = banco.cursor()
     cursor4.execute("SELECT * FROM tarifas_minimas") 
     tabelas = cursor4.fetchall()
@@ -525,6 +515,6 @@ if __name__ == "__main__":
     #botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
-
+    # __name__ == "__main__"
     frm_principal.show()
     app.exec()
