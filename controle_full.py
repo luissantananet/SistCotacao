@@ -173,8 +173,6 @@ def salva_cotacao():
 def limpar_tela():
     pass
 def excluir_m3():
-    """totalpreso = float(frm_principal.edt_totalPeso_m3.text().replace(',','.'))
-    totalm3 = float(frm_principal.edt_total_m3.text().replace(',','.'))"""
     cursor3 = banco.cursor()
     cursor3.execute("SELECT id FROM cubagem")
     dados_lido = cursor3.fetchall()
