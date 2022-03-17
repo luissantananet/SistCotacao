@@ -10,29 +10,9 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
-totalpreso = 2.400
-totalm3 = 3
+cursor3 = banco.cursor()
+cursor3.execute("SELECT id FROM cubagem")
+dados_lido = cursor3.fetchall()
+banco.commit()
 
-cursor2 = banco.cursor()
-cursor2.execute("SELECT id FROM cubagem")
-dados_id= cursor2.fetchall()
-valor_id = dados_id
-for dados in range(0, len(dados_id)):
-    ids = dados_id[dados][0]
-
-cursor2 = banco.cursor()
-cursor2.execute("SELECT * FROM cubagem")
-dados_lidos = cursor2.fetchall()
-totalm3lista = 0 
-for dados_lido in range(len(dados_lidos)):
-    lista = float(dados_lidos[dados_lido][5])
-    
-    totalm3lista = float(totalm3lista + lista)
-
-
-print('------------')
-print('lista',lista)
-print(type(lista))
-print('------------')
-print('totalm3lista',totalm3lista)
-print(len(dados_lidos))
+print(dados_lido)

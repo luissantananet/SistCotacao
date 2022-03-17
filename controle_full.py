@@ -173,36 +173,38 @@ def salva_cotacao():
 def limpar_tela():
     pass
 def excluir_m3():
-    totalpreso = float(frm_principal.edt_totalPeso_m3.text().replace(',','.'))
-    totalm3 = float(frm_principal.edt_total_m3.text().replace(',','.'))
-    
-    linha = frm_principal.tableWidget.currentRow()
-    frm_principal.tableWidget.removeRow(linha)
-
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM cubagem")
-    dados_lidos = cursor.fetchall()
-    valor_id = dados_lidos[linha][0]
-    cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
-    banco.commit()
-    # Subtrai o valor total e Exclui no bando de dado
-    cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM cubagem")
-    dados = cursor2.fetchall()
-    banco.commit()
-    totalm3lista = 0 
-    for dado in range(len(dados)):
-        lista = float(dados[dado][5])
-        totalm3lista = float(totalm3lista + lista)
-        result_m3 = totalm3lista / 300
-    # Mostra no tela    
-    frm_principal.edt_totalPeso_m3.setText(str('%.2f'%totalm3lista).replace('.',','))
-    frm_principal.edit_peso_cubo.setText(str('%.2f'%totalm3lista).replace('.',','))
-    frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+    """totalpreso = float(frm_principal.edt_totalPeso_m3.text().replace(',','.'))
+    totalm3 = float(frm_principal.edt_total_m3.text().replace(',','.'))"""
     cursor3 = banco.cursor()
     cursor3.execute("SELECT id FROM cubagem")
     dados_lido = cursor3.fetchall()
-    if dados_lido == []:
+    banco.commit()
+    result_m3 = 0
+    if not dados_lido == []:
+        linha = frm_principal.tableWidget.currentRow()
+        frm_principal.tableWidget.removeRow(linha)
+
+        cursor = banco.cursor()
+        cursor.execute("SELECT * FROM cubagem")
+        dados_lidos = cursor.fetchall()
+        valor_id = dados_lidos[linha][0]
+        cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
+        banco.commit()
+        # Subtrai o valor total e Exclui no bando de dado
+        cursor2 = banco.cursor()
+        cursor2.execute("SELECT * FROM cubagem")
+        dados = cursor2.fetchall()
+        banco.commit()
+        totalm3lista = 0 
+        for dado in range(len(dados)):
+            lista = float(dados[dado][5])
+            totalm3lista = float(totalm3lista + lista)
+            result_m3 = totalm3lista / 300
+        # Mostra no tela    
+        frm_principal.edt_totalPeso_m3.setText(str('%.2f'%totalm3lista).replace('.',','))
+        frm_principal.edit_peso_cubo.setText(str('%.2f'%totalm3lista).replace('.',','))
+        frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+    else:        
         frm_principal.edt_totalPeso_m3.setText('')
         frm_principal.edit_peso_cubo.setText('')
         frm_principal.edt_total_m3.setText('')
