@@ -780,6 +780,9 @@
      <string>Valores dos Fretes Mínimos</string>
     </property>
     <widget class="QLineEdit" name="edt_ad_gris_250">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -790,6 +793,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_100">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -800,6 +806,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_50">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -810,6 +819,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_200">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -820,6 +832,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_100">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -830,6 +845,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_150">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -840,6 +858,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_20">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -850,6 +871,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_250">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -860,6 +884,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_200">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -870,6 +897,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_50">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -880,6 +910,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_20">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -890,6 +923,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_20">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -900,6 +936,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_100">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -910,6 +949,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_150">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -920,6 +962,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_200">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -930,6 +975,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_50">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -940,6 +988,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_300">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -950,6 +1001,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_150">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -960,6 +1014,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_200">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -970,6 +1027,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_50">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -980,6 +1040,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_100">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -990,6 +1053,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_250">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -1000,6 +1066,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedagio_300">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -1010,6 +1079,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_20">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -1020,6 +1092,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_150">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -1030,6 +1105,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad_gris_300">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -1040,6 +1118,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_lit_250">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -1050,6 +1131,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_base_300">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -1203,6 +1287,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_50">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1213,6 +1300,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_250">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1236,6 +1326,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_300">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1246,6 +1339,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_20">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1256,6 +1352,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_200">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1266,6 +1365,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_150">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1276,6 +1378,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedlitoral_100">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>400</x>
