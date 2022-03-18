@@ -455,20 +455,22 @@ def pesquisa_remente():
     rem_cnpj = frm_principal.edt_rem_cnpj.text()
     rem_desc = frm_principal.edt_rem_desc.text()
     rem_cid = frm_principal.edt_rem_cid.text()
-    dest_cnpj = frm_principal.edt_dest_cnpj.text()
-    dest_desc = frm_principal.edt_dest_desc.text()
-    dest_cid = frm_principal.edt_dest_cid.text()
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
-    ids= cliente[0]
-    if rem_cnpj != ids:
+    
+    if dados_lidos == 0:
         frm_cliente.show()
         frm_cliente.edt_cnpj.setText(str(rem_cnpj))
         frm_cliente.edt_desc.setText(str(rem_desc))
         frm_cliente.edt_cid.setText(str(rem_cid))
         frm_cliente.edt_uf.setText('')
+    else:
+        frm_principal.edt_rem_cnpj.setText(str(cliente[0][0]))
+        frm_principal.edt_rem_desc.setText(str(cliente[0][1]))
+        frm_principal.edt_rem_cid.setText(str(cliente[0][2]))
+        
 def pesquisa_destinatario():
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
     dest_desc = frm_principal.edt_dest_desc.text()
@@ -477,19 +479,23 @@ def pesquisa_destinatario():
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
-    ids = cliente[0]
-    if dest_cnpj != ids:
+
+    if dados_lidos == 0:
         frm_cliente.show()
         frm_cliente.edt_cnpj.setText(str(dest_cnpj))
         frm_cliente.edt_desc.setText(str(dest_desc))
         frm_cliente.edt_cid.setText(str(dest_cid))
         frm_cliente.edt_uf.setText('')
+    else:
+        frm_principal.edt_dest_cnpj.setText(str(cliente[0][0]))
+        frm_principal.edt_dest_desc.setText(str(cliente[0][1]))
+        frm_principal.edt_dest_cid.setText(str(cliente[0][2]))
 def cadastro_cliente():
     cnpj = frm_cliente.edt_cnpj.text()
     desc = frm_cliente.edt_desc.text()
     cid = frm_cliente.edt_cid.text()
     uf = frm_cliente.edt_uf.text()
-
+    cursor = banco.cursor()
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
