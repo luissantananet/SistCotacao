@@ -465,7 +465,6 @@ def pesquisa_remente():
         frm_cliente.edt_cnpj.setText(str(rem_cnpj))
         frm_cliente.edt_desc.setText(str(rem_desc))
         frm_cliente.edt_cid.setText(str(rem_cid))
-        frm_cliente.edt_uf.setText('')
     else:
         frm_principal.edt_rem_cnpj.setText(str(cliente[0][0]))
         frm_principal.edt_rem_desc.setText(str(cliente[0][1]))
@@ -485,7 +484,6 @@ def pesquisa_destinatario():
         frm_cliente.edt_cnpj.setText(str(dest_cnpj))
         frm_cliente.edt_desc.setText(str(dest_desc))
         frm_cliente.edt_cid.setText(str(dest_cid))
-        frm_cliente.edt_uf.setText('')
     else:
         frm_principal.edt_dest_cnpj.setText(str(cliente[0][0]))
         frm_principal.edt_dest_desc.setText(str(cliente[0][1]))
@@ -509,13 +507,14 @@ def cadastro_cliente():
             cursor.execute(comando_sql,dados)
             banco.commit()
             QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
-            frm_cliente.show()
+            frm_cliente.close()
         elif cliente != []:
             if cliente[0] != cnpj:
                 cursor = banco.cursor()
                 cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
                 banco.commit()
                 QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
+                frm_cliente.close()
             else:
                 QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
         else:
