@@ -478,8 +478,6 @@ def cadastro_cliente():
             QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
-
-
 def limpar_cliente():
     frm_cliente.edt_cnpj.setText('')
     frm_cliente.edt_desc.setText('')
