@@ -1,3 +1,4 @@
+from importlib.machinery import EXTENSION_SUFFIXES
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
@@ -450,34 +451,69 @@ def salva_taxa():
             QMessageBox.about(frm_tarifa, "ERRO", "Erro na Atualização")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+def pesquisa_remente():
+    rem_cnpj = frm_principal.edt_rem_cnpj.text()
+    rem_desc = frm_principal.edt_rem_desc.text()
+    rem_cid = frm_principal.edt_rem_cid.text()
+    dest_cnpj = frm_principal.edt_dest_cnpj.text()
+    dest_desc = frm_principal.edt_dest_desc.text()
+    dest_cid = frm_principal.edt_dest_cid.text()
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM cliente")
+    cliente = cursor.fetchall()
+    dados_lidos = len(cliente)
+    ids= cliente[0]
+    if rem_cnpj != ids:
+        frm_cliente.show()
+        frm_cliente.edt_cnpj.setText(str(rem_cnpj))
+        frm_cliente.edt_desc.setText(str(rem_desc))
+        frm_cliente.edt_cid.setText(str(rem_cid))
+        frm_cliente.edt_uf.setText('')
+def pesquisa_destinatario():
+    dest_cnpj = frm_principal.edt_dest_cnpj.text()
+    dest_desc = frm_principal.edt_dest_desc.text()
+    dest_cid = frm_principal.edt_dest_cid.text()
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM cliente")
+    cliente = cursor.fetchall()
+    dados_lidos = len(cliente)
+    ids = cliente[0]
+    if dest_cnpj != ids:
+        frm_cliente.show()
+        frm_cliente.edt_cnpj.setText(str(dest_cnpj))
+        frm_cliente.edt_desc.setText(str(dest_desc))
+        frm_cliente.edt_cid.setText(str(dest_cid))
+        frm_cliente.edt_uf.setText('')
 def cadastro_cliente():
     cnpj = frm_cliente.edt_cnpj.text()
     desc = frm_cliente.edt_desc.text()
     cid = frm_cliente.edt_cid.text()
     uf = frm_cliente.edt_uf.text()
-    cursor = banco.cursor()
+
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
+    dados_lidos = len(cliente)
     ids= cliente[0]
-    
-    if not cliente == []:
-        cursor = banco.cursor()
-        comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
-        dados=(str(cnpj),str(desc),str(cid),str(uf))
-        cursor.execute(comando_sql,dados)
-        banco.commit()
-        QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
-        frm_cliente.show()
-    elif cliente != []:
-        if cliente[0] != cnpj:
+    if cnpj != ids:
+        if cliente == []:
+            frm_cliente.show()
             cursor = banco.cursor()
-            cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
+            comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
+            dados=(str(cnpj),str(desc),str(cid),str(uf))
+            cursor.execute(comando_sql,dados)
             banco.commit()
-            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
+            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
+            frm_cliente.show()
+        elif cliente != []:
+            if cliente[0] != cnpj:
+                cursor = banco.cursor()
+                cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
+                banco.commit()
+                QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
+            else:
+                QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
         else:
-            QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
-    else:
-        QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+            QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 def limpar_cliente():
     frm_cliente.edt_cnpj.setText('')
     frm_cliente.edt_desc.setText('')
@@ -542,8 +578,8 @@ if __name__ == "__main__":
     frm_principal.btn_salvar.clicked.connect(salva_cotacao)
     frm_principal.btn_limpa.clicked.connect(limpar_tela)
     frm_principal.btn_adicionar.clicked.connect(add_m3)
-    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_cliente)
-    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_cliente)
+    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
+    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
     frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
     frm_principal.btn_excluir.clicked.connect(excluir_m3)
     # Botões da tela tarifas
