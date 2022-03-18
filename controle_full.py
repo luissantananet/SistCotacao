@@ -456,39 +456,28 @@ def cadastro_cliente():
     cid = frm_cliente.edt_cid.text()
     uf = frm_cliente.edt_uf.text()
     cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM tarifas")
-    tarifas = cursor2.fetchall()
-    valor_id2 = len(tarifas)
-    ids= tarifas
-    idtb='TB'
-    idtbl="TBL"
-    if valor_id2 == 0:
+    cursor2.execute("SELECT * FROM cliente")
+    cliente = cursor2.fetchall()
+    valor_id2 = len(cliente)
+    ids= cliente
+    
+    if not cliente == []:
         if ids != idtb:
             cursor = banco.cursor()
-            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
-            dados=(str('TB'),float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
+            comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
+            dados=(str(cnpj),str(desc),str(cid),str(uf))
             cursor.execute(comando_sql,dados)
             banco.commit()
-        if ids != idtbl:
-            cursor = banco.cursor()
-            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
-            dados=(str('TBL'),float(fPesolit),float(ad_vlit),float(grislit),float(taxalit),float(icmslit))
-            cursor.execute(comando_sql,dados)
-            banco.commit()
-        QMessageBox.information(frm_tarifa, "Aviso", "Taxas cadastradas")
-        frm_tarifa.show()
+        QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
+        frm_cliente.show()
     elif valor_id2 != 0:
         if ids[0][1] == idtb:
             cursor = banco.cursor()
-            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPeso,ad_v,gris,taxa,icms,str('TB')))
+            cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
             banco.commit()
-        if ids[1][1] == idtbl:
-            cursor = banco.cursor()
-            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPesolit,ad_vlit,grislit,taxalit,icmslit,str('TBL')))
-            banco.commit()
-            QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
+            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
         else:
-            QMessageBox.about(frm_tarifa, "ERRO", "Erro na Atualização")
+            QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 
