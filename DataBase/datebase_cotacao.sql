@@ -50,8 +50,10 @@ create table cubagem(
     m3 decimal(6,3),
     primary key(id)
 );
-CREATE Table cidades(
+CREATE Table cliente(
     id int not null AUTO_INCREMENT,
+    cnpj varchar(14),
+    descricao varchar(100),
     cidade VARCHAR(100) NOT NULL,
     uf VARCHAR(100) not null,
     PRIMARY KEY(id)

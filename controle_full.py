@@ -450,10 +450,59 @@ def salva_taxa():
             QMessageBox.about(frm_tarifa, "ERRO", "Erro na Atualização")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+def cadastro_cliente():
+    cnpj = frm_cliente.edt_cnpj.text()
+    desc = frm_cliente.edt_desc.text()
+    cid = frm_cliente.edt_cid.text()
+    uf = frm_cliente.edt_uf.text()
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM tarifas")
+    tarifas = cursor2.fetchall()
+    valor_id2 = len(tarifas)
+    ids= tarifas
+    idtb='TB'
+    idtbl="TBL"
+    if valor_id2 == 0:
+        if ids != idtb:
+            cursor = banco.cursor()
+            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
+            dados=(str('TB'),float(fPeso),float(ad_v),float(gris),float(taxa),float(icms))
+            cursor.execute(comando_sql,dados)
+            banco.commit()
+        if ids != idtbl:
+            cursor = banco.cursor()
+            comando_sql=("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES(%s,%s,%s,%s,%s,%s)")
+            dados=(str('TBL'),float(fPesolit),float(ad_vlit),float(grislit),float(taxalit),float(icmslit))
+            cursor.execute(comando_sql,dados)
+            banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "Taxas cadastradas")
+        frm_tarifa.show()
+    elif valor_id2 != 0:
+        if ids[0][1] == idtb:
+            cursor = banco.cursor()
+            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPeso,ad_v,gris,taxa,icms,str('TB')))
+            banco.commit()
+        if ids[1][1] == idtbl:
+            cursor = banco.cursor()
+            cursor.execute("UPDATE tarifas SET frete_peso='{}',ad_valoren='{}',gris='{}',taxa='{}',icms='{}' WHERE descricao='{}'".format(fPesolit,ad_vlit,grislit,taxalit,icmslit,str('TBL')))
+            banco.commit()
+            QMessageBox.information(frm_tarifa, "Aviso", "Taxas Atualizadas")
+        else:
+            QMessageBox.about(frm_tarifa, "ERRO", "Erro na Atualização")
+    else:
+        QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+
+
+def limpar_cliente():
+    frm_cliente.edt_cnpj.setText('')
+    frm_cliente.edt_desc.setText('')
+    frm_cliente.edt_cid.setText('')
+    frm_cliente.edt_uf.setText('')
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\Forms\frm_principal_full.ui')
     frm_tarifa = uic.loadUi(r'.\Forms\frm_tarifa.ui')
+    frm_cliente = uic.loadUi(r'.\Forms\frm_cadastro_cliente.ui')
     #limpar bd.cubagem
     cursor = banco.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
@@ -503,7 +552,7 @@ if __name__ == "__main__":
     frm_principal.edt_ad_gris_300.setText(str(tabelas[6][4]).replace('.',','))
     frm_principal.edt_pedagio_300.setText(str(tabelas[6][5]).replace('.',','))
     frm_principal.edt_pedlitoral_300.setText(str(tabelas[6][6]).replace('.',','))
-    #botões da tela principal
+    # Botões da tela principal
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     frm_principal.btn_salvar.clicked.connect(salva_cotacao)
     frm_principal.btn_limpa.clicked.connect(limpar_tela)
@@ -512,9 +561,12 @@ if __name__ == "__main__":
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_cliente)
     frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
     frm_principal.btn_excluir.clicked.connect(excluir_m3)
-    #botões da tela tarifas
+    # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
+    # Botões da tela Cadastro de Cliente
+    frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
+    frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
     # __name__ == "__main__"
     frm_principal.show()
     app.exec()
