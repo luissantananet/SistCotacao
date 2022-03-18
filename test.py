@@ -10,8 +10,10 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
+rem_cnpj = '4616532000172'
 cursor = banco.cursor()
-cursor.execute("SELECT * FROM cliente")
-cliente = cursor.fetchall()
+cursor.execute("SELECT * FROM cliente WHERE id="+ str(rem_cnpj))
+dados_lidos = cursor.fetchall()
+cliente_cnpj = dados_lidos
 
-print(cliente)
+print(cliente_cnpj)

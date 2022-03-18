@@ -1,3 +1,4 @@
+from http import client
 from importlib.machinery import EXTENSION_SUFFIXES
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
@@ -12,6 +13,8 @@ banco = mysql.connector.connect(
     database="cotacao"
 )
 numero_id = 0
+cliente_id = 0
+cliente_cnpj = 0
 id_m3 = 0
 result_peso_m3 = 0
 
@@ -452,6 +455,7 @@ def salva_taxa():
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 def pesquisa_remente():
+    global cliente_id
     rem_cnpj = frm_principal.edt_rem_cnpj.text()
     rem_desc = frm_principal.edt_rem_desc.text()
     rem_cid = frm_principal.edt_rem_cid.text()
@@ -459,17 +463,34 @@ def pesquisa_remente():
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
-    
+
     if dados_lidos == 0:
         frm_cliente.show()
         frm_cliente.edt_cnpj.setText(str(rem_cnpj))
         frm_cliente.edt_desc.setText(str(rem_desc))
         frm_cliente.edt_cid.setText(str(rem_cid))
     else:
-        frm_principal.edt_rem_cnpj.setText(str(cliente[0][0]))
-        frm_principal.edt_rem_desc.setText(str(cliente[0][1]))
-        frm_principal.edt_rem_cid.setText(str(cliente[0][2]))
-        
+        if not rem_cnpj == '':
+            #cliente_cnpj = cliente[0][1]
+            cursor = banco.cursor()
+            cursor.execute("SELECT * FROM cliente WHERE cnpj="+ str(rem_cnpj))
+            dados_lidos = cursor.fetchall()            
+            totalcliente = len(dados_lidos)
+
+            if totalcliente == 0:
+                frm_cliente.show()
+                frm_cliente.edt_cnpj.setText(str(rem_cnpj))
+                frm_cliente.edt_desc.setText(str(rem_desc))
+                frm_cliente.edt_cid.setText(str(rem_cid))
+            else:
+                frm_principal.edt_rem_cnpj.setText(str(dados_lidos[0][1]))
+                frm_principal.edt_rem_desc.setText(str(dados_lidos[0][2]))
+                frm_principal.edt_rem_cid.setText(str(dados_lidos[0][3]))
+        else:
+            frm_cliente.show()
+            frm_cliente.edt_cnpj.setText(str(rem_cnpj))
+            frm_cliente.edt_desc.setText(str(rem_desc))
+            frm_cliente.edt_cid.setText(str(rem_cid))
 def pesquisa_destinatario():
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
     dest_desc = frm_principal.edt_dest_desc.text()
@@ -478,17 +499,35 @@ def pesquisa_destinatario():
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
-
+    
     if dados_lidos == 0:
         frm_cliente.show()
         frm_cliente.edt_cnpj.setText(str(dest_cnpj))
         frm_cliente.edt_desc.setText(str(dest_desc))
         frm_cliente.edt_cid.setText(str(dest_cid))
     else:
-        frm_principal.edt_dest_cnpj.setText(str(cliente[0][0]))
-        frm_principal.edt_dest_desc.setText(str(cliente[0][1]))
-        frm_principal.edt_dest_cid.setText(str(cliente[0][2]))
+        if not dest_cnpj == '':
+            cursor = banco.cursor()
+            cursor.execute("SELECT * FROM cliente WHERE cnpj="+ str(dest_cnpj))
+            dados_lidos = cursor.fetchall()            
+            totalcliente = len(dados_lidos)
+
+            if totalcliente == 0:
+                frm_cliente.show()
+                frm_cliente.edt_cnpj.setText(str(dest_cnpj))
+                frm_cliente.edt_desc.setText(str(dest_desc))
+                frm_cliente.edt_cid.setText(str(dest_cid))
+            else:
+                frm_principal.edt_rem_cnpj.setText(str(dados_lidos[0][1]))
+                frm_principal.edt_rem_desc.setText(str(dados_lidos[0][2]))
+                frm_principal.edt_rem_cid.setText(str(dados_lidos[0][3]))
+        else:
+            frm_cliente.show()
+            frm_cliente.edt_cnpj.setText(str(dest_cnpj))
+            frm_cliente.edt_desc.setText(str(dest_desc))
+            frm_cliente.edt_cid.setText(str(dest_cid))
 def cadastro_cliente():
+    global cliente
     cnpj = frm_cliente.edt_cnpj.text()
     desc = frm_cliente.edt_desc.text()
     cid = frm_cliente.edt_cid.text()
@@ -497,28 +536,28 @@ def cadastro_cliente():
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
     dados_lidos = len(cliente)
-    ids= cliente[0]
-    if cnpj != ids:
-        if cliente == []:
-            frm_cliente.show()
+
+    if dados_lidos == 0:
+        frm_cliente.show()
+        cursor = banco.cursor()
+        comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
+        dados=(str(cnpj),str(desc),str(cid),str(uf))
+        cursor.execute(comando_sql,dados)
+        banco.commit()
+        QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
+        frm_cliente.close()
+    elif dados_lidos != 0:
+        cliente_id = cliente[0]
+        if cliente_id == cnpj:
             cursor = banco.cursor()
-            comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
-            dados=(str(cnpj),str(desc),str(cid),str(uf))
-            cursor.execute(comando_sql,dados)
+            cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, cliente_id))
             banco.commit()
-            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
+            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
             frm_cliente.close()
-        elif cliente != []:
-            if cliente[0] != cnpj:
-                cursor = banco.cursor()
-                cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
-                banco.commit()
-                QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
-                frm_cliente.close()
-            else:
-                QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
         else:
-            QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+            QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
+    else:
+        QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 def limpar_cliente():
     frm_cliente.edt_cnpj.setText('')
     frm_cliente.edt_desc.setText('')
