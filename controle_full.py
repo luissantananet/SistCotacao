@@ -455,23 +455,21 @@ def cadastro_cliente():
     desc = frm_cliente.edt_desc.text()
     cid = frm_cliente.edt_cid.text()
     uf = frm_cliente.edt_uf.text()
-    cursor2 = banco.cursor()
-    cursor2.execute("SELECT * FROM cliente")
-    cliente = cursor2.fetchall()
-    valor_id2 = len(cliente)
-    ids= cliente
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM cliente")
+    cliente = cursor.fetchall()
+    ids= cliente[0]
     
     if not cliente == []:
-        if ids != idtb:
-            cursor = banco.cursor()
-            comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
-            dados=(str(cnpj),str(desc),str(cid),str(uf))
-            cursor.execute(comando_sql,dados)
-            banco.commit()
+        cursor = banco.cursor()
+        comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
+        dados=(str(cnpj),str(desc),str(cid),str(uf))
+        cursor.execute(comando_sql,dados)
+        banco.commit()
         QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
         frm_cliente.show()
-    elif valor_id2 != 0:
-        if ids[0][1] == idtb:
+    elif cliente != []:
+        if cliente[0] != cnpj:
             cursor = banco.cursor()
             cursor.execute("UPDATE cliente SET cnpj='{}',descricao='{}',cidade='{}',uf='{}' WHERE id='{}'".format(cnpj,desc,cid,uf, ids))
             banco.commit()

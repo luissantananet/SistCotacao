@@ -10,9 +10,8 @@ banco = mysql.connector.connect(
     passwd="cofggcvf",
     database="cotacao"
 )
-cursor3 = banco.cursor()
-cursor3.execute("SELECT id FROM cubagem")
-dados_lido = cursor3.fetchall()
-banco.commit()
+cursor = banco.cursor()
+cursor.execute("SELECT * FROM cliente")
+cliente = cursor.fetchall()
 
-print(dados_lido)
+print(cliente)
