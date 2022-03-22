@@ -173,7 +173,24 @@ def calc_contacao():
         QMessageBox.about(frm_principal, "Aviso", "Insira os valores!")
         frm_principal.show()
 def salva_cotacao():
-    pass
+    origem = () 
+    destino = ()
+    cidade_origem = ()
+    estado_origem = () 
+    cidade_destino = ()
+    estado_destino = ()
+    tipo = () 
+    valor_merc = ()
+    peso = ()
+    volume = () 
+    tipo_merc = () 
+    peso_cudo_total = ()
+    m3_total = ()
+    cursor = banco.cursor()
+    comando_sql=("INSERT INTO cotacao(origem, destino, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cudo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+    dados=(str(origem), str(destino), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
+    cursor.execute(comando_sql,dados)
+    banco.commit()
 def limpar_tela():
     pass
 def excluir_m3():
