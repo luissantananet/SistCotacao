@@ -1870,7 +1870,7 @@
      <string>FOB</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="edt_uf">
+   <widget class="QLineEdit" name="edt_uf_rem">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1896,7 +1896,7 @@
      <string> UF</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="edt_uf_2">
+   <widget class="QLineEdit" name="edt_uf_dest">
     <property name="geometry">
      <rect>
       <x>530</x>
