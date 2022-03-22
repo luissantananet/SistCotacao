@@ -178,22 +178,53 @@ def salva_cotacao():
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
     dest_desc = frm_principal.edt_dest_desc.text()
     cidade_origem = frm_principal.edt_rem_cid.text()
-    estado_origem = frm_principal.edt_uf_rem.text() 
+    estado_origem = frm_principal.edt_rem_uf.text() 
     cidade_destino = frm_principal.edt_dest_cid.text()
-    estado_destino = frm_principal.edt_uf_dest.text() 
-    tipo = () 
-    valor_merc = ()
-    peso = ()
-    volume = () 
-    tipo_merc = () 
-    peso_cudo_total = ()
-    m3_total = ()
+    estado_destino = frm_principal.edt_dest_uf.text() 
+    valor_merc = frm_principal.edt_valor_merc.text().replace(',','.')
+    peso = frm_principal.edt_peso.text().replace(',','.')
+    volume = frm_principal.edt_volume.text() 
+    tipo_merc = frm_principal.edit_tipo_merc.text() 
+    peso_cudo_total = frm_principal.edit_peso_cubo.text().replace(',','.')
+    m3_total = frm_principal.edt_total_m3_2.text().replace(',','.')
+    tipo = ""
+    if frm_principal.rbtn_cif.isChecked() :
+        tipo = "CIF"
+    elif frm_principal.rbtn_fob.isChecked() :        
+        tipo = "FOB"
+    if peso_cudo_total == '':
+        peso_cudo_total = 0.00
+    if m3_total == '':
+        m3_total = 0.00
+    """else:
+        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")"""
+    if not tipo == "":
+        cursor = banco.cursor()
+        comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
+        cursor.execute(comando_sql,dados)
+        banco.commit()
+        QMessageBox.information(frm_principal, "Aviso", "Cotação salva!")
+        # Limpando a tela
+        orig_cnpj = frm_principal.edt_rem_cnpj.setText('')
+        orig_desc = frm_principal.edt_rem_desc.setText('')
+        dest_cnpj = frm_principal.edt_dest_cnpj.setText('')
+        dest_desc = frm_principal.edt_dest_desc.setText('')
+        cidade_origem = frm_principal.edt_rem_cid.setText('')
+        estado_origem = frm_principal.edt_rem_uf.setText('') 
+        cidade_destino = frm_principal.edt_dest_cid.setText('')
+        estado_destino = frm_principal.edt_dest_uf.setText('')
+        valor_merc = frm_principal.edt_valor_merc.setText('')
+        peso = frm_principal.edt_peso.setText('')
+        volume = frm_principal.edt_volume.setText('')
+        tipo_merc = frm_principal.edit_tipo_merc.setText('')
+        peso_cudo_total = frm_principal.edit_peso_cubo.setText('')
+        m3_total = frm_principal.edt_total_m3_2.setText('')
+        tipo = ""
+    else:
+        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")
+    # Messagem Box informativo
     
-    cursor = banco.cursor()
-    comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cudo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
-    dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
-    cursor.execute(comando_sql,dados)
-    banco.commit()
 def limpar_tela():
     pass
 def excluir_m3():
@@ -245,6 +276,7 @@ def add_m3():
     frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso_m3).replace('.',','))
     frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso_m3).replace('.',','))
     frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+    frm_principal.edt_total_m3_2.setText(str('%.5f'%result_m3).replace('.',','))
 
     cursor = banco.cursor()
     comando_sql=("INSERT INTO cubagem(dim1,dim2,dim3,volume,m3) VALUES(%s,%s,%s,%s,%s)")
@@ -478,6 +510,7 @@ def pesquisa_remente():
     rem_cnpj = frm_principal.edt_rem_cnpj.text()
     rem_desc = frm_principal.edt_rem_desc.text()
     rem_cid = frm_principal.edt_rem_cid.text()
+    rem_uf = frm_principal.edt_rem_uf.text()
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
@@ -499,11 +532,14 @@ def pesquisa_remente():
             if totalcliente == 0:
                 frm_cliente.show()
                 frm_cliente.edt_cnpj.setText(str(rem_cnpj))
-                
+                frm_cliente.edt_desc.setText(str(rem_desc))
+                frm_cliente.edt_cid.setText(str(rem_cid))
+                frm_principal.edt_dest_uf.setText(rem_uf)
             else:
                 frm_principal.edt_rem_cnpj.setText(str(dados_lidos[0][1]))
                 frm_principal.edt_rem_desc.setText(str(dados_lidos[0][2]))
                 frm_principal.edt_rem_cid.setText(str(dados_lidos[0][3]))
+                frm_principal.edt_rem_uf.setText(str(dados_lidos[0][4]))
         else:
             frm_cliente.show()
             frm_cliente.edt_cnpj.setText(str(rem_cnpj))
@@ -513,6 +549,7 @@ def pesquisa_destinatario():
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
     dest_desc = frm_principal.edt_dest_desc.text()
     dest_cid = frm_principal.edt_dest_cid.text()
+    dest_uf = frm_principal.edt_dest_uf.text()
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM cliente")
     cliente = cursor.fetchall()
@@ -523,6 +560,7 @@ def pesquisa_destinatario():
         frm_cliente.edt_cnpj.setText(str(dest_cnpj))
         frm_cliente.edt_desc.setText(str(dest_desc))
         frm_cliente.edt_cid.setText(str(dest_cid))
+        frm_cliente.edt_uf.text(str(dest_uf))
     else:
         if not dest_cnpj == '':
             cursor = banco.cursor()
@@ -533,10 +571,14 @@ def pesquisa_destinatario():
             if totalcliente == 0:
                 frm_cliente.show()
                 frm_cliente.edt_cnpj.setText(str(dest_cnpj))
+                frm_cliente.edt_desc.setText(str(dest_desc))
+                frm_cliente.edt_cid.setText(str(dest_cid))
+                frm_cliente.edt_uf.text()
             else:
-                frm_principal.edt_rem_cnpj.setText(str(dados_lidos[0][1]))
-                frm_principal.edt_rem_desc.setText(str(dados_lidos[0][2]))
-                frm_principal.edt_rem_cid.setText(str(dados_lidos[0][3]))
+                frm_principal.edt_dest_cnpj.setText(str(dados_lidos[0][1]))
+                frm_principal.edt_dest_desc.setText(str(dados_lidos[0][2]))
+                frm_principal.edt_dest_cid.setText(str(dados_lidos[0][3]))
+                frm_principal.edt_dest_uf.setText(str(dados_lidos[0][4]))
         else:
             frm_cliente.show()
             frm_cliente.edt_cnpj.setText(str(dest_cnpj))
@@ -570,6 +612,13 @@ def cadastro_cliente():
             banco.commit()
             QMessageBox.information(frm_tarifa, "Aviso", "Cliente Atualizado")
             frm_cliente.close()
+        elif cliente_id != cnpj:
+            cursor = banco.cursor()
+            comando_sql=("INSERT INTO cliente(cnpj, descricao, cidade, uf) VALUES(%s,%s,%s,%s)")
+            dados=(str(cnpj),str(desc),str(cid),str(uf))
+            cursor.execute(comando_sql,dados)
+            banco.commit()
+            QMessageBox.information(frm_tarifa, "Aviso", "Cliente Cadastrado!")
         else:
             QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
     else:
