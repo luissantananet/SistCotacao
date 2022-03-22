@@ -173,12 +173,14 @@ def calc_contacao():
         QMessageBox.about(frm_principal, "Aviso", "Insira os valores!")
         frm_principal.show()
 def salva_cotacao():
-    origem = () 
-    destino = ()
-    cidade_origem = ()
-    estado_origem = () 
-    cidade_destino = ()
-    estado_destino = ()
+    orig_cnpj = frm_principal.edt_rem_cnpj.text()
+    orig_desc = frm_principal.edt_rem_desc.text()
+    dest_cnpj = frm_principal.edt_dest_cnpj.text()
+    dest_desc = frm_principal.edt_dest_desc.text()
+    cidade_origem = frm_principal.edt_rem_cid.text()
+    estado_origem = frm_principal.edt_uf_rem.text() 
+    cidade_destino = frm_principal.edt_dest_cid.text()
+    estado_destino = frm_principal.edt_uf_dest.text() 
     tipo = () 
     valor_merc = ()
     peso = ()
@@ -186,9 +188,10 @@ def salva_cotacao():
     tipo_merc = () 
     peso_cudo_total = ()
     m3_total = ()
+    
     cursor = banco.cursor()
-    comando_sql=("INSERT INTO cotacao(origem, destino, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cudo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
-    dados=(str(origem), str(destino), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
+    comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cudo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+    dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
     cursor.execute(comando_sql,dados)
     banco.commit()
 def limpar_tela():
@@ -423,7 +426,6 @@ def salva_tarifa():
     QMessageBox.information(frm_tarifa, "Aviso", "tabela Atualizadas")
 def salva_taxa():
     #taxas base
-    desc = frm_tarifa.label_37.text()
     fPeso = frm_tarifa.edt_fpeso.text().replace(',','.')
     ad_v = frm_tarifa.edt_ad.text().replace(',','.')
     gris = frm_tarifa.edt_gris.text().replace(',','.')
