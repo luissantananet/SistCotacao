@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Tarifas</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/3592841-cog-gear-general-machine-office-setting-settings_107765.ico</normaloff>../icons/3592841-cog-gear-general-machine-office-setting-settings_107765.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">

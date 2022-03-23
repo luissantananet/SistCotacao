@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../icons/solicitacao-de-cotacao.png</normaloff>../icons/solicitacao-de-cotacao.png</iconset>
+    <normaloff>../icons/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</normaloff>../icons/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</iconset>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhNone</set>
