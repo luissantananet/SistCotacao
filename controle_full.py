@@ -1,5 +1,4 @@
-from http import client
-from importlib.machinery import EXTENSION_SUFFIXES
+
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
@@ -222,9 +221,7 @@ def salva_cotacao():
         m3_total = frm_principal.edt_total_m3_2.setText('')
         tipo = ""
     else:
-        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")
-    # Messagem Box informativo
-    
+        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")  
 def limpar_tela():
     pass
 def excluir_m3():
@@ -301,8 +298,6 @@ def add_m3():
     frm_principal.edt_dim3.setText('')
     frm_principal.edt_vol.setText('')
     frm_principal.edt_resultado_m3.setText('')   
-def pesquisa_cliente():
-    pass
 def chama_tarifa():
     # Tabela "tarifas_minimas"
     cursor = banco.cursor()
@@ -630,9 +625,24 @@ def limpar_cliente():
     frm_cliente.edt_uf.setText('')
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    frm_principal = uic.loadUi(r'.\Forms\frm_principal_full.ui')
-    frm_tarifa = uic.loadUi(r'.\Forms\frm_tarifa.ui')
-    frm_cliente = uic.loadUi(r'.\Forms\frm_cadastro_cliente.ui')
+    frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
+    frm_tarifa = uic.loadUi(r'.\forms\frm_tarifa.ui')
+    frm_cliente = uic.loadUi(r'.\forms\frm_cadastro_cliente.ui')
+    # Botões da tela principal
+    frm_principal.btn_calcula.clicked.connect(calc_contacao)
+    frm_principal.btn_salvar.clicked.connect(salva_cotacao)
+    frm_principal.btn_limpa.clicked.connect(limpar_tela)
+    frm_principal.btn_adicionar.clicked.connect(add_m3)
+    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
+    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
+    frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
+    frm_principal.btn_excluir.clicked.connect(excluir_m3)
+    # Botões da tela tarifas
+    frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
+    frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
+    # Botões da tela Cadastro de Cliente
+    frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
+    frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
     #limpar bd.cubagem
     cursor = banco.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
@@ -682,21 +692,7 @@ if __name__ == "__main__":
     frm_principal.edt_ad_gris_300.setText(str(tabelas[6][4]).replace('.',','))
     frm_principal.edt_pedagio_300.setText(str(tabelas[6][5]).replace('.',','))
     frm_principal.edt_pedlitoral_300.setText(str(tabelas[6][6]).replace('.',','))
-    # Botões da tela principal
-    frm_principal.btn_calcula.clicked.connect(calc_contacao)
-    frm_principal.btn_salvar.clicked.connect(salva_cotacao)
-    frm_principal.btn_limpa.clicked.connect(limpar_tela)
-    frm_principal.btn_adicionar.clicked.connect(add_m3)
-    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
-    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
-    frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
-    frm_principal.btn_excluir.clicked.connect(excluir_m3)
-    # Botões da tela tarifas
-    frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
-    frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
-    # Botões da tela Cadastro de Cliente
-    frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
-    frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
+
     # __name__ == "__main__"
     frm_principal.show()
     app.exec()

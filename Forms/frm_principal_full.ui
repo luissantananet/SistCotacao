@@ -10,8 +10,27 @@
     <height>769</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>732</width>
+    <height>769</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>732</width>
+    <height>769</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Cotação</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/solicitacao-de-cotacao.png</normaloff>../icons/solicitacao-de-cotacao.png</iconset>
+  </property>
+  <property name="inputMethodHints">
+   <set>Qt::ImhNone</set>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="gBox_valores">
@@ -1767,6 +1786,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhUppercaseOnly</set>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -1879,8 +1901,14 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -1905,8 +1933,17 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximumSize">
+     <size>
+      <width>41</width>
+      <height>22</height>
+     </size>
+    </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
