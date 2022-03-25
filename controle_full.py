@@ -528,9 +528,6 @@ def pesquisa_remente():
             if totalcliente == 0:
                 frm_cliente.show()
                 frm_cliente.edt_cnpj.setText(str(rem_cnpj))
-                frm_cliente.edt_desc.setText(str(rem_desc))
-                frm_cliente.edt_cid.setText(str(rem_cid))
-                frm_principal.edt_dest_uf.setText(rem_uf)
             else:
                 frm_principal.edt_rem_cnpj.setText(str(dados_lidos[0][1]))
                 frm_principal.edt_rem_desc.setText(str(dados_lidos[0][2]))
@@ -577,9 +574,6 @@ def pesquisa_destinatario():
             if totalcliente == 0:
                 frm_cliente.show()
                 frm_cliente.edt_cnpj.setText(str(dest_cnpj))
-                frm_cliente.edt_desc.setText(str(dest_desc))
-                frm_cliente.edt_cid.setText(str(dest_cid))
-                frm_cliente.edt_uf.text()
             else:
                 frm_principal.edt_dest_cnpj.setText(str(dados_lidos[0][1]))
                 frm_principal.edt_dest_desc.setText(str(dados_lidos[0][2]))
