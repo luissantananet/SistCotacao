@@ -172,6 +172,26 @@
       <height>192</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>CNPJ</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Descrição</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Cidade</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>UF</string>
+     </property>
+    </column>
    </widget>
    <widget class="QPushButton" name="btn_selecionar">
     <property name="geometry">

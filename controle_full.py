@@ -538,7 +538,7 @@ def pesquisa_remente():
             frm_cliente.edt_cnpj.setText(str(rem_cnpj))
     
     cursor1 = banco.cursor()
-    cursor1.execute("SELECT * FROM  cliente")
+    cursor1.execute("SELECT cnpj, descricao, cidade, uf FROM  cliente")
     dados_clientes = cursor1.fetchall()
     frm_cliente.tableWidget.setRowCount(len(dados_clientes))
     frm_cliente.tableWidget.setColumnCount(4)
@@ -584,7 +584,7 @@ def pesquisa_destinatario():
             frm_cliente.edt_cnpj.setText(str(dest_cnpj))
             
     cursor1 = banco.cursor()
-    cursor1.execute("SELECT * FROM  cliente")
+    cursor1.execute("SELECT cnpj, descricao, cidade, uf FROM  cliente")
     dados_clientes = cursor1.fetchall()
     frm_cliente.tableWidget.setRowCount(len(dados_clientes))
     frm_cliente.tableWidget.setColumnCount(4)
