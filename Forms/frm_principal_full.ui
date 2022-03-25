@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>769</height>
+    <height>739</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>732</width>
-    <height>769</height>
+    <height>739</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>732</width>
-    <height>769</height>
+    <height>739</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -450,7 +450,7 @@
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>654</y>
+      <y>554</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -463,7 +463,7 @@
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>680</y>
+      <y>580</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -476,7 +476,7 @@
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>630</y>
+      <y>530</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -491,8 +491,14 @@
       <x>10</x>
       <y>520</y>
       <width>621</width>
-      <height>221</height>
+      <height>211</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777208</height>
+     </size>
     </property>
     <property name="title">
      <string>Cubagem</string>
@@ -1852,8 +1858,8 @@
    <widget class="QPushButton" name="btn_tarifa">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>520</y>
+      <x>654</x>
+      <y>2</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -1995,16 +2001,6 @@
      <string> UF</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>732</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
  </widget>
  <tabstops>
