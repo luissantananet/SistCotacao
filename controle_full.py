@@ -16,6 +16,7 @@ cliente_id = 0
 cliente_cnpj = 0
 id_m3 = 0
 result_peso_m3 = 0
+client = 0
 
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
@@ -502,6 +503,7 @@ def salva_taxa():
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
 def pesquisa_remente():
     global cliente_id
+    global client
     rem_cnpj = frm_principal.edt_rem_cnpj.text()
     rem_desc = frm_principal.edt_rem_desc.text()
     rem_cid = frm_principal.edt_rem_cid.text()
@@ -518,7 +520,6 @@ def pesquisa_remente():
         frm_cliente.edt_cid.setText(str(rem_cid))
     else:
         if not rem_cnpj == '':
-            #cliente_cnpj = cliente[0][1]
             cursor = banco.cursor()
             cursor.execute("SELECT * FROM cliente WHERE cnpj="+ str(rem_cnpj))
             dados_lidos = cursor.fetchall()            
@@ -538,9 +539,19 @@ def pesquisa_remente():
         else:
             frm_cliente.show()
             frm_cliente.edt_cnpj.setText(str(rem_cnpj))
-            frm_cliente.edt_desc.setText(str(rem_desc))
-            frm_cliente.edt_cid.setText(str(rem_cid))
+    
+    cursor1 = banco.cursor()
+    cursor1.execute("SELECT * FROM  cliente")
+    dados_clientes = cursor1.fetchall()
+    frm_cliente.tableWidget.setRowCount(len(dados_clientes))
+    frm_cliente.tableWidget.setColumnCount(4)
+    for i in range(0, len(dados_clientes)):
+        for j in range(0, 4):
+            frm_cliente.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_clientes[i][j])))
+    client = 1
 def pesquisa_destinatario():
+    global cliente_id
+    global client
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
     dest_desc = frm_principal.edt_dest_desc.text()
     dest_cid = frm_principal.edt_dest_cid.text()
@@ -577,8 +588,17 @@ def pesquisa_destinatario():
         else:
             frm_cliente.show()
             frm_cliente.edt_cnpj.setText(str(dest_cnpj))
-            frm_cliente.edt_desc.setText(str(dest_desc))
-            frm_cliente.edt_cid.setText(str(dest_cid))
+            
+    cursor1 = banco.cursor()
+    cursor1.execute("SELECT * FROM  cliente")
+    dados_clientes = cursor1.fetchall()
+    frm_cliente.tableWidget.setRowCount(len(dados_clientes))
+    frm_cliente.tableWidget.setColumnCount(4)
+    
+    for i in range(0, len(dados_clientes)):
+        for j in range(0, 4):
+            frm_cliente.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_clientes[i][j])))
+    client = 2
 def cadastro_cliente():
     global cliente
     cnpj = frm_cliente.edt_cnpj.text()
@@ -618,11 +638,46 @@ def cadastro_cliente():
             QMessageBox.about(frm_tarifa, "ERRO", "Erro no Cadastro")
     else:
         QMessageBox.about(frm_tarifa, "ERRO", "falta dados!")
+    cursor1 = banco.cursor()
+    cursor1.execute("SELECT * FROM  cliente")
+    dados_clientes = cursor1.fetchall()
+    frm_cliente.tableWidget.setRowCount(len(dados_clientes))
+    frm_cliente.tableWidget.setColumnCount(4)
+    for i in range(0, len(dados_clientes)):
+        for j in range(0, 4):
+            frm_cliente.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_clientes[i][j])))
 def limpar_cliente():
     frm_cliente.edt_cnpj.setText('')
     frm_cliente.edt_desc.setText('')
     frm_cliente.edt_cid.setText('')
     frm_cliente.edt_uf.setText('')
+def select_cliente():
+    global numero_id
+    global client
+    linha = frm_cliente.tableWidget.currentRow()
+    cursor = banco.cursor()
+    comando_SQL = "SELECT * FROM cliente"
+    cursor.execute(comando_SQL)
+    dados_lidos = cursor.fetchall()
+    valor_id = dados_lidos[linha][0]
+    cursor.execute("SELECT * FROM cliente WHERE id="+str(valor_id))
+    cliente = cursor.fetchall()
+    frm_principal.show()
+    if client == 1:
+        frm_principal.edt_rem_cnpj.setText(str(cliente[0][1]))
+        frm_principal.edt_rem_desc.setText(str(cliente[0][2]))
+        frm_principal.edt_rem_cid.setText(str(cliente[0][3]))
+        frm_principal.edt_rem_uf.setText(str(cliente[0][4]))
+    elif client == 2:
+        frm_principal.edt_dest_cnpj.setText(str(cliente[0][1]))
+        frm_principal.edt_dest_desc.setText(str(cliente[0][2]))
+        frm_principal.edt_dest_cid.setText(str(cliente[0][3]))
+        frm_principal.edt_dest_uf.setText(str(cliente[0][4]))
+    else:
+        QMessageBox.about(frm_principal, "Aviso", "Erro no Bando de Dados!")  
+    
+    frm_cliente.close()
+    numero_id = valor_id
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
@@ -643,6 +698,7 @@ if __name__ == "__main__":
     # Botões da tela Cadastro de Cliente
     frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
     frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
+    frm_cliente.btn_selecionar.clicked.connect(select_cliente)
     #limpar bd.cubagem
     cursor = banco.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
