@@ -188,6 +188,16 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>edt_cnpj</tabstop>
+  <tabstop>edt_desc</tabstop>
+  <tabstop>edt_cid</tabstop>
+  <tabstop>edt_uf</tabstop>
+  <tabstop>btn_salvar</tabstop>
+  <tabstop>btn_selecionar</tabstop>
+  <tabstop>btn_limpar</tabstop>
+  <tabstop>tableWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -212,6 +212,9 @@
      <string>Tarifas</string>
     </property>
     <widget class="QLineEdit" name="edt_fpeso">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -222,6 +225,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_ad">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -232,6 +238,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_gris">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -242,6 +251,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_taxas">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -252,6 +264,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_icms">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -405,6 +420,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="edt_pedag">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1706,6 +1724,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_rem_desc">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -1729,6 +1750,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_dest_desc">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -1752,6 +1776,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_dest_cid">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1778,6 +1805,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_rem_cid">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1893,6 +1923,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_rem_uf">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1925,6 +1958,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="edt_dest_uf">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1972,29 +2008,29 @@
   </widget>
  </widget>
  <tabstops>
+  <tabstop>edt_rem_cnpj</tabstop>
+  <tabstop>btn_rem_pesq</tabstop>
+  <tabstop>edt_dest_cnpj</tabstop>
+  <tabstop>btn_dest_pesq</tabstop>
   <tabstop>edt_valor_merc</tabstop>
   <tabstop>edt_peso</tabstop>
   <tabstop>edt_volume</tabstop>
   <tabstop>edit_tipo_merc</tabstop>
-  <tabstop>edit_peso_cubo</tabstop>
-  <tabstop>edt_fpeso</tabstop>
-  <tabstop>edt_ad</tabstop>
-  <tabstop>edt_gris</tabstop>
-  <tabstop>edt_taxas</tabstop>
-  <tabstop>edt_icms</tabstop>
-  <tabstop>edt_frete_cif</tabstop>
-  <tabstop>edt_frete_fob</tabstop>
-  <tabstop>edt_frete_litoral</tabstop>
-  <tabstop>edt_pedag</tabstop>
-  <tabstop>btn_salvar</tabstop>
-  <tabstop>btn_limpa</tabstop>
-  <tabstop>btn_calcula</tabstop>
-  <tabstop>edt_totalPeso_m3</tabstop>
   <tabstop>edt_dim1</tabstop>
   <tabstop>edt_dim2</tabstop>
   <tabstop>edt_dim3</tabstop>
   <tabstop>edt_vol</tabstop>
   <tabstop>btn_adicionar</tabstop>
+  <tabstop>btn_excluir</tabstop>
+  <tabstop>btn_calcula</tabstop>
+  <tabstop>btn_salvar</tabstop>
+  <tabstop>btn_limpa</tabstop>
+  <tabstop>btn_tarifa</tabstop>
+  <tabstop>edt_taxas</tabstop>
+  <tabstop>edt_icms</tabstop>
+  <tabstop>edt_frete_cif</tabstop>
+  <tabstop>edt_frete_fob</tabstop>
+  <tabstop>edt_frete_litoral</tabstop>
   <tabstop>edt_resultado_m3</tabstop>
   <tabstop>edt_ad_gris_250</tabstop>
   <tabstop>edt_base_100</tabstop>
@@ -2045,15 +2081,23 @@
   <tabstop>edt_ftotal_250</tabstop>
   <tabstop>edt_litoral_20</tabstop>
   <tabstop>edt_ftotal_50</tabstop>
-  <tabstop>edt_rem_cnpj</tabstop>
+  <tabstop>edit_peso_cubo</tabstop>
   <tabstop>edt_rem_desc</tabstop>
-  <tabstop>edt_dest_cnpj</tabstop>
+  <tabstop>edt_ad</tabstop>
   <tabstop>edt_dest_desc</tabstop>
   <tabstop>edt_dest_cid</tabstop>
   <tabstop>edt_rem_cid</tabstop>
-  <tabstop>btn_rem_pesq</tabstop>
-  <tabstop>btn_dest_pesq</tabstop>
-  <tabstop>btn_tarifa</tabstop>
+  <tabstop>edt_fpeso</tabstop>
+  <tabstop>edt_gris</tabstop>
+  <tabstop>edt_totalPeso_m3</tabstop>
+  <tabstop>edt_total_m3_2</tabstop>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>edt_total_m3</tabstop>
+  <tabstop>edt_pedag</tabstop>
+  <tabstop>rbtn_cif</tabstop>
+  <tabstop>rbtn_fob</tabstop>
+  <tabstop>edt_rem_uf</tabstop>
+  <tabstop>edt_dest_uf</tabstop>
  </tabstops>
  <resources/>
  <connections/>
