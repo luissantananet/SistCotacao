@@ -1,19 +1,4 @@
-import sys
-from cx_Freeze import setup, Executable
+from distutils.core import setup
+import py2exe
 
-# Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"packages": ["os"], "includes": ["PyQt5"]}
-
-# GUI applications require a different base on Windows (the default is for
-# a console application).
-base = None
-if sys.platform == "win32":
-    base = "Win32GUI"
-
-setup(
-    name="SisCotacao",
-    version="0.1",
-    description="Faz contação para transportadora!",
-    options={"build_exe": build_exe_options},
-    executables=[Executable("controle_full.py", base=base)]
-)
+setup(console=['controle_full.py'])
