@@ -3,6 +3,7 @@ from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
 import mysql.connector.errors
+from reportlab.pdfgen import canvas
 
 # Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
@@ -641,10 +642,31 @@ def cadastro_cliente():
         for j in range(0, 4):
             frm_cliente.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_clientes[i][j])))
 def limpar_cliente():
-    frm_cliente.edt_cnpj.setText('')
-    frm_cliente.edt_desc.setText('')
-    frm_cliente.edt_cid.setText('')
-    frm_cliente.edt_uf.setText('')
+    cursor = banco.cursor()
+    cursor.execute("SELECT id FROM cubagem")
+    dados_lido = cursor.fetchall()
+    banco.commit()
+    if not dados_lido == []:
+        linha = frm_principal.tableWidget.currentRow()
+        frm_principal.tableWidget.removeRow(linha)
+
+        cursor = banco.cursor()
+        cursor.execute("SELECT * FROM cubagem")
+        dados_lidos = cursor.fetchall()
+        valor_id = dados_lidos[linha][0]
+        cursor.execute("DELETE FROM cubagem WHERE id="+ str(valor_id))
+        banco.commit()
+
+        cursor1 = banco.cursor()
+        cursor1.execute("SELECT cnpj, descricao, cidade, uf FROM  cliente")
+        dados_clientes = cursor1.fetchall()
+        frm_cliente.tableWidget.setRowCount(len(dados_clientes))
+        frm_cliente.tableWidget.setColumnCount(4)
+        for i in range(0, len(dados_clientes)):
+            for j in range(0, 4):
+                frm_cliente.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_clientes[i][j])))
+    else:
+        QMessageBox.about(frm_tarifa, "ERRO", "Erro ao excluir, selecione o cliente!")
 def select_cliente():
     global numero_id
     global client
@@ -672,6 +694,13 @@ def select_cliente():
     
     frm_cliente.close()
     numero_id = valor_id
+def gerar_pdf():
+    cursor = banco.cusor()
+    comando_sql = "SELECt * FROM cotacao"
+    cursor.execute(comando_sql)
+    dados_lidos = cursor.fetchall()
+    y = 0
+    pdf = canvas.Canvas
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')

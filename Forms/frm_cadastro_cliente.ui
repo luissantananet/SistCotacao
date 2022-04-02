@@ -160,7 +160,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Limpar</string>
+     <string>Excluir</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
