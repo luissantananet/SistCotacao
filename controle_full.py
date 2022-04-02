@@ -3,6 +3,7 @@ from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
 import mysql.connector.errors
+import datetime
 from reportlab.pdfgen import canvas
 
 # Conexão com o bando de dados MySQL
@@ -700,7 +701,17 @@ def gerar_pdf():
     cursor.execute(comando_sql)
     dados_lidos = cursor.fetchall()
     y = 0
-    pdf = canvas.Canvas
+    pdf = canvas.Canvas("Cotação de frete '{}'", datetime.date.today())
+    pdf.setFont("Times-Bold", 25)
+    pdf.drawsString(200,800, "Cotação:'{}'",str(dados_lidos[0][0]))
+    pdf.setFont("Times-Bold", 18)
+    pdf.drawsString(10,750, "Remetente: ")
+    pdf.drawsString()
+    pdf.drawsString()
+    pdf.drawsString()
+    pdf.drawsString()
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
