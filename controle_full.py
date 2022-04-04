@@ -5,6 +5,7 @@ import mysql.connector
 import mysql.connector.errors
 import datetime
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
 # Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
@@ -706,17 +707,19 @@ def gerar_pdf():
     print(cotacao)
     x = 0
     y = 0
-    pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())))
+    pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())), pagesize=A4)
     pdf.setFont("Times-Bold", 25)
     pdf.drawString(200,800, "Cotação: " + str(cotacao[0][0]))
     pdf.setFont("Times-Bold", 18)
     for i in range(0, len(cotacao)):
-        y = y + 25
+        y = y + 20
         x = x + 25
-        pdf.drawString(100 -y, 750, str("Remetente: {}".format(cotacao[i][1])))
-        pdf.drawString(350 -y, 750,str(cotacao[i][2]))
-        pdf.drawString(100 -x, 750-y, str("Destinatário: " + cotacao[i][3]))
-        pdf.drawString(350 -y, 750-y,str(cotacao[i][4]))
+        pdf.setFont("Times-Bold", 12)
+        pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1]))
+        pdf.drawString(230, 750,str(cotacao[i][2]))
+        pdf.drawString(30 -y, 750-y, str("Destinatário: " + cotacao[i][3]))
+        pdf.drawString(230 , 750-y,str(cotacao[i][4]))
+        
 
     pdf.save()
 def chama_cotacao():
