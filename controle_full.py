@@ -696,23 +696,29 @@ def select_cliente():
     frm_cliente.close()
     numero_id = valor_id
 def gerar_pdf():
+    linha = frm_cotacao.tableWidget.currentRow()
     cursor = banco.cursor()
-    comando_sql = "SELECt * FROM cotacao"
-    cursor.execute(comando_sql)
+    cursor.execute("SELECt id FROM cotacao")
     dados_lidos = cursor.fetchall()
+    valor_id = dados_lidos[linha][0]
+    cursor.execute("SELECT * FROM cotacao WHERE id="+ str(valor_id))
+    cotacao = cursor.fetchall()
+    print(cotacao)
+    x = 0
     y = 0
-    pdf = canvas.Canvas("Cotação de frete")
+    pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())))
     pdf.setFont("Times-Bold", 25)
-    pdf.drawsString(200,800, "Cotação: ", + str(dados_lidos[0][0]))
+    pdf.drawString(200,800, "Cotação: " + str(cotacao[0][0]))
     pdf.setFont("Times-Bold", 18)
-    y = y + 50
-    pdf.drawsString(10,750 - y, "Remetente: '{}'", str(dados_lidos[0][1]))
-    pdf.drawsString(50,750 - y, "Destinatário: '{}'", str(dados_lidos[0][2]))
-    pdf.drawsString()
-    pdf.drawsString()
-    pdf.drawsString()
+    for i in range(0, len(cotacao)):
+        y = y + 25
+        x = x + 25
+        pdf.drawString(100 -y, 750, str("Remetente: {}".format(cotacao[i][1])))
+        pdf.drawString(350 -y, 750,str(cotacao[i][2]))
+        pdf.drawString(100 -x, 750-y, str("Destinatário: " + cotacao[i][3]))
+        pdf.drawString(350 -y, 750-y,str(cotacao[i][4]))
 
-    pdf.show()
+    pdf.save()
 def chama_cotacao():
     # Tabela "cotacao"
     cursor = banco.cursor()
