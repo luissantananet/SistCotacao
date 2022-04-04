@@ -2001,6 +2001,19 @@
      <string> UF</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_cotacao">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>607</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cotações</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>

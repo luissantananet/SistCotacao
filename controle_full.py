@@ -696,27 +696,40 @@ def select_cliente():
     frm_cliente.close()
     numero_id = valor_id
 def gerar_pdf():
-    cursor = banco.cusor()
+    cursor = banco.cursor()
     comando_sql = "SELECt * FROM cotacao"
     cursor.execute(comando_sql)
     dados_lidos = cursor.fetchall()
     y = 0
-    pdf = canvas.Canvas("Cotação de frete '{}'", datetime.date.today())
+    pdf = canvas.Canvas("Cotação de frete")
     pdf.setFont("Times-Bold", 25)
-    pdf.drawsString(200,800, "Cotação:'{}'",str(dados_lidos[0][0]))
+    pdf.drawsString(200,800, "Cotação: ", + str(dados_lidos[0][0]))
     pdf.setFont("Times-Bold", 18)
-    pdf.drawsString(10,750, "Remetente: ")
-    pdf.drawsString()
+    y = y + 50
+    pdf.drawsString(10,750 - y, "Remetente: '{}'", str(dados_lidos[0][1]))
+    pdf.drawsString(50,750 - y, "Destinatário: '{}'", str(dados_lidos[0][2]))
     pdf.drawsString()
     pdf.drawsString()
     pdf.drawsString()
 
-
+    pdf.show()
+def chama_cotacao():
+    # Tabela "cotacao"
+    cursor = banco.cursor()
+    cursor.execute("SELECT * FROM cotacao") 
+    cotacao = cursor.fetchall()
+    frm_cotacao.tableWidget.setRowCount(len(cotacao))
+    frm_cotacao.tableWidget.setColumnCount(15)
+    for i in range(0, len(cotacao)):
+        for j in range(0,15):
+            frm_cotacao.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(cotacao[i][j])))
+    frm_cotacao.show()
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
     frm_tarifa = uic.loadUi(r'.\forms\frm_tarifa.ui')
     frm_cliente = uic.loadUi(r'.\forms\frm_cadastro_cliente.ui')
+    frm_cotacao = uic.loadUi(r'.\forms\frm_cotacao.ui')
     # Botões da tela principal
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     frm_principal.btn_salvar.clicked.connect(salva_cotacao)
@@ -726,6 +739,7 @@ if __name__ == "__main__":
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
     frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
     frm_principal.btn_excluir.clicked.connect(excluir_m3)
+    frm_principal.btn_cotacao.clicked.connect(chama_cotacao)
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
@@ -733,6 +747,8 @@ if __name__ == "__main__":
     frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
     frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
     frm_cliente.btn_selecionar.clicked.connect(select_cliente)
+    # Botões da tela cotações
+    frm_cotacao.btn_dpf.clicked.connect(gerar_pdf)
     #limpar bd.cubagem
     cursor = banco.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
