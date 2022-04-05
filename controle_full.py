@@ -6,6 +6,7 @@ import mysql.connector.errors
 import datetime
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
+import os
 
 # Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
@@ -20,7 +21,7 @@ cliente_cnpj = 0
 id_m3 = 0
 result_peso_m3 = 0
 client = 0
-
+data_cotacao = None
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
@@ -176,6 +177,7 @@ def calc_contacao():
         QMessageBox.about(frm_principal, "Aviso", "Insira os valores!")
         frm_principal.show()
 def salva_cotacao():
+    global data_cotacao
     orig_cnpj = frm_principal.edt_rem_cnpj.text()
     orig_desc = frm_principal.edt_rem_desc.text()
     dest_cnpj = frm_principal.edt_dest_cnpj.text()
@@ -190,6 +192,7 @@ def salva_cotacao():
     tipo_merc = frm_principal.edit_tipo_merc.text() 
     peso_cudo_total = frm_principal.edit_peso_cubo.text().replace(',','.')
     m3_total = frm_principal.edt_total_m3_2.text().replace(',','.')
+    data_cotacao = str(datetime.date.today())
     tipo = ""
     if frm_principal.rbtn_cif.isChecked() :
         tipo = "CIF"
@@ -202,9 +205,10 @@ def salva_cotacao():
     """else:
         QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")"""
     if not tipo == "":
+        
         cursor = banco.cursor()
-        comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
-        dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total))
+        comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total, data_cotacao) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total), str(data_cotacao))
         cursor.execute(comando_sql,dados)
         banco.commit()
         QMessageBox.information(frm_principal, "Aviso", "Cotação salva!")
@@ -224,8 +228,9 @@ def salva_cotacao():
         peso_cudo_total = frm_principal.edit_peso_cubo.setText('')
         m3_total = frm_principal.edt_total_m3_2.setText('')
         tipo = ""
+        
     else:
-        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")  
+        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")
 def limpar_tela():
     pass
 def excluir_m3():
@@ -697,6 +702,7 @@ def select_cliente():
     frm_cliente.close()
     numero_id = valor_id
 def gerar_pdf():
+    #global data_cotacao
     linha = frm_cotacao.tableWidget.currentRow()
     cursor = banco.cursor()
     cursor.execute("SELECt id FROM cotacao")
@@ -704,24 +710,39 @@ def gerar_pdf():
     valor_id = dados_lidos[linha][0]
     cursor.execute("SELECT * FROM cotacao WHERE id="+ str(valor_id))
     cotacao = cursor.fetchall()
-    print(cotacao)
     x = 0
     y = 0
     pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())), pagesize=A4)
     pdf.setFont("Times-Bold", 25)
-    pdf.drawString(200,800, "Cotação: " + str(cotacao[0][0]))
-    pdf.setFont("Times-Bold", 18)
+    pdf.drawString(200,800 -y, "Cotação: " + str(cotacao[0][0]))
+    pdf.setFont("Times-Bold", 15)
+    pdf.drawString(470, 800, str(data_cotacao))
     for i in range(0, len(cotacao)):
         y = y + 20
-        x = x + 25
+        x = x + 20
+        # Descrição dos Clientes
         pdf.setFont("Times-Bold", 12)
-        pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1]))
-        pdf.drawString(230, 750,str(cotacao[i][2]))
-        pdf.drawString(30 -y, 750-y, str("Destinatário: " + cotacao[i][3]))
-        pdf.drawString(230 , 750-y,str(cotacao[i][4]))
+        pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
+        pdf.drawString(175, 750, str(cotacao[i][2])) # Descrição do Cliente remetente
+        pdf.drawString(30 -y, 760-y, str(cotacao[i][5])) # Cidade remetente
+        pdf.drawString(120 , 760-y, str(" - " + cotacao[i][6])) # Estado remetente
+        pdf.drawString(30 -y,710, str("Destinatário: " + cotacao[i][3])) # CNPJ do cliente Destino
+        pdf.drawString(175, 710, str(cotacao[i][4])) # Descrição do Cliente Destino
+        pdf.drawString(30 -y, 720-y, str(cotacao[i][7])) # Cidade Destino
+        pdf.drawString(120 , 720-y, str(" - " + cotacao[i][8])) # Estado Destino
+        # Frete
+        pdf.setFont("Times-Bold", 11)
+        # Valor da nota fiscal
+        # Volume
+        # peso
+        # M³(Cubagem)
+        # Peso M³
+        # Valor do frete
+        pdf.drawString(30 -y, 500, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
         
-
     pdf.save()
+    path_dir = ("Cotação de frete {}.dpf".format(str(datetime.date.today())))
+    os.startfile(path_dir)
 def chama_cotacao():
     # Tabela "cotacao"
     cursor = banco.cursor()
