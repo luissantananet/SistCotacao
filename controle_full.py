@@ -708,8 +708,9 @@ def gerar_pdf():
     cursor.execute("SELECt id FROM cotacao")
     dados_lidos = cursor.fetchall()
     valor_id = dados_lidos[linha][0]
-    cursor.execute("SELECT * FROM cotacao WHERE id="+ str(valor_id))
-    cotacao = cursor.fetchall()
+    cursor2 = banco.cursor()
+    cursor2.execute("SELECT * FROM cotacao WHERE id="+ str(valor_id))
+    cotacao = cursor2.fetchall()
     x = 0
     y = 0
     pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())), pagesize=A4)
@@ -720,6 +721,11 @@ def gerar_pdf():
     for i in range(0, len(cotacao)):
         y = y + 20
         x = x + 20
+        nf = float(cotacao[i][10])
+        Volume = float(cotacao[i][12])
+        peso = float(cotacao[i][11])
+        Cubagem = float(cotacao[i][15])
+        Peso_M = float(cotacao[i][14])
         # Descrição dos Clientes
         pdf.setFont("Times-Bold", 12)
         pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
@@ -732,12 +738,12 @@ def gerar_pdf():
         pdf.drawString(120 , 720-y, str(" - " + cotacao[i][8])) # Estado Destino
         # Frete
         pdf.setFont("Times-Bold", 10)
-        nf= float(cotacao[i][10])
-        pdf.setFont(30 -y, 400, float("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
-        pdf.setFont(30 -y, 420-y, str("Volumes: " + cotacao[i][12]).replace(',','.'))# Volume
-        pdf.setFont(30 -y, 450, str("Peso: " + cotacao[i][11]).replace(',','.'))# peso
-        pdf.setFont(30 -y, 450-y, str("M³: " + cotacao[i][15]).replace(',','.'))# M³(Cubagem)
-        pdf.setFont(30 -y, 500, str("Peso M³: " + cotacao[i][14]).replace(',','.'))# Peso M³
+        
+        pdf.setFont(30 -y, 400, str("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
+        pdf.setFont(30 -y, 420-y, str("Volumes: " + Volume))# Volume
+        pdf.setFont(30 -y, 450, str("Peso: " + peso))# peso
+        pdf.setFont(30 -y, 450-y, str("M³: " + Cubagem))# M³(Cubagem)
+        pdf.setFont(30 -y, 500, str("Peso M³: " + Peso_M))# Peso M³
         # Valor do frete
         pdf.drawString(30 -y, 500, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
         
