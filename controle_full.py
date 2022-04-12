@@ -731,12 +731,13 @@ def gerar_pdf():
         pdf.drawString(30 -y, 720-y, str(cotacao[i][7])) # Cidade Destino
         pdf.drawString(120 , 720-y, str(" - " + cotacao[i][8])) # Estado Destino
         # Frete
-        pdf.setFont("Times-Bold", 11)
-        # Valor da nota fiscal
-        # Volume
-        # peso
-        # M³(Cubagem)
-        # Peso M³
+        pdf.setFont("Times-Bold", 10)
+        nf= float(cotacao[i][10])
+        pdf.setFont(30 -y, 400, float("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
+        pdf.setFont(30 -y, 420-y, str("Volumes: " + cotacao[i][12]).replace(',','.'))# Volume
+        pdf.setFont(30 -y, 450, str("Peso: " + cotacao[i][11]).replace(',','.'))# peso
+        pdf.setFont(30 -y, 450-y, str("M³: " + cotacao[i][15]).replace(',','.'))# M³(Cubagem)
+        pdf.setFont(30 -y, 500, str("Peso M³: " + cotacao[i][14]).replace(',','.'))# Peso M³
         # Valor do frete
         pdf.drawString(30 -y, 500, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
         
