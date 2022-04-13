@@ -241,10 +241,7 @@ def salva_cotacao():
         else:
             frete = fretetotal
             frete_litotal = litotal
-        print(pesototal)
-        print(type(pesototal))
-        print(fretetotal)
-        print(fretetarifa)
+        # Salvar no Banco de Dados
         cursor = banco.cursor()
         comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total, data_cotacao, fretetotal,fretetotal_litotal) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
         dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total), str(data_cotacao), str(frete),str(frete_litotal))
