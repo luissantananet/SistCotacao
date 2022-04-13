@@ -268,6 +268,10 @@ def salva_cotacao():
     else:
         QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")
 def limpar_tela():
+    #limpar bd.cubagem
+    cursor = banco.cursor()
+    cursor.execute("TRUNCATE TABLE cubagem")
+    banco.commit()
     frm_principal.edt_rem_cnpj.setText('')
     frm_principal.edt_rem_desc.setText('')
     frm_principal.edt_dest_cnpj.setText('')
@@ -282,6 +286,21 @@ def limpar_tela():
     frm_principal.edit_tipo_merc.setText('')
     frm_principal.edit_peso_cubo.setText('')
     frm_principal.edt_total_m3_2.setText('')
+    frm_principal.edt_totalPeso_m3.setText('')
+    frm_principal.edit_peso_cubo.setText('')
+    frm_principal.edt_total_m3.setText('')
+    frm_principal.edt_total_m3_2.setText('')
+    cursor2 = banco.cursor()
+    comando_SQL = "SELECT dim1, dim2, dim3,volume,m3  FROM cubagem"
+    cursor2.execute(comando_SQL)
+    dados_lidos = cursor2.fetchall()
+
+    frm_principal.tableWidget.setRowCount(len(dados_lidos))
+    frm_principal.tableWidget.setColumnCount(5)
+
+    for i in range(0, len(dados_lidos)):
+        for j in range(0, 5):
+            frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados_lidos[i][j]))) 
 def excluir_m3():
     cursor3 = banco.cursor()
     cursor3.execute("SELECT id FROM cubagem")
