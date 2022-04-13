@@ -22,7 +22,7 @@ cliente_cnpj = 0
 id_m3 = 0
 result_peso_m3 = 0
 client = 0
-data_cotacao = None
+data_cotacao = ''
 def calc_contacao():
     # Acesso as Taxas e tabelas fixas no banco de dados
     cursor = banco.cursor()
@@ -196,20 +196,20 @@ def salva_cotacao():
     data_cotacao = str(datetime.date.today())
     litotal = float(frm_principal.edt_frete_litoral.text().replace(',','.'))
     tipo = ""
+    fretetotal = 0.00
+    pesototal = 0.00
+    fretetarifa = 0.00
+    fretetarifa_litotal = 0.00
     if frm_principal.rbtn_cif.isChecked() :
             tipo = "CIF"
             fretetotal = float(frm_principal.edt_frete_cif.text().replace(',','.'))
     elif frm_principal.rbtn_fob.isChecked() :        
         tipo = "FOB"
         fretetotal = float(frm_principal.edt_frete_fob.text().replace(',','.'))
-    fretetotal = 0.00
-    pesototal = 0.00
-    fretetarifa = 0.00
-    fretetarifa_litotal = 0.00
     if peso_cudo_total == '':
         peso_cudo_total = 0.00
         m3_total = 0.00
-    if float(peso < peso_cudo_total):
+    if float(peso) < float(peso_cudo_total):
         pesototal = float(peso_cudo_total)
     else:
         pesototal = peso
@@ -315,10 +315,12 @@ def excluir_m3():
         frm_principal.edt_totalPeso_m3.setText(str('%.2f'%totalm3lista).replace('.',','))
         frm_principal.edit_peso_cubo.setText(str('%.2f'%totalm3lista).replace('.',','))
         frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+        frm_principal.edt_total_m3_2.setText(str('%.5f'%result_m3).replace('.',','))
     else:        
         frm_principal.edt_totalPeso_m3.setText('')
         frm_principal.edit_peso_cubo.setText('')
         frm_principal.edt_total_m3.setText('')
+        frm_principal.edt_total_m3_2.setText('')
 def add_m3():
     global id_m3
     global result_peso_m3
@@ -766,10 +768,10 @@ def gerar_pdf():
     x = 0
     y = 0
     pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())), pagesize=A4)
-    pdf.setFont("Times-Bold", 25)
+    pdf.setFont("Times-Bold", 16)
     pdf.drawString(200,800 -y, "Cotação: " + str(cotacao[0][0]))
-    pdf.setFont("Times-Bold", 15)
-    pdf.drawString(470, 800, str(data_cotacao))
+    pdf.setFont("Times-Bold", 11)
+    pdf.drawString(370, 800, str(cotacao[0][16])) # Data da Cotação
     for i in range(0, len(cotacao)):
         y = y + 20
         x = x + 20
@@ -778,26 +780,30 @@ def gerar_pdf():
         peso = str(cotacao[i][11])
         Cubagem = str(cotacao[i][15])
         Peso_M = str(cotacao[i][14])
+        frete = str(cotacao[i][17])
+        frete_litoral = str(cotacao[i][18])
         # Descrição dos Clientes
-        pdf.setFont("Times-Bold", 12)
-        pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
+        pdf.setFont("Times-Bold", 11)
+        pdf.drawString(50 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
         pdf.drawString(175, 750, str(cotacao[i][2])) # Descrição do Cliente remetente
-        pdf.drawString(30 -y, 760-y, str(cotacao[i][5])) # Cidade remetente
+        pdf.drawString(50 -y, 760-y, str(cotacao[i][5])) # Cidade remetente
         pdf.drawString(120 , 760-y, str(" - " + cotacao[i][6])) # Estado remetente
-        pdf.drawString(30 -y,710, str("Destinatário: " + cotacao[i][3])) # CNPJ do cliente Destino
+        pdf.drawString(50 -y,710, str("Destinatário: " + cotacao[i][3])) # CNPJ do cliente Destino
         pdf.drawString(175, 710, str(cotacao[i][4])) # Descrição do Cliente Destino
-        pdf.drawString(30 -y, 720-y, str(cotacao[i][7])) # Cidade Destino
+        pdf.drawString(50 -y, 720-y, str(cotacao[i][7])) # Cidade Destino
         pdf.drawString(120 , 720-y, str(" - " + cotacao[i][8])) # Estado Destino
         # Frete
-        pdf.setFont("Times-Bold", 10)
-        
-        pdf.drawString(30 -y, 670, ("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
-        pdf.drawString(30 -y, 660, str("Volumes: " + Volume))# Volume
-        pdf.drawString(30 -y, 650, str("Peso: " + peso))# peso
-        pdf.drawString(30 -y, 650-y, str("M³: " + Cubagem))# M³(Cubagem)
-        pdf.drawString(30 -y, 640, str("Peso M³: " + Peso_M))# Peso M³
-        # Valor do frete
-        pdf.drawString(30 -y, 600, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
+        pdf.setFont("Times-Bold", 9)
+        pdf.drawString(50 -y, 680, ("Valor Nota Fiscal: " + nf).replace('.',',')) # Valor da nota fiscal
+        pdf.drawString(50 -y, 670, str("Volumes: " + Volume))# Volume
+        pdf.drawString(50 -y, 660, str("Peso: " + peso).replace('.',','))# peso
+        pdf.drawString(50 -y, 660-y, str("M³: " + Cubagem).replace('.',','))# M³(Cubagem)
+        pdf.drawString(50 -y, 650, str("Peso M³: " + Peso_M).replace('.',','))# Peso M³
+        pdf.setFont("Times-Bold", 11)
+        pdf.drawString(50 -y, 640-y, str("Frete: " + frete).replace('.',','))# Valor do frete
+        pdf.drawString(50 -y, 630-y, str("Frete Litoral: " + frete_litoral).replace('.',','))# Valor do frete Litoral
+        pdf.setFont("Times-Bold", 7)
+        pdf.drawString(50 -y, 580, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
         
     pdf.save()
     path_dir = (r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())))
