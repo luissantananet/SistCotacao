@@ -911,7 +911,6 @@ if __name__ == "__main__":
         frm_principal.edt_ad_gris_300.setText(str(tabelas[6][4]).replace('.',','))
         frm_principal.edt_pedagio_300.setText(str(tabelas[6][5]).replace('.',','))
         frm_principal.edt_pedlitoral_300.setText(str(tabelas[6][6]).replace('.',','))
-
     # __name__ == "__main__"
     frm_principal.show()
     app.exec()
