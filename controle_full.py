@@ -1,4 +1,5 @@
 
+from pickle import NONE
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
@@ -187,28 +188,66 @@ def salva_cotacao():
     cidade_destino = frm_principal.edt_dest_cid.text()
     estado_destino = frm_principal.edt_dest_uf.text() 
     valor_merc = frm_principal.edt_valor_merc.text().replace(',','.')
-    peso = frm_principal.edt_peso.text().replace(',','.')
+    peso = float(frm_principal.edt_peso.text().replace(',','.'))
     volume = frm_principal.edt_volume.text() 
     tipo_merc = frm_principal.edit_tipo_merc.text() 
     peso_cudo_total = frm_principal.edit_peso_cubo.text().replace(',','.')
     m3_total = frm_principal.edt_total_m3_2.text().replace(',','.')
     data_cotacao = str(datetime.date.today())
+    litotal = float(frm_principal.edt_frete_litoral.text().replace(',','.'))
     tipo = ""
     if frm_principal.rbtn_cif.isChecked() :
-        tipo = "CIF"
+            tipo = "CIF"
+            fretetotal = float(frm_principal.edt_frete_cif.text().replace(',','.'))
     elif frm_principal.rbtn_fob.isChecked() :        
         tipo = "FOB"
+        fretetotal = float(frm_principal.edt_frete_fob.text().replace(',','.'))
+    fretetotal = 0.00
+    pesototal = 0.00
+    fretetarifa = 0.00
+    fretetarifa_litotal = 0.00
     if peso_cudo_total == '':
         peso_cudo_total = 0.00
-    if m3_total == '':
         m3_total = 0.00
-    """else:
-        QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")"""
+    if float(peso < peso_cudo_total):
+        pesototal = float(peso_cudo_total)
+    else:
+        pesototal = peso
     if not tipo == "":
-        
+        if (pesototal > 1.00) and (pesototal <= 20.00):
+            fretetarifa = float(frm_principal.edt_ftotal_20.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_20.text().replace(',','.'))
+        elif (pesototal > 20.00) and (pesototal <= 50.00):
+            fretetarifa = float(frm_principal.edt_ftotal_50.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_50.text().replace(',','.'))
+        elif (pesototal > 50.00) and (pesototal <= 100.00):
+            fretetarifa = float(frm_principal.edt_ftotal_100.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_100.text().replace(',','.'))
+        elif (pesototal > 100.00) and (pesototal <= 150.00):
+            fretetarifa = float(frm_principal.edt_ftotal_150.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_150.text().replace(',','.'))
+        elif (pesototal > 150.00) and (pesototal <= 200.00):
+            fretetarifa = float(frm_principal.edt_ftotal_200.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_200.text().replace(',','.'))
+        elif (pesototal > 200.00) and (pesototal <= 250.00):
+            fretetarifa = float(frm_principal.edt_ftotal_250.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_250.text().replace(',','.'))
+        elif (pesototal > 250.00) and (pesototal <= 300.00):
+            fretetarifa = float(frm_principal.edt_ftotal_300.text().replace(',','.'))
+            fretetarifa_litotal = float(frm_principal.edt_litoral_300.text().replace(',','.'))
+        if fretetotal <= fretetarifa:
+            frete = fretetarifa
+            frete_litotal = fretetarifa_litotal
+        else:
+            frete = fretetotal
+            frete_litotal = litotal
+        print(pesototal)
+        print(type(pesototal))
+        print(fretetotal)
+        print(fretetarifa)
         cursor = banco.cursor()
-        comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total, data_cotacao) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
-        dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total), str(data_cotacao))
+        comando_sql=("INSERT INTO cotacao(emit_cnpj, emit_nome, dest_cnpj, dest_nome, cidade_origem, estado_origem, cidade_destino, estado_destino, tipo, valor_merc, peso, volume, tipo_merc, peso_cubo_total, m3_total, data_cotacao, fretetotal,fretetotal_litotal) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        dados=(str(orig_cnpj),str(orig_desc), str(dest_cnpj), str(dest_desc), str(cidade_origem), str(estado_origem), str(cidade_destino), str(estado_destino), str(tipo), float(valor_merc), float(peso), int(volume), str(tipo_merc), float(peso_cudo_total), float(m3_total), str(data_cotacao), str(frete),str(frete_litotal))
         cursor.execute(comando_sql,dados)
         banco.commit()
         QMessageBox.information(frm_principal, "Aviso", "Cotação salva!")
