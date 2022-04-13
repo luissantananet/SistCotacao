@@ -271,7 +271,20 @@ def salva_cotacao():
     else:
         QMessageBox.about(frm_principal, "Aviso", "Selecione o Tipo do Frete.")
 def limpar_tela():
-    pass
+    frm_principal.edt_rem_cnpj.setText('')
+    frm_principal.edt_rem_desc.setText('')
+    frm_principal.edt_dest_cnpj.setText('')
+    frm_principal.edt_dest_desc.setText('')
+    frm_principal.edt_rem_cid.setText('')
+    frm_principal.edt_rem_uf.setText('') 
+    frm_principal.edt_dest_cid.setText('')
+    frm_principal.edt_dest_uf.setText('')
+    frm_principal.edt_valor_merc.setText('')
+    frm_principal.edt_peso.setText('')
+    frm_principal.edt_volume.setText('')
+    frm_principal.edit_tipo_merc.setText('')
+    frm_principal.edit_peso_cubo.setText('')
+    frm_principal.edt_total_m3_2.setText('')
 def excluir_m3():
     cursor3 = banco.cursor()
     cursor3.execute("SELECT id FROM cubagem")
@@ -752,7 +765,7 @@ def gerar_pdf():
     cotacao = cursor2.fetchall()
     x = 0
     y = 0
-    pdf = canvas.Canvas("Cotação de frete {}.dpf".format(str(datetime.date.today())), pagesize=A4)
+    pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())), pagesize=A4)
     pdf.setFont("Times-Bold", 25)
     pdf.drawString(200,800 -y, "Cotação: " + str(cotacao[0][0]))
     pdf.setFont("Times-Bold", 15)
@@ -760,11 +773,11 @@ def gerar_pdf():
     for i in range(0, len(cotacao)):
         y = y + 20
         x = x + 20
-        nf = float(cotacao[i][10])
-        Volume = float(cotacao[i][12])
-        peso = float(cotacao[i][11])
-        Cubagem = float(cotacao[i][15])
-        Peso_M = float(cotacao[i][14])
+        nf = str(cotacao[i][10])
+        Volume = str(cotacao[i][12])
+        peso = str(cotacao[i][11])
+        Cubagem = str(cotacao[i][15])
+        Peso_M = str(cotacao[i][14])
         # Descrição dos Clientes
         pdf.setFont("Times-Bold", 12)
         pdf.drawString(30 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
@@ -778,16 +791,16 @@ def gerar_pdf():
         # Frete
         pdf.setFont("Times-Bold", 10)
         
-        pdf.setFont(30 -y, 400, str("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
-        pdf.setFont(30 -y, 420-y, str("Volumes: " + Volume))# Volume
-        pdf.setFont(30 -y, 450, str("Peso: " + peso))# peso
-        pdf.setFont(30 -y, 450-y, str("M³: " + Cubagem))# M³(Cubagem)
-        pdf.setFont(30 -y, 500, str("Peso M³: " + Peso_M))# Peso M³
+        pdf.drawString(30 -y, 670, ("Valor Nota Fiscal: " +  nf)) # Valor da nota fiscal
+        pdf.drawString(30 -y, 660, str("Volumes: " + Volume))# Volume
+        pdf.drawString(30 -y, 650, str("Peso: " + peso))# peso
+        pdf.drawString(30 -y, 650-y, str("M³: " + Cubagem))# M³(Cubagem)
+        pdf.drawString(30 -y, 640, str("Peso M³: " + Peso_M))# Peso M³
         # Valor do frete
-        pdf.drawString(30 -y, 500, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
+        pdf.drawString(30 -y, 600, str('Obs.: Prazo de entrega médio: 3 dias úteis após o embarque.'))
         
     pdf.save()
-    path_dir = ("Cotação de frete {}.dpf".format(str(datetime.date.today())))
+    path_dir = (r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())))
     os.startfile(path_dir)
 def chama_cotacao():
     # Tabela "cotacao"
