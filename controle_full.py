@@ -1,5 +1,3 @@
-
-from pickle import NONE
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
@@ -772,7 +770,7 @@ def select_cliente():
     frm_cliente.close()
     numero_id = valor_id
 def gerar_pdf():
-    #global data_cotacao
+    global data_cotacao
     linha = frm_cotacao.tableWidget.currentRow()
     cursor = banco.cursor()
     cursor.execute("SELECt id FROM cotacao")
@@ -783,7 +781,8 @@ def gerar_pdf():
     cotacao = cursor2.fetchall()
     x = 0
     y = 0
-    pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())), pagesize=A4)
+    data_cotacao = datetime.date.today()
+    pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(data_cotacao.strftime('%d/%m/%Y')), pagesize=A4))
     pdf.setFont("Times-Bold", 16)
     pdf.drawString(200,800 -y, "Cotação: " + str(cotacao[0][0]))
     pdf.setFont("Times-Bold", 11)
