@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 import mysql.connector
 import mysql.connector.errors
 import datetime
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
+"""from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4"""
 import os
 
 # Conexão com o bando de dados MySQL
@@ -782,11 +782,11 @@ def gerar_pdf():
     x = 0
     y = 0
     data_cotacao = datetime.date.today()
-    pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(data_cotacao.strftime('%d/%m/%Y')), pagesize=A4))
+    """pdf = canvas.Canvas(r'.\dpf\Cotação de frete {}.dpf'.format(str(data_cotacao.strftime('%d/%m/%Y')), pagesize=A4))
     pdf.setFont("Times-Bold", 16)
     pdf.drawString(200,800 -y, "Cotação: " + str(cotacao[0][0]))
     pdf.setFont("Times-Bold", 11)
-    pdf.drawString(370, 800, str(cotacao[0][16])) # Data da Cotação
+    pdf.drawString(370, 800, str(cotacao[0][16])) # Data da Cotação"""
     for i in range(0, len(cotacao)):
         y = y + 20
         x = x + 20
@@ -798,7 +798,7 @@ def gerar_pdf():
         frete = str(cotacao[i][17])
         frete_litoral = str(cotacao[i][18])
         # Descrição dos Clientes
-        pdf.setFont("Times-Bold", 11)
+        """pdf.setFont("Times-Bold", 11)
         pdf.drawString(50 -y, 750, str("Remetente: " + cotacao[i][1])) # CNPJ do cliente remetente
         pdf.drawString(175, 750, str(cotacao[i][2])) # Descrição do Cliente remetente
         pdf.drawString(50 -y, 760-y, str(cotacao[i][5])) # Cidade remetente
@@ -822,7 +822,7 @@ def gerar_pdf():
         
     pdf.save()
     path_dir = (r'.\dpf\Cotação de frete {}.dpf'.format(str(datetime.date.today())))
-    os.startfile(path_dir)
+    os.startfile(path_dir)"""
 def chama_cotacao():
     # Tabela "cotacao"
     cursor = banco.cursor()
