@@ -4,8 +4,12 @@ import mysql.connector
 import mysql.connector.errors
 import datetime
 from reportlab.pdfgen import canvas
+<<<<<<< Updated upstream
 from reportlab.lib.pagesizes import A4
 import os
+=======
+from Reportlab.lib.pagesizes import A4
+>>>>>>> Stashed changes
 
 # Conexão com o bando de dados MySQL
 banco = mysql.connector.connect(
