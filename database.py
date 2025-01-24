@@ -6,7 +6,8 @@ class Database:
 
     def connect(self):
         self.conn = sqlite3.connect(self.nome)
-        
+        self.cursor = self.conn.cursor()
+
     def disconnect(self):
         try:
             self.conn.close()

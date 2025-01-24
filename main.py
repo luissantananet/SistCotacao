@@ -52,6 +52,10 @@ if __name__ == "__main__":
     frm_cotacao.btn_dpf.clicked.connect(gerar_pdf)"""
     #limpar bd.cubagem
     db = Database()
+    db.connect()
+    db.create_tables()
+    db.disconnect()
+
     cursor = db.cursor()
     cursor.execute("TRUNCATE TABLE cubagem") 
     tabelas = cursor.fetchall()
