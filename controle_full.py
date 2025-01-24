@@ -11,7 +11,7 @@ import os
 banco = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="cofggcvf",
+    passwd="1@!Cofggcvf",
     database="cotacao"
 )
 numero_id = 0
