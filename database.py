@@ -13,32 +13,31 @@ class Database:
         except AttributeError:
             pass
     def create_tables(self):
-        self.cursor.execute('''
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS tarifas(
-                id int not null auto_increment,
-                descricao varchar(50),
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                descricao TEXT NOT NULL,
                 frete_peso decimal(7,2),
                 ad_valoren decimal(7,4),
                 gris decimal(7,4),
                 taxa decimal(7,2),
-                icms decimal(7,2),
-                primary key(id)
+                icms decimal(7,2)
             );
-        ''')
+        """)
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS trarifas_minimas(
-                id int not null auto_increment,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 descricao varchar(50),
                 tarifa_base decimal(7,2),
                 tarifa_litoral decimal(7,2),
                 ad_Gris decimal(7,4),
                 pedagio decimal(7,2),
-                pedlitoral decimal(7,2),
-                primary key(id));
+                pedlitoral decimal(7,2)
+            );
         """)
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS cotacao(
-                id int not null auto_increment,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 emit_cnpj varchar(14),
                 emit_nome varchar(100),
                 dest_cnpj varchar(14),
@@ -56,24 +55,22 @@ class Database:
                 m3_total decimal(10,3),
                 data_cotacao date,
                 fretetotal varchar(10),
-                fretetotal_litotal varchar(10),
-                primary key(id)
+                fretetotal_litotal varchar(10)
             );
         """)
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS cubagem(
-                id int not null auto_increment,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 dim1 decimal(5,2),
                 dim2 decimal(5,2),
                 dim3 decimal(5,2),
                 volume decimal,
-                m3 decimal(6,3),
-                primary key(id)
+                m3 decimal(6,3)
             );
         ''')
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS cliente(
-                id int not null auto_increment,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 cnpj varchar(14),
                 nome varchar(100),
                 endereco varchar(100),
@@ -81,14 +78,14 @@ class Database:
                 estado varchar(100),
                 cep varchar(10),
                 telefone varchar(20),
-                email varchar(100),
-                primary key(id)
+                email varchar(100)
             );   
         ''')
         self.conn.commit()
 if __name__ == '__main__':
     db = Database()
     db.connect()
+    db.create_tables()
     if db.conn:
         print('Conectado')
     db.disconnect()
