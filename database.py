@@ -6,12 +6,13 @@ class Database:
 
     def connect(self):
         self.conn = sqlite3.connect(self.nome)
-        self.cursor = self.conn.cursor()
+        
     def disconnect(self):
         try:
             self.conn.close()
         except AttributeError:
             pass
+
     def create_tables(self):
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS tarifas(
@@ -82,6 +83,16 @@ class Database:
             );   
         ''')
         self.conn.commit()
+
+    def selects_all(self,table):
+        self.cursor.execute(f'SELECT * FROM {table}')
+        return self.cursor.fetchall()
+    
+    def select_cubagem(self,id):
+        self.cursor.execute(f'SELECT * FROM cubagem WHERE id = {id}')
+        for linha in self.cursor.fetchall():
+            return linha
+
 if __name__ == '__main__':
     db = Database()
     db.connect()
