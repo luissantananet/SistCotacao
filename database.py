@@ -27,7 +27,7 @@ class Database:
             );
         """)
         self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS trarifas_minimas(
+            CREATE TABLE IF NOT EXISTS tarifas_minimas(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 descricao varchar(50),
                 tarifa_base decimal(7,2),
@@ -86,14 +86,16 @@ class Database:
         self.conn.commit()
 
     def selects_all(self,table):
-        self.cursor.execute(f'SELECT * FROM {table}')
+        self.cursor.execute(f"SELECT * FROM {table}")
         return self.cursor.fetchall()
     
     def select_cubagem(self,id):
-        self.cursor.execute(f'SELECT * FROM cubagem WHERE id = {id}')
+        self.cursor.execute(f"SELECT * FROM cubagem WHERE id = '{id}';")
         for linha in self.cursor.fetchall():
             return linha
-
+    def TRUNCATE_TABLE(self,table):
+        self.cursor.execute(f"DROP TABLE '{table}';")
+        self.conn.commit()
 if __name__ == '__main__':
     db = Database()
     db.connect()

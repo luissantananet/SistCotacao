@@ -54,15 +54,10 @@ if __name__ == "__main__":
     db = Database()
     db.connect()
     db.create_tables()
-    db.disconnect()
 
-    cursor = db.cursor()
-    cursor.execute("TRUNCATE TABLE cubagem") 
-    tabelas = cursor.fetchall()
+    limpar_cubagem = db.TRUNCATE_TABLE('cubagem')
     # Mostrar dados da tabelas "tarifas_minimas"
-    cursor4 = db.cursor()
-    cursor4.execute("SELECT * FROM tarifas_minimas") 
-    tabelas = cursor4.fetchall()
+    tabelas = db.selects_all('tarifas_minimas')
     tabela = len(tabelas)
     if not tabela == 0:
         frm_principal.edt_base_20.setText(str(tabelas[0][2]).replace('.',','))
