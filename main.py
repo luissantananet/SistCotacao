@@ -11,19 +11,19 @@ import datetime
 from reportlab.lib.pagesizes import A4"""
 import os
 
-
-def chama_cotacao():
-    # Tabela "cotacao"
-    db = Database.connect()
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM cotacao") 
-    cotacao = cursor.fetchall()
-    frm_cotacao.tableWidget.setRowCount(len(cotacao))
-    frm_cotacao.tableWidget.setColumnCount(15)
-    for i in range(0, len(cotacao)):
-        for j in range(0,15):
-            frm_cotacao.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(cotacao[i][j])))
-    frm_cotacao.show()
+class Cotacao:
+    def chama_cotacao(self):
+        # Tabela "cotacao"
+        db = Database.connect()
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM cotacao") 
+        cotacao = cursor.fetchall()
+        frm_cotacao.tableWidget.setRowCount(len(cotacao))
+        frm_cotacao.tableWidget.setColumnCount(15)
+        for i in range(0, len(cotacao)):
+            for j in range(0,15):
+                frm_cotacao.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(cotacao[i][j])))
+        frm_cotacao.show()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -31,6 +31,7 @@ if __name__ == "__main__":
     frm_tarifa = uic.loadUi(r'.\forms\frm_tarifa.ui')
     frm_cliente = uic.loadUi(r'.\forms\frm_cadastro_cliente.ui')
     frm_cotacao = uic.loadUi(r'.\forms\frm_cotacao.ui')
+    cotacao = Cotacao()
     """ # Botões da tela principal
     frm_principal.btn_calcula.clicked.connect(calc_contacao)
     frm_principal.btn_salvar.clicked.connect(salva_cotacao)
@@ -40,7 +41,7 @@ if __name__ == "__main__":
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
     frm_principal.btn_tarifa.clicked.connect(chama_tarifa)
     frm_principal.btn_excluir.clicked.connect(excluir_m3)
-    frm_principal.btn_cotacao.clicked.connect(chama_cotacao)
+    frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(salva_tarifa)
@@ -101,6 +102,5 @@ if __name__ == "__main__":
         frm_principal.edt_ad_gris_300.setText(str(tabelas[6][4]).replace('.',','))
         frm_principal.edt_pedagio_300.setText(str(tabelas[6][5]).replace('.',','))
         frm_principal.edt_pedlitoral_300.setText(str(tabelas[6][6]).replace('.',','))
-    # __name__ == "__main__"
     frm_principal.show()
     app.exec()
