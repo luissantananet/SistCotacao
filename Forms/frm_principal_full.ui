@@ -26,8 +26,8 @@
    <string>Cotação</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../icons/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</normaloff>../icons/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</iconset>
+   <iconset resource="../icons/icons.qrc">
+    <normaloff>:/newPrefix/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</normaloff>:/newPrefix/3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</iconset>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhNone</set>
@@ -2108,6 +2108,8 @@
   <tabstop>edt_rem_uf</tabstop>
   <tabstop>edt_dest_uf</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

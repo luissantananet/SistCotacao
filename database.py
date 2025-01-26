@@ -106,17 +106,35 @@ class Database:
         sql = f"INSERT INTO {table} ({columns}) VALUES ({placeholders})"
         self.cursor.execute(sql, list(values.values()))
         self.conn.commit()
-    
+
     def updeate_all(self, table, values):
         set_clause = ", ".join([f"{col} = ?" for col in values.keys()])
         sql = f"UPDATE {table} SET {set_clause} WHERE descricao = ?"
         self.cursor.execute(sql, list(values.values()) + [values['descricao']])
         self.conn.commit()
     
+    def delete_all(self, table, values):
+        sql = f"DELETE FROM {table} WHERE descricao = ?"
+        self.cursor.execute(sql, [values['descricao']])
+        self.conn.commit()
+
+    def insert_tarifas(self):
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 01 até 20Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 21 até 50Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 51 até 100Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 101 até 150Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 151 até 200Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 201 até 250Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 251 até 300Kg',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES('TB',00.00,00.00,00.00,00.00,00.00);")
+        self.cursor.execute("INSERT INTO tarifas(descricao,frete_peso,ad_valoren,gris,taxa,icms) VALUES('TBL',00.00,00.00,00.00,00.00,00.00);")
+        self.conn.commit()
+
 if __name__ == '__main__':
     db = Database()
     db.connect()
     db.create_tables()
+    db.insert_tarifas()
     if db.conn:
         print('Conectado')
     db.disconnect()

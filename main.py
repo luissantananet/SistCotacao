@@ -15,7 +15,10 @@ class Cotacao:
     def __init__(self):
         self.db = Database()
         self.db.connect()
-        
+        id_txm =len(self.db.selects_all('tarifas_minimas'))
+        id_tx = len(self.db.selects_all('tarifas'))
+        if id_tx and id_txm == 0:
+            self.db.insert_tarifas() 
     def chama_cotacao(self):
         # Tabela "cotacao"
         cursor = self.db.cursor()

@@ -32,8 +32,8 @@
    <string>Cadastro de Cliente</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../icons/3592854-add-user-business-man-employee-general-human-member-office_107767.ico</normaloff>../icons/3592854-add-user-business-man-employee-general-human-member-office_107767.ico</iconset>
+   <iconset resource="../icons/icons.qrc">
+    <normaloff>:/newPrefix/3592854-add-user-business-man-employee-general-human-member-office_107767.ico</normaloff>:/newPrefix/3592854-add-user-business-man-employee-general-human-member-office_107767.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btn_salvar">
@@ -218,6 +218,8 @@
   <tabstop>btn_limpar</tabstop>
   <tabstop>tableWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

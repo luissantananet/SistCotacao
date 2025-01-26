@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>3592841-cog-gear-general-machine-office-setting-settings_107765.ico</file>
+    <file>3592841-cog-gear-general-machine-office-setting-settings_107765.png</file>
+    <file>3592854-add-user-business-man-employee-general-human-member-office_107767.ico</file>
+    <file>3592854-add-user-business-man-employee-general-human-member-office_107767.png</file>
+    <file>3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.ico</file>
+    <file>3592869-compose-create-edit-edit-file-office-pencil-writing-creative_107746.png</file>
+    <file>Nova pasta/adicionar-usuario.png</file>
+    <file>Nova pasta/solicitacao-de-cotacao.png</file>
+    <file>Nova pasta/terminal-pos.png</file>
+  </qresource>
+</RCC>
