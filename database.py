@@ -117,7 +117,7 @@ class Database:
         sql = f"DELETE FROM {table} WHERE descricao = ?"
         self.cursor.execute(sql, [values['descricao']])
         self.conn.commit()
-
+    
     def insert_tarifas(self):
         self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 01 até 20Kg',00.00,00.00,00.00,00.00,00.00);")
         self.cursor.execute("INSERT INTO tarifas_minimas(descricao,tarifa_base,tarifa_litoral,ad_Gris,pedagio,pedlitoral) VALUES('De 21 até 50Kg',00.00,00.00,00.00,00.00,00.00);")

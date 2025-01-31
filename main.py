@@ -290,6 +290,69 @@ class Cotacao:
         frm_tarifa.show()
     def salva_tarifa(self):
         pass
+    def limpar_tela(self):
+        self.db.delete_all('cubagem')
+        frm_principal.edt_rem_cnpj.setText('')
+        frm_principal.edt_rem_desc.setText('')
+        frm_principal.edt_dest_cnpj.setText('')
+        frm_principal.edt_dest_desc.setText('')
+        frm_principal.edt_rem_cid.setText('')
+        frm_principal.edt_rem_uf.setText('') 
+        frm_principal.edt_dest_cid.setText('')
+        frm_principal.edt_dest_uf.setText('')
+        frm_principal.edt_valor_merc.setText('')
+        frm_principal.edt_peso.setText('')
+        frm_principal.edt_volume.setText('')
+        frm_principal.edit_tipo_merc.setText('')
+        frm_principal.edit_peso_cubo.setText('')
+        frm_principal.edt_total_m3_2.setText('')
+        frm_principal.edt_totalPeso_m3.setText('')
+        frm_principal.edit_peso_cubo.setText('')
+        frm_principal.edt_total_m3.setText('')
+        frm_principal.edt_total_m3_2.setText('')
+        cursor = self.db.selects_all('cubagem')
+        dados = cursor.fetchall()
+        
+        frm_principal.tableWidget.setRowCount(len(dados))
+        frm_principal.tableWidget.setColumnCount(5)
+        for i in range(0, len(dados)):
+            for j in range(0,5):
+                frm_principal.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados[i][j])))
+    
+    def add_m3(self):
+        dim1 = float(frm_principal.edt_dim1.text().replace(',','.'))
+        dim2 = float(frm_principal.edt_dim2.text().replace(',','.'))
+        dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
+        vol = int(frm_principal.edt_vol.text())
+
+        result = dim1 * dim2 * dim3* vol* 0.3 * 1000
+        result_peso = result_peso + result
+        result_m3 = result_peso / 300
+        frm_principal.edt_resultado_m3.setText(str('%.4f'%result).replace('.',','))
+        frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso).replace('.',','))
+        frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso).replace('.',','))
+        frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
+        frm_principal.edt_total_m3_2.setText(str('%.5f'%result_m3).replace('.',','))
+
+        self.db.inserts_all('cubagem', {
+            'dim1': dim1,
+            'dim2': dim2,
+            'dim3': dim3,
+            'volume': vol,
+            'm3': result
+        })
+        cursor = self.db.selects_all('cubagem')
+        dados = cursor.fetchall()
+        frm_principal.tableWidget.setRowCount(len(dados))
+        frm_principal.tableWidget.setColumnCount(5)
+
+        for i in range(0, len(dados)):
+            for j in range(0, 5):
+                frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j]))) 
+
+
+
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -305,8 +368,9 @@ if __name__ == "__main__":
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
+    frm_principal.btn_limpa.clicked.connect(cotacao.limpar_tela)
     """ frm_principal.btn_salvar.clicked.connect(salva_cotacao)
-    frm_principal.btn_limpa.clicked.connect(limpar_tela)
+    
     frm_principal.btn_adicionar.clicked.connect(add_m3)
     frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
