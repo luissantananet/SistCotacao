@@ -310,6 +310,11 @@ class Cotacao:
         frm_principal.edit_peso_cubo.setText('')
         frm_principal.edt_total_m3.setText('')
         frm_principal.edt_total_m3_2.setText('')
+        frm_principal.edt_resultado_m3.setText('')
+        frm_principal.edt_dim1.setText('')
+        frm_principal.edt_dim2.setText('')
+        frm_principal.edt_dim3.setText('')
+        frm_principal.edt_vol.setText('')
         dados = self.db.selects_all('cubagem')
         
         frm_principal.tableWidget.setRowCount(len(dados))
