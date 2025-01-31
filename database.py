@@ -96,8 +96,8 @@ class Database:
         for linha in self.cursor.fetchall():
             return linha
     
-    def TRUNCATE_TABLE(self,table):
-        self.cursor.execute(f"DROP TABLE '{table}';")
+    def TRUNCATE_TABLE(self, table):
+        self.cursor.execute(f"DELETE FROM {table};")
         self.conn.commit()
     
     def inserts_all(self, table, values):
@@ -113,9 +113,9 @@ class Database:
         self.cursor.execute(sql, list(values.values()) + [values['descricao']])
         self.conn.commit()
     
-    def delete_all(self, table, values):
-        sql = f"DELETE FROM {table} WHERE descricao = ?"
-        self.cursor.execute(sql, [values['descricao']])
+    def delete_all(self, table):
+        sql = f"DELETE FROM {table}"
+        self.cursor.execute(sql)
         self.conn.commit()
     
     def insert_tarifas(self):

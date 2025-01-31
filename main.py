@@ -310,8 +310,7 @@ class Cotacao:
         frm_principal.edit_peso_cubo.setText('')
         frm_principal.edt_total_m3.setText('')
         frm_principal.edt_total_m3_2.setText('')
-        cursor = self.db.selects_all('cubagem')
-        dados = cursor.fetchall()
+        dados = self.db.selects_all('cubagem')
         
         frm_principal.tableWidget.setRowCount(len(dados))
         frm_principal.tableWidget.setColumnCount(5)
@@ -319,21 +318,26 @@ class Cotacao:
             for j in range(0,5):
                 frm_principal.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados[i][j])))
     
-    def add_m3(self):
-        dim1 = float(frm_principal.edt_dim1.text().replace(',','.'))
-        dim2 = float(frm_principal.edt_dim2.text().replace(',','.'))
-        dim3 = float(frm_principal.edt_dim3.text().replace(',','.'))
-        vol = int(frm_principal.edt_vol.text())
+    def limpar_entrada(self, texto):
+        return ''.join(c for c in texto if c.isdigit() or c == '.')
 
-        result = dim1 * dim2 * dim3* vol* 0.3 * 1000
+    def add_m3(self):
+        dim1 = float(self.limpar_entrada(frm_principal.edt_dim1.text().replace(',','.')))
+        dim2 = float(self.limpar_entrada(frm_principal.edt_dim2.text().replace(',','.')))
+        dim3 = float(self.limpar_entrada(frm_principal.edt_dim3.text().replace(',','.')))
+        vol = int(self.limpar_entrada(frm_principal.edt_vol.text()))
+        # Calculo do peso cubico
+        result_peso = 0
+        result = dim1 * dim2 * dim3 * vol * 0.3 * 1000
         result_peso = result_peso + result
         result_m3 = result_peso / 300
+        # Mostrar resultado
         frm_principal.edt_resultado_m3.setText(str('%.4f'%result).replace('.',','))
         frm_principal.edt_totalPeso_m3.setText(str('%.2f'%result_peso).replace('.',','))
         frm_principal.edit_peso_cubo.setText(str('%.2f'%result_peso).replace('.',','))
         frm_principal.edt_total_m3.setText(str('%.5f'%result_m3).replace('.',','))
         frm_principal.edt_total_m3_2.setText(str('%.5f'%result_m3).replace('.',','))
-
+        # Salvar no banco de dados
         self.db.inserts_all('cubagem', {
             'dim1': dim1,
             'dim2': dim2,
@@ -341,11 +345,10 @@ class Cotacao:
             'volume': vol,
             'm3': result
         })
-        cursor = self.db.selects_all('cubagem')
-        dados = cursor.fetchall()
+        # Mostrar na tabela
+        dados = self.db.selects_all('cubagem')
         frm_principal.tableWidget.setRowCount(len(dados))
         frm_principal.tableWidget.setColumnCount(5)
-
         for i in range(0, len(dados)):
             for j in range(0, 5):
                 frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j]))) 
@@ -369,9 +372,10 @@ if __name__ == "__main__":
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
     frm_principal.btn_limpa.clicked.connect(cotacao.limpar_tela)
+    frm_principal.btn_adicionar.clicked.connect(cotacao.add_m3)
     """ frm_principal.btn_salvar.clicked.connect(salva_cotacao)
     
-    frm_principal.btn_adicionar.clicked.connect(add_m3)
+    
     frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
     frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
     
