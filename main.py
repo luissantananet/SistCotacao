@@ -285,7 +285,92 @@ class Cotacao:
             QMessageBox.information(frm_tarifa, "Aviso", "Taxas atualizadas com sucesso!")
         frm_tarifa.show()
     def salva_tarifa(self):
-        pass
+        tarifas_minimas = [
+            {
+                'desc': frm_tarifa.desc_20.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_20.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_20.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_20.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_20.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_20.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_50.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_50.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_50.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_50.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_50.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_50.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_100.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_100.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_100.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_100.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_100.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_100.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_150.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_150.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_150.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_150.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_150.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_150.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_200.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_200.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_200.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_200.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_200.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_200.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_250.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_250.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_250.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_250.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_250.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_250.text().replace(',','.')
+            },
+            {
+                'desc': frm_tarifa.desc_300.text().replace(',','.'),
+                'tarifa_base': frm_tarifa.edt_base_300.text().replace(',','.'),
+                'tarifa_litoral': frm_tarifa.edt_base_lit_300.text().replace(',','.'),
+                'ad_gris': frm_tarifa.edt_ad_gris_300.text().replace(',','.'),
+                'pedagio': frm_tarifa.edt_pedagio_300.text().replace(',','.'),
+                'pedlitoral': frm_tarifa.edt_pedlitoral_300.text().replace(',','.')
+            }
+        ]
+        
+        ids = self.db.selects_all('tarifas_minimas')
+        id_tabelas = len(ids)
+        
+        if id_tabelas == 0:
+            for tarifa in tarifas_minimas:
+                self.db.inserts_all('tarifas_minimas', {
+                    'descricao': tarifa['desc'],
+                    'tarifa_base': tarifa['tarifa_base'],
+                    'tarifa_litoral': tarifa['tarifa_litoral'],
+                    'ad_Gris': tarifa['ad_gris'],
+                    'pedagio': tarifa['pedagio'],
+                    'pedlitoral': tarifa['pedlitoral']
+                })
+        else:
+            for i, tarifa in enumerate(tarifas_minimas):
+                self.db.update_all('tarifas_minimas', {
+                    'descricao': tarifa['desc'],
+                    'tarifa_base': tarifa['tarifa_base'],
+                    'tarifa_litoral': tarifa['tarifa_litoral'],
+                    'ad_Gris': tarifa['ad_gris'],
+                    'pedagio': tarifa['pedagio'],
+                    'pedlitoral': tarifa['pedlitoral']
+                }, f"id={ids[i][0]}")
+        
+        QMessageBox.information(frm_tarifa, "Aviso", "Tarifas mínimas salvas/atualizadas com sucesso!")
+        frm_tarifa.show()
+
     def limpar_tela(self):
         self.db.delete_all('cubagem')
         frm_principal.edt_rem_cnpj.setText('')
