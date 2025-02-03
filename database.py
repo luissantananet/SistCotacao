@@ -110,10 +110,10 @@ class Database:
         self.cursor.execute(sql, list(values.values()))
         self.conn.commit()
 
-    def updeate_all(self, table, values):
+    def update_all(self, table, values, where_clause):
         set_clause = ", ".join([f"{col} = ?" for col in values.keys()])
-        sql = f"UPDATE {table} SET {set_clause} WHERE descricao = ?"
-        self.cursor.execute(sql, list(values.values()) + [values['descricao']])
+        sql = f"UPDATE {table} SET {set_clause} WHERE {where_clause}"
+        self.cursor.execute(sql, list(values.values()))
         self.conn.commit()
     
     def delete_all(self, table, where_clause=None):

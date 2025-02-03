@@ -266,7 +266,7 @@ class Cotacao:
             })
             QMessageBox.information(frm_tarifa, "Aviso", "Taxas salvas com sucesso!")
         else:
-            self.db.updeate_all('tarifas', {
+            self.db.update_all('tarifas', {
                 'descricao': 'TB',
                 'frete_peso': fPeso,
                 'ad_valoren': ad_v,
@@ -274,7 +274,7 @@ class Cotacao:
                 'taxa': taxa,
                 'icms': icms
             })
-            self.db.updeate_all('tarifas', {
+            self.db.update_all('tarifas', {
                 'descricao': 'TBL',
                 'frete_peso': fPesolit,
                 'ad_valoren': ad_vlit,
