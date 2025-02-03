@@ -2,8 +2,6 @@ from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem
 from database import Database 
 
-import mysql.connector
-import mysql.connector.errors
 
 import datetime
 
@@ -148,7 +146,7 @@ class Cotacao:
                     ftotall_200 = float(fbl200 + pedl200 + ad_g200)
                     frm_principal.edt_ftotal_200.setText(str('%.2f'%ftotal_200).replace('.',','))
                     frm_principal.edt_litoral_200.setText(str('%.2f'%ftotall_200).replace('.',','))
-
+                    
                     adg250 = float(tabelas[5][4])
                     fb250 = float(tabelas[5][2])
                     fbl250 = float(tabelas[5][3])
@@ -159,7 +157,7 @@ class Cotacao:
                     ftotall_250 = float(fbl250 + pedl250 + ad_g250)
                     frm_principal.edt_ftotal_250.setText(str('%.2f'%ftotal_250).replace('.',','))
                     frm_principal.edt_litoral_250.setText(str('%.2f'%ftotall_250).replace('.',','))
-
+                    
                     adg300 = float(tabelas[6][4])
                     fb300 = float(tabelas[6][2])
                     fbl300 = float(tabelas[6][3])
@@ -358,9 +356,28 @@ class Cotacao:
             for j in range(0, 5):
                 frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j]))) 
 
-
-
-
+    def pesquisa_cliente(self, tipo):
+        if tipo == 'remetente':
+            cnpj = frm_principal.edt_rem_cnpj.text()
+        else:
+            cnpj = frm_principal.edt_dest_cnpj.text()
+        
+        if cnpj:
+            cliente = self.db.selects_all('cliente', f"cnpj='{cnpj}'")
+            if cliente:
+                if tipo == 'remetente':
+                    frm_principal.edt_rem_desc.setText(cliente[0][1])
+                    frm_principal.edt_rem_cid.setText(cliente[0][2])
+                    frm_principal.edt_rem_uf.setText(cliente[0][3])
+                else:
+                    frm_principal.edt_dest_desc.setText(cliente[0][1])
+                    frm_principal.edt_dest_cid.setText(cliente[0][2])
+                    frm_principal.edt_dest_uf.setText(cliente[0][3])
+            else:
+                frm_cliente.show()
+                frm_cliente.edt_cnpj.setText(cnpj)
+        else:
+            frm_cliente.show()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -372,18 +389,15 @@ if __name__ == "__main__":
     # Botões da tela principal
     frm_principal.btn_calcula.clicked.connect(cotacao.calc_contacao)
     frm_principal.btn_tarifa.clicked.connect(cotacao.chama_tarifa)
-
+    frm_principal.btn_limpa.clicked.connect(cotacao.limpar_tela)
+    frm_principal.btn_adicionar.clicked.connect(cotacao.add_m3)
+    frm_principal.btn_rem_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('remetente'))
+    frm_principal.btn_dest_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('destinatario'))
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
-    frm_principal.btn_limpa.clicked.connect(cotacao.limpar_tela)
-    frm_principal.btn_adicionar.clicked.connect(cotacao.add_m3)
+    
     """ frm_principal.btn_salvar.clicked.connect(salva_cotacao)
-    
-    
-    frm_principal.btn_rem_pesq.clicked.connect(pesquisa_remente)
-    frm_principal.btn_dest_pesq.clicked.connect(pesquisa_destinatario)
-    
     frm_principal.btn_excluir.clicked.connect(excluir_m3)
     frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
     

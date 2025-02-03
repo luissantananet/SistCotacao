@@ -87,8 +87,11 @@ class Database:
         ''')
         self.conn.commit()
     
-    def selects_all(self,table):
-        self.cursor.execute(f"SELECT * FROM {table}")
+    def selects_all(self, table, where_clause=None):
+        if where_clause:
+            self.cursor.execute(f"SELECT * FROM {table} WHERE {where_clause}")
+        else:
+            self.cursor.execute(f"SELECT * FROM {table}")
         return self.cursor.fetchall()
     
     def select_cubagem(self,id):
