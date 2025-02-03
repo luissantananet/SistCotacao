@@ -19,9 +19,7 @@ class Cotacao:
             self.db.insert_tarifas() 
     def chama_cotacao(self):
         # Tabela "cotacao"
-        cursor = self.db.cursor()
-        cursor.execute("SELECT * FROM cotacao") 
-        cotacao = cursor.fetchall()
+        cotacao = self.db.selects_all('cotacao')
         frm_cotacao.tableWidget.setRowCount(len(cotacao))
         frm_cotacao.tableWidget.setColumnCount(15)
         for i in range(0, len(cotacao)):
@@ -409,6 +407,9 @@ class Cotacao:
         else:
             QMessageBox.about(frm_principal, "Aviso", "Selecione uma linha para excluir.")
 
+    def salva_cotacao(self):
+        pass
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
@@ -424,19 +425,21 @@ if __name__ == "__main__":
     frm_principal.btn_rem_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('remetente'))
     frm_principal.btn_dest_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('destinatario'))
     frm_principal.btn_excluir.clicked.connect(cotacao.excluir_m3)
+    frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
+    frm_principal.btn_salvar.clicked.connect(cotacao.salva_cotacao)
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
+    # Botões da tela cotações
+    """ 
     
-    """ frm_principal.btn_salvar.clicked.connect(salva_cotacao)
     
-    frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
     
     # Botões da tela Cadastro de Cliente
     frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
     frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
     frm_cliente.btn_selecionar.clicked.connect(select_cliente)
-    # Botões da tela cotações
+    
     frm_cotacao.btn_dpf.clicked.connect(gerar_pdf)"""
     #limpar bd.cubagem
     db = Database()
