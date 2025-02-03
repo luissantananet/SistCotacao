@@ -494,6 +494,8 @@ class Cotacao:
 
     def salva_cotacao(self):
         pass
+    def msn_dev(self):
+        QMessageBox.about(frm_principal, "Aviso", "Função em desenvolvimento.")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -511,20 +513,16 @@ if __name__ == "__main__":
     frm_principal.btn_dest_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('destinatario'))
     frm_principal.btn_excluir.clicked.connect(cotacao.excluir_m3)
     frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
-    frm_principal.btn_salvar.clicked.connect(cotacao.salva_cotacao)
+    frm_principal.btn_salvar.clicked.connect(cotacao.msn_dev)
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
     # Botões da tela cotações
-    """ 
-    
-    
-    
     # Botões da tela Cadastro de Cliente
-    frm_cliente.btn_salvar.clicked.connect(cadastro_cliente)
-    frm_cliente.btn_limpar.clicked.connect(limpar_cliente)
-    frm_cliente.btn_selecionar.clicked.connect(select_cliente)
-    
+    frm_cliente.btn_salvar.clicked.connect(cotacao.msn_dev)
+    frm_cliente.btn_limpar.clicked.connect(cotacao.msn_dev)
+    frm_cliente.btn_selecionar.clicked.connect(cotacao.msn_dev)
+    """
     frm_cotacao.btn_dpf.clicked.connect(gerar_pdf)"""
     #limpar bd.cubagem
     db = Database()
