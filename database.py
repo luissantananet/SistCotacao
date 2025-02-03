@@ -116,8 +116,11 @@ class Database:
         self.cursor.execute(sql, list(values.values()) + [values['descricao']])
         self.conn.commit()
     
-    def delete_all(self, table):
-        sql = f"DELETE FROM {table}"
+    def delete_all(self, table, where_clause=None):
+        if where_clause:
+            sql = f"DELETE FROM {table} WHERE {where_clause}"
+        else:
+            sql = f"DELETE FROM {table}"
         self.cursor.execute(sql)
         self.conn.commit()
     

@@ -354,7 +354,15 @@ class Cotacao:
         frm_principal.tableWidget.setColumnCount(5)
         for i in range(0, len(dados)):
             for j in range(0, 5):
-                frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j]))) 
+                frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j])))
+        frm_principal.edt_dim1.setText('')
+        frm_principal.edt_dim2.setText('')
+        frm_principal.edt_dim3.setText('')
+        frm_principal.edt_vol.setText('')
+        frm_principal.edt_totalPeso_m3.setText('')
+        frm_principal.edit_peso_cubo.setText('')
+        frm_principal.edt_total_m3.setText('')
+        frm_principal.edt_total_m3_2.setText('')
 
     def pesquisa_cliente(self, tipo):
         if tipo == 'remetente':
@@ -379,6 +387,28 @@ class Cotacao:
         else:
             frm_cliente.show()
 
+    def excluir_m3(self):
+        linha = frm_principal.tableWidget.currentRow()
+        if linha >= 0:  # Verifica se uma linha foi selecionada
+            item = frm_principal.tableWidget.item(linha, 0)
+            if item:  # Verifica se o item não é None
+                id = int(item.text())  # Converte o id para inteiro
+                self.db.delete_all('cubagem', f"id={id}")
+                dados = self.db.selects_all('cubagem')
+                frm_principal.tableWidget.setRowCount(len(dados))
+                frm_principal.tableWidget.setColumnCount(5)
+                for i in range(0, len(dados)):
+                    for j in range(0, 5):
+                        frm_principal.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j])))
+                frm_principal.edt_totalPeso_m3.setText('')
+                frm_principal.edit_peso_cubo.setText('')
+                frm_principal.edt_total_m3.setText('')
+                frm_principal.edt_total_m3_2.setText('')
+            else:
+                QMessageBox.about(frm_principal, "Aviso", "Item não encontrado.")
+        else:
+            QMessageBox.about(frm_principal, "Aviso", "Selecione uma linha para excluir.")
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     frm_principal = uic.loadUi(r'.\forms\frm_principal_full.ui')
@@ -393,12 +423,13 @@ if __name__ == "__main__":
     frm_principal.btn_adicionar.clicked.connect(cotacao.add_m3)
     frm_principal.btn_rem_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('remetente'))
     frm_principal.btn_dest_pesq.clicked.connect(lambda: cotacao.pesquisa_cliente('destinatario'))
+    frm_principal.btn_excluir.clicked.connect(cotacao.excluir_m3)
     # Botões da tela tarifas
     frm_tarifa.btn_salvar_taxa.clicked.connect(cotacao.salva_taxa)
     frm_tarifa.btn_salvar_tabela.clicked.connect(cotacao.salva_tarifa)
     
     """ frm_principal.btn_salvar.clicked.connect(salva_cotacao)
-    frm_principal.btn_excluir.clicked.connect(excluir_m3)
+    
     frm_principal.btn_cotacao.clicked.connect(cotacao.chama_cotacao)
     
     # Botões da tela Cadastro de Cliente
